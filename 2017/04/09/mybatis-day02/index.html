@@ -5,17 +5,17 @@
   
   <title>mybatis_day02 | yyt_TB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###定义resultMap    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultM">
+  <meta name="description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis_day02">
 <meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day02/index.html">
 <meta property="og:site_name" content="yyt_TB">
-<meta property="og:description" content="###定义resultMap    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultM">
-<meta property="og:updated_time" content="2017-04-09T11:07:25.033Z">
+<meta property="og:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
+<meta property="og:updated_time" content="2017-04-09T11:17:03.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis_day02">
-<meta name="twitter:description" content="###定义resultMap    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultM">
+<meta name="twitter:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
   
     <link rel="alternate" href="/atom.xml" title="yyt_TB" type="application/atom+xml">
   
@@ -86,8 +86,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###定义resultMap<br>    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。<br>    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。</p>
-<ul>
+        <h3 id="定义resultMap"><a href="#定义resultMap" class="headerlink" title="定义resultMap"></a>定义resultMap</h3><pre><code>如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
+resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。
+</code></pre><ul>
 <li><p>resultMap的配置</p>
 <pre><code>&lt;resultMap type=&quot;com.yyt.mybatis.po.User&quot; id=&quot;userListResultMap&quot;&gt;
     &lt;id column=&quot;_id&quot; property=&quot;id&quot;/&gt;
@@ -102,8 +103,7 @@
 <pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
         SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
 &lt;/select&gt;
-</code></pre><p>###动态sql</p>
-<ul>
+</code></pre><h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><ul>
 <li><p>if语句</p>
 <pre><code>&lt;!-- 传递pojo综合查询用户信息 --&gt;
 &lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
@@ -170,8 +170,7 @@
         and username like &apos;%${user.username}%&apos;
     &lt;/if&gt;
 &lt;/sql&gt;
-</code></pre><p>###关联查询</p>
-</li>
+</code></pre><h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3></li>
 </ul>
 </li>
 <li><p>一对一的查询<code>一张订单对应只有一个用户</code></p>
@@ -251,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/09/mybatis-day02/" data-id="cj1al4quk000068ggjzv6an12" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/04/09/mybatis-day02/" data-id="cj1alhglw0004mwggc6btju6x" class="article-share-link">Share</a>
       
       
     </footer>
