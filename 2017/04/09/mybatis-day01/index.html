@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yyt_TB</title>
+  <title>mybatis_day01 | yyt_TB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="yyt_TB">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法 public class User {     private Integer id;     private String username;     private Date birthday;     private String sex;     private String address;">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis_day01">
+<meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day01/index.html">
 <meta property="og:site_name" content="yyt_TB">
+<meta property="og:description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法 public class User {     private Integer id;     private String username;     private Date birthday;     private String sex;     private String address;">
+<meta property="og:updated_time" content="2017-04-09T11:02:16.208Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yyt_TB">
+<meta name="twitter:title" content="mybatis_day01">
+<meta name="twitter:description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法 public class User {     private Integer id;     private String username;     private Date birthday;     private String sex;     private String address;">
   
     <link rel="alternate" href="/atom.xml" title="yyt_TB" type="application/atom+xml">
   
@@ -59,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-mybatis-day01" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-mybatis-day01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/09/mybatis-day01/" class="article-date">
   <time datetime="2017-04-09T11:00:39.000Z" itemprop="datePublished">2017-04-09</time>
@@ -74,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/mybatis-day01/">mybatis_day01</a>
+    <h1 class="article-title" itemprop="name">
+      mybatis_day01
     </h1>
   
 
@@ -315,214 +318,23 @@ map                            Map
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-mybatis与spring的整合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/09/mybatis与spring的整合/" class="article-date">
-  <time datetime="2017-04-09T10:35:21.000Z" itemprop="datePublished">2017-04-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2017/04/09/mybatis与spring的整合/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          mybatis与spring的整合
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/mybatis与spring的整合/">mybatis与spring的整合</a>
-    </h1>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>SqlMapConfig.xml文件的配置</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE configuration
-PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-    &lt;typeAliases&gt;
-        &lt;!-- 配置别名 --&gt;
-        &lt;package name=&quot;com.yyt.mybayis.po&quot;/&gt;
-    &lt;/typeAliases&gt;
-    &lt;mappers&gt;
-        &lt;!-- 加载映射文件 --&gt;
-        &lt;mapper class=&quot;com.yyt.mybayis.mapper.UserMapper&quot;/&gt;
-        &lt;mapper class=&quot;com.yyt.mybayis.mapper.OrdersMapper&quot;/&gt;
-    &lt;/mappers&gt;
-&lt;/configuration&gt;
-</code></pre></li>
-<li><p>applicationContext.xml文件的配置</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
-    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd&quot;&gt;
-
-    &lt;!-- 加载数据库参数配置文件 --&gt;
-    &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; /&gt;
-    &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;
-        destroy-method=&quot;close&quot;&gt;
-        &lt;property name=&quot;driverClassName&quot; value=&quot;${jdbc.driver}&quot; /&gt;
-        &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot; /&gt;
-        &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot; /&gt;
-        &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
-        &lt;property name=&quot;maxActive&quot; value=&quot;10&quot; /&gt;
-        &lt;property name=&quot;maxIdle&quot; value=&quot;5&quot; /&gt;
-    &lt;/bean&gt;
-    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-        &lt;!-- 加载数据库信息 --&gt;
-        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-        &lt;!-- 加载maybatis的核心配置文件 --&gt;
-        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:sqlmapConfig.xml&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 分别配置两个mapper代理 --&gt;
-    &lt;bean id=&quot;userMapperFactoryBean&quot; class=&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;&gt;
-        &lt;property name=&quot;mapperInterface&quot; value=&quot;com.yyt.mybayis.mapper.UserMapper&quot;/&gt;
-        &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-    &lt;bean id=&quot;ordersMapperFactoryBean&quot; class=&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;&gt;
-        &lt;property name=&quot;mapperInterface&quot; value=&quot;com.yyt.mybayis.mapper.OrdersMapper&quot;/&gt;
-        &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-&lt;/beans&gt;
-</code></pre></li>
-<li><p>db.properties文件配置</p>
-<pre><code>jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8
-jdbc.username=root
-jdbc.password=123
-</code></pre></li>
-<li><p>测试方法</p>
-<pre><code>public class UserMapperTest {
-
-private ApplicationContext  applicationContext;
-
-    @Before
-    public void init() throws Exception {
-        applicationContext = new ClassPathXmlApplicationContext(&quot;classpath:applicationContext.xml&quot;);
-    }
-
-    @Test
-    public void testFindAllUser() {
-        UserMapper userMapper = applicationContext.getBean(UserMapper.class);
-        List&lt;User&gt; list = userMapper.findAllUser();
-        for (User user : list) {
-            System.out.println(user);
-        }
-    }
-
-}
-</code></pre></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/09/mybatis与spring的整合/" data-id="cj1aky510000010gg5x0pt3td" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-第一篇笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/09/第一篇笔记/" class="article-date">
-  <time datetime="2017-04-09T08:30:24.000Z" itemprop="datePublished">2017-04-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/第一篇笔记/">第一篇笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/09/第一篇笔记/" data-id="cj1aky51b000310ggghbaztap" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/09/hello-world/" class="article-date">
-  <time datetime="2017-04-09T08:21:09.346Z" itemprop="datePublished">2017-04-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/09/hello-world/" data-id="cj1aky516000110gg2yzghtsa" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
