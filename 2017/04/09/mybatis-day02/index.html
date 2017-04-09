@@ -5,14 +5,17 @@
   
   <title>mybatis_day02 | yyt_TB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords">
+  <meta name="description" content="###定义resultMap    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultM">
+<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis_day02">
 <meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day02/index.html">
 <meta property="og:site_name" content="yyt_TB">
-<meta property="og:updated_time" content="2017-04-09T11:03:54.538Z">
+<meta property="og:description" content="###定义resultMap    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultM">
+<meta property="og:updated_time" content="2017-04-09T11:07:25.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis_day02">
+<meta name="twitter:description" content="###定义resultMap    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultM">
   
     <link rel="alternate" href="/atom.xml" title="yyt_TB" type="application/atom+xml">
   
@@ -52,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -83,11 +86,172 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>###定义resultMap<br>    如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。<br>    resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。</p>
+<ul>
+<li><p>resultMap的配置</p>
+<pre><code>&lt;resultMap type=&quot;com.yyt.mybatis.po.User&quot; id=&quot;userListResultMap&quot;&gt;
+    &lt;id column=&quot;_id&quot; property=&quot;id&quot;/&gt;
+    &lt;result column=&quot;_name&quot; property=&quot;username&quot;/&gt;
+    &lt;result column=&quot;_birthday&quot; property=&quot;birthday&quot;/&gt;
+    &lt;result column=&quot;_sex&quot; property=&quot;sex&quot;/&gt;
+    &lt;result column=&quot;_address&quot; property=&quot;address&quot;/&gt;
+&lt;/resultMap&gt;
+</code></pre></li>
+</ul>
+<hr>
+<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
+        SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
+&lt;/select&gt;
+</code></pre><p>###动态sql</p>
+<ul>
+<li><p>if语句</p>
+<pre><code>&lt;!-- 传递pojo综合查询用户信息 --&gt;
+&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
+    select * from user 
+    where 1=1 
+    &lt;if test=&quot;id!=null&quot;&gt;
+    and id=#{id}
+    &lt;/if&gt;
+    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
+    and username like &apos;%${username}%&apos;
+    &lt;/if&gt;
+&lt;/select&gt;
+</code></pre></li>
+<li><p>where语句</p>
+<pre><code>&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
+    select * from user 
+    &lt;where&gt;
+    &lt;if test=&quot;id!=null and id!=&apos;&apos;&quot;&gt;
+    and id=#{id}
+    &lt;/if&gt;
+    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
+    and username like &apos;%${username}%&apos;
+    &lt;/if&gt;
+    &lt;/where&gt;
+&lt;/select&gt;
+</code></pre></li>
+<li><p>foreach语句</p>
+<ul>
+<li>向sql传递数组或List，mybatis使用foreach解析</li>
+<li><p>mapper配置<code>queryvo类中包括一个Integer集合ids</code></p>
+<pre><code>&lt;select id=&quot;findUserByForeach&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
+    SELECT * FROM USER WHERE username LIKE &apos;%张%&apos;
+    &lt;!-- 判断queryvo对象里面的ids集合--&gt;
+    &lt;if test=&quot;ids !=null and ids.size&gt;0&quot;&gt;
+        &lt;!-- 遍历ids,并非在上面sql语句上加入 and id in(......) 括号中间写遍历的参数以逗号隔开--&gt;
+        &lt;foreach collection=&quot;ids&quot; open=&quot;and id in(&quot; close=&quot;)&quot; item=&quot;id&quot; separator=&quot;,&quot;&gt;
+            #{id}
+        &lt;/foreach&gt;
+    &lt;/if&gt;
+&lt;/select&gt;
+</code></pre></li>
+<li>运行结果<ul>
+<li><code>Preparing: SELECT * FROM USER WHERE username LIKE &#39;%张%&#39; and id in( ? , ? , ? )</code></li>
+<li><code>Parameters: 10(Integer), 89(Integer), 16(Integer)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>sql片段</p>
+<ul>
+<li>Sql中可将重复的sql提取出来，使用时用include引用即可，最终达到sql重用的目的</li>
+<li><p>代码如下</p>
+<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
+    SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
+    &lt;where&gt;
+        &lt;include refid=&quot;id_username_user&quot;/&gt;
+    &lt;/where&gt;
+&lt;/select&gt;
+&lt;sql id=&quot;id_username_user&quot;&gt;
+    &lt;if test=&quot;user.id != null and user.id != &apos;&apos;&quot;&gt;
+        and id=${user.id}
+    &lt;/if&gt;
+    &lt;if test=&quot;user.username != null and user.username != &apos;&apos;&quot;&gt;
+        and username like &apos;%${user.username}%&apos;
+    &lt;/if&gt;
+&lt;/sql&gt;
+</code></pre><p>###关联查询</p>
+</li>
+</ul>
+</li>
+<li><p>一对一的查询<code>一张订单对应只有一个用户</code></p>
+<ul>
+<li><p>mapper代码</p>
+<pre><code>&lt;!-- 查询订单关联用户信息使用resultmap --&gt;
+&lt;resultMap type=&quot;Orders&quot; id=&quot;orderUserResultMap&quot;&gt;
+    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;
+    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;
+    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
+    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;
+    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;
+    &lt;!-- 一对一关联映射 --&gt;
+    &lt;!-- 
+    property:Orders对象的user属性
+    javaType：user属性对应 的类型
+     --&gt;
+    &lt;association property=&quot;user&quot; javaType=&quot;cn.itcast.po.User&quot;&gt;
+        &lt;!-- column:user表的主键对应的列  property：user对象中id属性--&gt;
+        &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;
+        &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;
+        &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;
+    &lt;/association&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;findOrdersWithUserResultMap&quot; resultMap=&quot;orderUserResultMap&quot;&gt;
+    SELECT
+        o.id,
+        o.user_id,
+        o.number,
+        o.createtime,
+        o.note,
+        u.username,
+        u.address
+    FROM
+        orders o
+    JOIN `user` u ON u.id = o.user_id
+&lt;/select&gt;
+</code></pre></li>
+<li>在订单实体类中加入用户的属性,并提供get,set方法</li>
+</ul>
+</li>
+<li><p>一对多查询<code>一个用户可以有多个订单</code></p>
+<ul>
+<li><p>mapper代码</p>
+<pre><code>&lt;!-- 配置一对多的关系 --&gt;
+&lt;resultMap type=&quot;user&quot; id=&quot;userAndordersMapper&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
+    &lt;result property=&quot;birthday&quot; column=&quot;birthday&quot;/&gt;
+    &lt;result property=&quot;sex&quot; column=&quot;sex&quot;/&gt;
+    &lt;result property=&quot;address&quot; column=&quot;address&quot;/&gt;
+    &lt;!-- 配置一对多的关系 --&gt;
+    &lt;collection property=&quot;orders&quot; ofType=&quot;orders&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;oid&quot;/&gt;
+        &lt;result property=&quot;number&quot; column=&quot;number&quot;/&gt;
+        &lt;result property=&quot;createtime&quot; column=&quot;createtime&quot;/&gt;
+        &lt;result property=&quot;note&quot; column=&quot;note&quot;/&gt;
+    &lt;/collection&gt;
+&lt;/resultMap&gt;
+&lt;!-- 一对多的sql语句的写法配置 --&gt;
+&lt;select id=&quot;findUserOrdersByUser&quot; resultMap=&quot;userAndordersMapper&quot;&gt;
+    SELECT
+    u.*, o.id oid,
+    o.number,
+    o.createtime,
+    o.note
+    FROM
+    `user` u
+    LEFT JOIN orders o ON u.id = o.user_id
+&lt;/select&gt;
+</code></pre></li>
+<li>在用户实体类中加入订单对象的list集合属性,并提供get和set方法</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/09/mybatis-day02/" data-id="cj1al1rbg0001j4ggu6eoabzn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/04/09/mybatis-day02/" data-id="cj1al4quk000068ggjzv6an12" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,7 +289,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li></ul>
     </div>
@@ -135,7 +299,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
