@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://i.imgur.com/vD7EHku.png">
 <meta property="og:image" content="http://i.imgur.com/lHkROWL.png">
 <meta property="og:image" content="http://i.imgur.com/HHGzBrV.png">
-<meta property="og:updated_time" content="2017-04-10T10:35:58.466Z">
+<meta property="og:updated_time" content="2017-04-10T10:42:20.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="easyui初级使用">
 <meta name="twitter:description" content="什么是easyui jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果 使用jquery easyui和后台进行交互 通过后台（action）返回json数据到页面 底层使用jquery ajax+json数据   应用场景 使用jquery easyui一般用在后台管理系统基本案例DataGrid(数据表格)     DataGrid属性&amp;lt;table cl">
@@ -421,13 +421,17 @@ $(&apos;#dg&apos;).datagrid({
 <li>colspan :合并列</li>
 <li>resizable :允许列改变大小</li>
 <li>hidden :如果为true,表示隐藏</li>
-<li><p>checkbox :如果为true则显示复选框</p>
-<h2 id="对话窗口"><a href="#对话窗口" class="headerlink" title="对话窗口"></a>对话窗口</h2><p><img src="http://i.imgur.com/pQ3z9Xu.png" alt=""></p>
-  <div class="easyui-dialog" style="width:600px;height:300px" data-options="title:'我的对话框',toolbar:'#tb',modal:true"><br>      对话框窗口内容。里面可以插入一个表格<br>  </div><br>  <div id="tb"><br>      <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" a=""><br>      <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" a=""><br>  </a></a></div>
-
-</li>
+<li>checkbox :如果为true则显示复选框<h2 id="对话窗口"><a href="#对话窗口" class="headerlink" title="对话窗口"></a>对话窗口</h2><img src="http://i.imgur.com/pQ3z9Xu.png" alt=""></li>
 </ul>
-<h2 id="layout布局"><a href="#layout布局" class="headerlink" title="layout布局"></a>layout布局</h2><h3 id="tab选项卡"><a href="#tab选项卡" class="headerlink" title="tab选项卡"></a>tab选项卡</h3><p><img src="http://i.imgur.com/a4WOZyz.png" alt=""></p>
+<pre><code>&lt;div class=&quot;easyui-dialog&quot; style=&quot;width:600px;height:300px&quot;
+    data-options=&quot;title:&apos;我的对话框&apos;,toolbar:&apos;#tb&apos;,modal:true&quot;&gt;
+    对话框窗口内容。里面可以插入一个表格
+&lt;/div&gt;
+&lt;div id=&quot;tb&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:&apos;icon-edit&apos;,plain:true&quot;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:&apos;icon-help&apos;,plain:true&quot;/a&gt;
+&lt;/div&gt;
+</code></pre><h2 id="layout布局"><a href="#layout布局" class="headerlink" title="layout布局"></a>layout布局</h2><h3 id="tab选项卡"><a href="#tab选项卡" class="headerlink" title="tab选项卡"></a>tab选项卡</h3><p><img src="http://i.imgur.com/a4WOZyz.png" alt=""></p>
 <pre><code>&lt;div id=&quot;tt&quot; class=&quot;easyui-tabs&quot; style=&quot;width:500px;height:250px;&quot;&gt;   
     &lt;div title=&quot;Tab1&quot; style=&quot;padding:20px;display:none;&quot;&gt;   
         tab1    
@@ -454,23 +458,27 @@ $(&apos;#dg&apos;).datagrid({
 <li>在选中一个选项卡时触发</li>
 </ul>
 </li>
-<li><p>onAdd</p>
-<ul>
-<li><p>在添加一个选项卡时触发</p>
-<h3 id="Accordion分类"><a href="#Accordion分类" class="headerlink" title="Accordion分类"></a>Accordion分类</h3><p><img src="http://i.imgur.com/vD7EHku.png" alt=""></p>
-<p><div id="aa" class="easyui-accordion" style="width:300px;height:200px;"><br>  <div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">   </div></div></p>
-<pre><code>&lt;h3 style=&quot;color:#0099FF;&quot;&gt;Accordion for jQuery&lt;/h3&gt;   
-&lt;p&gt;Accordion is a part of easyui framework for jQuery.     
-It lets you define your accordion component on web page more easily.&lt;/p&gt;   
-</code></pre><p>  <br>  <div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">   </div></p>
-<pre><code>content2    
-</code></pre><p>  <br>  <div title="Title3">   </div></p>
-<pre><code>content3    
-</code></pre><p>  <br><br><img src="http://i.imgur.com/lHkROWL.png" alt=""></p>
-<h3 id="layout布局-1"><a href="#layout布局-1" class="headerlink" title="layout布局"></a>layout布局</h3><p><img src="http://i.imgur.com/HHGzBrV.png" alt=""></p>
-</li>
+<li>onAdd<ul>
+<li>在添加一个选项卡时触发<h3 id="Accordion分类"><a href="#Accordion分类" class="headerlink" title="Accordion分类"></a>Accordion分类</h3><img src="http://i.imgur.com/vD7EHku.png" alt=""></li>
 </ul>
 </li>
+</ul>
+<pre><code>&lt;div id=&quot;aa&quot; class=&quot;easyui-accordion&quot; style=&quot;width:300px;height:200px;&quot;&gt;   
+    &lt;div title=&quot;Title1&quot; data-options=&quot;iconCls:&apos;icon-save&apos;&quot; style=&quot;overflow:auto;padding:10px;&quot;&gt;   
+        &lt;h3 style=&quot;color:#0099FF;&quot;&gt;Accordion for jQuery&lt;/h3&gt;   
+        &lt;p&gt;Accordion is a part of easyui framework for jQuery.     
+        It lets you define your accordion component on web page more easily.&lt;/p&gt;   
+    &lt;/div&gt;   
+    &lt;div title=&quot;Title2&quot; data-options=&quot;iconCls:&apos;icon-reload&apos;,selected:true&quot; style=&quot;padding:10px;&quot;&gt;   
+        content2    
+    &lt;/div&gt;   
+    &lt;div title=&quot;Title3&quot;&gt;   
+        content3    
+    &lt;/div&gt;   
+&lt;/div&gt; 
+</code></pre><p><img src="http://i.imgur.com/lHkROWL.png" alt=""></p>
+<h3 id="layout布局-1"><a href="#layout布局-1" class="headerlink" title="layout布局"></a>layout布局</h3><p><img src="http://i.imgur.com/HHGzBrV.png" alt=""></p>
+<ul>
 <li><p>完整页面布局</p>
 <pre><code>&lt;body class=&quot;easyui-layout&quot;&gt;   
     &lt;div data-options=&quot;region:&apos;north&apos;,title:&apos;North Title&apos;,split:true&quot; style=&quot;height:100px;&quot;&gt;&lt;/div&gt;   
