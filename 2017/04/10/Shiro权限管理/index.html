@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/10/Shiro权限管理/index.html">
 <meta property="og:site_name" content="YYT">
 <meta property="og:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
-<meta property="og:updated_time" content="2017-04-10T11:10:23.331Z">
+<meta property="og:updated_time" content="2017-04-10T11:47:12.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro权限管理">
 <meta name="twitter:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
@@ -380,17 +380,58 @@
 &lt;/bean&gt;
 </code></pre></li>
 <li><p>bean的名字为bosRealm所在类的内容</p>
-<pre><code>public class BOSRealm extends AuthorizingRealm {
+<pre><code>package com.yyt.bos.shiro;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+
+import com.yyt.bos.dao.FunctionDao;
+import com.yyt.bos.dao.UserDao;
+import com.yyt.bos.entity.Function;
+import com.yyt.bos.entity.User;
+
+public class BOSRealm extends AuthorizingRealm {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private FunctionDao functionDao;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection paramPrincipalCollection) {
         // TODO Auto-generated method stub
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addStringPermission(&quot;staff&quot;);
-        info.addStringPermission(&quot;staff-delete&quot;);
+        /*info.addStringPermission(&quot;staff&quot;);
+        info.addStringPermission(&quot;staff-delete&quot;);*/
+        User user = (User) paramPrincipalCollection.getPrimaryPrincipal();
+        if(&quot;李四&quot;.equals(user.getUsername())){
+            List&lt;Function&gt; list = functionDao.findAll();
+            info.addStringPermission(&quot;staff-delete&quot;);
+            info.addStringPermission(&quot;staff-add&quot;);
+            for (Function function : list) {
+                System.out.println(function.getName());
+                info.addStringPermission(function.getCode());
+            }
+        }else{
+            String id = user.getId();
+            List&lt;Function&gt; list = functionDao.findFunctionByUsername(id);
+            for (Function function : list) {
+                System.out.println(function.getName());
+                info.addStringPermission(function.getCode());
+            }
+        }
         return info;
     }
 
@@ -481,7 +522,20 @@ public BaseAction() {
         e.printStackTrace();
     }
 }
-</code></pre>
+</code></pre><ul>
+<li><p>在jsp页面上根据不同登录用户隐藏按钮</p>
+<pre><code>/* 如果登录的用户有此权限则按钮不隐藏,没有此权限则 隐藏按钮*/
+&lt;shiro:hasPermission name=&quot;staff-add&quot;&gt;
+, {
+    id : &apos;button-add&apos;,
+    text : &apos;增加&apos;,
+    iconCls : &apos;icon-add&apos;,
+    handler : doAdd
+}
+&lt;/shiro:hasPermission&gt;
+</code></pre></li>
+</ul>
+
       
     </div>
 
