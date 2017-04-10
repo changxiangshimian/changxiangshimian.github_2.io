@@ -324,168 +324,16 @@
       
         
           
-            <h3 id="定义resultMap"><a href="#定义resultMap" class="headerlink" title="定义resultMap"></a>定义resultMap</h3><pre><code>如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
-resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。
-</code></pre><ul>
-<li><p>resultMap的配置</p>
-<pre><code>&lt;resultMap type=&quot;com.yyt.mybatis.po.User&quot; id=&quot;userListResultMap&quot;&gt;
-    &lt;id column=&quot;_id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;_name&quot; property=&quot;username&quot;/&gt;
-    &lt;result column=&quot;_birthday&quot; property=&quot;birthday&quot;/&gt;
-    &lt;result column=&quot;_sex&quot; property=&quot;sex&quot;/&gt;
-    &lt;result column=&quot;_address&quot; property=&quot;address&quot;/&gt;
-&lt;/resultMap&gt;
-</code></pre></li>
-</ul>
-<hr>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-        SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-&lt;/select&gt;
-</code></pre><h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><ul>
-<li><p>if语句</p>
-<pre><code>&lt;!-- 传递pojo综合查询用户信息 --&gt;
-&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    where 1=1 
-    &lt;if test=&quot;id!=null&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>where语句</p>
-<pre><code>&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    &lt;where&gt;
-    &lt;if test=&quot;id!=null and id!=&apos;&apos;&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>foreach语句</p>
-<ul>
-<li>向sql传递数组或List，mybatis使用foreach解析</li>
-<li><p>mapper配置<code>queryvo类中包括一个Integer集合ids</code></p>
-<pre><code>&lt;select id=&quot;findUserByForeach&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT * FROM USER WHERE username LIKE &apos;%张%&apos;
-    &lt;!-- 判断queryvo对象里面的ids集合--&gt;
-    &lt;if test=&quot;ids !=null and ids.size&gt;0&quot;&gt;
-        &lt;!-- 遍历ids,并非在上面sql语句上加入 and id in(......) 括号中间写遍历的参数以逗号隔开--&gt;
-        &lt;foreach collection=&quot;ids&quot; open=&quot;and id in(&quot; close=&quot;)&quot; item=&quot;id&quot; separator=&quot;,&quot;&gt;
-            #{id}
-        &lt;/foreach&gt;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li>运行结果<ul>
-<li><code>Preparing: SELECT * FROM USER WHERE username LIKE &#39;%张%&#39; and id in( ? , ? , ? )</code></li>
-<li><code>Parameters: 10(Integer), 89(Integer), 16(Integer)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>sql片段</p>
-<ul>
-<li>Sql中可将重复的sql提取出来，使用时用include引用即可，最终达到sql重用的目的</li>
-<li><p>代码如下</p>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-    &lt;where&gt;
-        &lt;include refid=&quot;id_username_user&quot;/&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-&lt;sql id=&quot;id_username_user&quot;&gt;
-    &lt;if test=&quot;user.id != null and user.id != &apos;&apos;&quot;&gt;
-        and id=${user.id}
-    &lt;/if&gt;
-    &lt;if test=&quot;user.username != null and user.username != &apos;&apos;&quot;&gt;
-        and username like &apos;%${user.username}%&apos;
-    &lt;/if&gt;
-&lt;/sql&gt;
-</code></pre><h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3></li>
-</ul>
-</li>
-<li><p>一对一的查询<code>一张订单对应只有一个用户</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 查询订单关联用户信息使用resultmap --&gt;
-&lt;resultMap type=&quot;Orders&quot; id=&quot;orderUserResultMap&quot;&gt;
-    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;
-    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
-    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;
-    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;
-    &lt;!-- 一对一关联映射 --&gt;
-    &lt;!-- 
-    property:Orders对象的user属性
-    javaType：user属性对应 的类型
-     --&gt;
-    &lt;association property=&quot;user&quot; javaType=&quot;cn.itcast.po.User&quot;&gt;
-        &lt;!-- column:user表的主键对应的列  property：user对象中id属性--&gt;
-        &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;
-        &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;
-    &lt;/association&gt;
-&lt;/resultMap&gt;
-&lt;select id=&quot;findOrdersWithUserResultMap&quot; resultMap=&quot;orderUserResultMap&quot;&gt;
-    SELECT
-        o.id,
-        o.user_id,
-        o.number,
-        o.createtime,
-        o.note,
-        u.username,
-        u.address
-    FROM
-        orders o
-    JOIN `user` u ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在订单实体类中加入用户的属性,并提供get,set方法</li>
-</ul>
-</li>
-<li><p>一对多查询<code>一个用户可以有多个订单</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 配置一对多的关系 --&gt;
-&lt;resultMap type=&quot;user&quot; id=&quot;userAndordersMapper&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
-    &lt;result property=&quot;birthday&quot; column=&quot;birthday&quot;/&gt;
-    &lt;result property=&quot;sex&quot; column=&quot;sex&quot;/&gt;
-    &lt;result property=&quot;address&quot; column=&quot;address&quot;/&gt;
-    &lt;!-- 配置一对多的关系 --&gt;
-    &lt;collection property=&quot;orders&quot; ofType=&quot;orders&quot;&gt;
-        &lt;id property=&quot;id&quot; column=&quot;oid&quot;/&gt;
-        &lt;result property=&quot;number&quot; column=&quot;number&quot;/&gt;
-        &lt;result property=&quot;createtime&quot; column=&quot;createtime&quot;/&gt;
-        &lt;result property=&quot;note&quot; column=&quot;note&quot;/&gt;
-    &lt;/collection&gt;
-&lt;/resultMap&gt;
-&lt;!-- 一对多的sql语句的写法配置 --&gt;
-&lt;select id=&quot;findUserOrdersByUser&quot; resultMap=&quot;userAndordersMapper&quot;&gt;
-    SELECT
-    u.*, o.id oid,
-    o.number,
-    o.createtime,
-    o.note
-    FROM
-    `user` u
-    LEFT JOIN orders o ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在用户实体类中加入订单对象的list集合属性,并提供get和set方法</li>
-</ul>
-</li>
-</ul>
-
-          
+          定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
+resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/09/mybatis-day02/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -604,230 +452,21 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
       
         
           
-            <h3 id="Mybatis基本的配置"><a href="#Mybatis基本的配置" class="headerlink" title="Mybatis基本的配置"></a>Mybatis基本的配置</h3><ul>
-<li><p>首先创建一个实体类并提供get,set和toString方法</p>
-<pre><code>public class User {
+          Mybatis基本的配置
+首先创建一个实体类并提供get,set和toString方法
+public class User {
     private Integer id;
     private String username;
     private Date birthday;
-    private String sex;
-    private String address;
-    ........
-}
-</code></pre></li>
-<li><p>加载log4j配置文件<code>内容如下</code></p>
-<pre><code># Global logging configuration
-log4j.rootLogger=DEBUG, stdout
-# Console output...
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
-</code></pre></li>
-<li><p>在同级目录下创建接口和mapper配置文件<code>两个文件的名称要相同</code></p>
-<ul>
-<li><p>接口里面填写的是各种增删改查的方法</p>
-<pre><code>public interface UserMapper {
-    public User findUserByid(int id);
-    public void insertUser(User user);
-    public List&lt;User&gt; findAllUser();
-}
-</code></pre></li>
-<li><p>mapper配置文件的代码</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper
-PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;!-- 这里因为接口和mapper文件都在同级目录,所以要填写本文件的包全路径  --&gt;
-&lt;mapper namespace=&quot;com.yyt.mybatis.mapper.UserMapper&quot;&gt;
-    &lt;!-- id:方法名,parameterType:传入方法里面的参数,resultType:方法执行后返回的参数类型 --&gt;
-    &lt;select id=&quot;findUserByid&quot; parameterType=&quot;int&quot;
-        resultType=&quot;com.yyt.mybatis.po.User&quot;&gt;
-        select * from `user` where id=#{id};
-    &lt;/select&gt;
-    &lt;select id=&quot;insertUser&quot; parameterType=&quot;com.yyt.mybatis.po.User&quot;&gt;
-        INSERT INTO
-        USER(username,birthday,sex,address) VALUES
-        (#{username},#{birthday},#{sex},#{address});
-
-    &lt;/select&gt;
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<pre><code>    &lt;select id=&quot;findAllUser&quot; resultType=&quot;com.yyt.mybatis.po.User&quot;&gt;
-        select * from `user`;
-    &lt;/select&gt;
-&lt;/mapper&gt;
-</code></pre><ul>
-<li><p>mybatis核心配置文件的配置</p>
-<ul>
-<li><p>SqlMapConfig.xml文件代码</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE configuration
-PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-    &lt;environments default=&quot;development&quot;&gt;
-        &lt;environment id=&quot;development&quot;&gt;
-            &lt;transactionManager type=&quot;JDBC&quot;&gt;&lt;/transactionManager&gt;
-            &lt;dataSource type=&quot;POOLED&quot;&gt;
-                &lt;!-- 链接数据库 --&gt;
-                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
-                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8&quot;/&gt;
-                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
-                &lt;property name=&quot;password&quot; value=&quot;123&quot;/&gt;
-            &lt;/dataSource&gt;
-        &lt;/environment&gt;
-    &lt;/environments&gt;
-
-    &lt;!-- 加载映射文件 --&gt;
-    &lt;mappers&gt;
-        &lt;mapper class=&quot;com.yyt.mybatis.mapper.UserMapper&quot;/&gt;
-    &lt;/mappers&gt;
-
-&lt;/configuration&gt;
-</code></pre></li>
-</ul>
-</li>
-<li><p>创建一个测试类测试一下</p>
-<pre><code>public class UserMapperTest {
-
-private SqlSessionFactory sqlSessionFactory = null;
-
-    @Before
-    public void init() throws Exception {
-        //第一步：创建一个SQLSessionFactoryBuilder对象。
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        //第二步：加载配置文件。
-        InputStream inputStream = Resources.getResourceAsStream(&quot;SqlMapConfig.xml&quot;);
-        //第三步：创建SQLSessionFactory对象
-        sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);
-    }
-
-    @Test
-    public void testFindUserByid() {
-        SqlSession sqlsession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
-        User user = userMapper.findUserByid(1);
-        sqlsession.close();
-        System.out.println(user);
-    }
-
-    @Test
-    public void testInsertUser() {
-        SqlSession sqlsession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
-        User user = new  User();
-        user.setUsername(&quot;尼古拉斯赵四&quot;);
-        user.setSex(&quot;1&quot;);
-        user.setBirthday(new Date());
-        user.setAddress(&quot;湖北省武汉市江夏区汤逊湖北路8号长城科技园5栋1405&quot;);
-        userMapper.insertUser(user);
-        sqlsession.commit();
-        sqlsession.close();
-    }
-
-    @Test
-    public void testFindAllUser() {
-        SqlSession sqlsession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
-        List&lt;User&gt; list = userMapper.findAllUser();
-        sqlsession.close();
-        for (User user : list) {
-            System.out.println(user);
-        }
-    }
-
-}
-</code></pre></li>
-<li><p><code>#{}和${}的区别</code></p>
-<pre><code>#{}表示一个占位符号，通过#{}可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
- #{}可以接收简单类型值或pojo属性值。 如果parameterType传输单个简单类型值，#{}括号中可以是value或其它名称。“%”#{name}”%”
-${}表示拼接sql串，通过${}可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换，
- ${}可以接收简单类型值或pojo属性值，如果parameterType传输单个简单类型值，${}括号中只能是value。
-</code></pre></li>
-<li>parameterType<ul>
-<li>指定输入参数类型，mybatis通过ognl从输入对象中获取参数值拼接在sql中</li>
-</ul>
-</li>
-<li>resultType<ul>
-<li>指定输出结果类型，mybatis将sql查询结果的一行记录数据映射为resultType指定类型的对象</li>
-</ul>
-</li>
-<li><p>selectOne</p>
-<ul>
-<li><p>查询一条记录，如果使用selectOne查询多条记录则抛出异常</p>
-<pre><code>org.apache.ibatis.exceptions.TooManyResultsException:
-Expected one result (or null) to be returned by selectOne(), but found: 3
-    at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:70)
--------------------------------没有找到selectOne方法的返回值,但发现了3个对象-----------------------------
-</code></pre></li>
-</ul>
-</li>
-<li>selectList<ul>
-<li>可以查询一条或多条记录。</li>
-</ul>
-</li>
-<li>SqlMapConfig配置文件里加载mapper映射文件有一下几种方法<ul>
-<li><code>&lt;mapper resource=&quot; &quot; /&gt;</code><ul>
-<li>使用相对于类路径的资源如：<mapper resource="sqlmap/User.xml"></mapper></li>
-</ul>
-</li>
-<li><code>&lt;mapper class=&quot; &quot; /&gt;</code><ul>
-<li><code>&lt;mapper class=&quot;cn.itcast.mybatis.mapper.UserMapper&quot;/&gt;</code></li>
-<li>接口类路径</li>
-<li>此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。</li>
-</ul>
-</li>
-<li><code>&lt;package name=&quot;&quot;/&gt;</code><ul>
-<li>注册指定包下的所有mapper接口</li>
-<li><code>&lt;package name=&quot;cn.itcast.mybatis.mapper&quot;/&gt;</code></li>
-<li>此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>给mybatis配置别名</p>
-<ul>
-<li><p>在SqlMapConfig.xml文件中配置</p>
-<pre><code>&lt;typeAliases&gt;    
-    &lt;!--配置别名, 填写实体类的路径  --&gt;
-    &lt;package name=&quot;com.yyt.mybatis.po&quot;/&gt;
-&lt;/typeAliases&gt;
-</code></pre></li>
-<li>表示在该包路径中的实体类的别名就是他们的名字,不区分大小写.<ul>
-<li>这样以后在mapper文件中的参数或者返回值类型就不用填写类的全路名了,直接填写别名就行了</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>mybatis支持的别名</p>
-<pre><code>别名                        映射的类型
-_byte                         byte 
-_long                         long 
-_short                         short 
-_int                         int 
-_integer                     int 
-_double                         double 
-_float                         float 
-_boolean                     boolean 
-string                         String 
-byte                         Byte 
-long                         Long 
-short                         Short 
-int                         Integer 
-integer                     Integer 
-double                         Double 
-float                         Float 
-boolean                     Boolean 
-date                         Date 
-decimal                     BigDecimal 
-bigdecimal                     BigDecimal 
-map                            Map
-</code></pre></li>
-</ul>
-
-          
+    pr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/09/mybatis-day01/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -946,95 +585,19 @@ map                            Map
       
         
           
-            <ul>
-<li><p>SqlMapConfig.xml文件的配置</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE configuration
-PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-    &lt;typeAliases&gt;
-        &lt;!-- 配置别名 --&gt;
-        &lt;package name=&quot;com.yyt.mybayis.po&quot;/&gt;
-    &lt;/typeAliases&gt;
-    &lt;mappers&gt;
-        &lt;!-- 加载映射文件 --&gt;
-        &lt;mapper class=&quot;com.yyt.mybayis.mapper.UserMapper&quot;/&gt;
-        &lt;mapper class=&quot;com.yyt.mybayis.mapper.OrdersMapper&quot;/&gt;
-    &lt;/mappers&gt;
-&lt;/configuration&gt;
-</code></pre></li>
-<li><p>applicationContext.xml文件的配置</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
-    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd&quot;&gt;
-
-    &lt;!-- 加载数据库参数配置文件 --&gt;
-    &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; /&gt;
-    &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;
-        destroy-method=&quot;close&quot;&gt;
-        &lt;property name=&quot;driverClassName&quot; value=&quot;${jdbc.driver}&quot; /&gt;
-        &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot; /&gt;
-        &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot; /&gt;
-        &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot; /&gt;
-        &lt;property name=&quot;maxActive&quot; value=&quot;10&quot; /&gt;
-        &lt;property name=&quot;maxIdle&quot; value=&quot;5&quot; /&gt;
-    &lt;/bean&gt;
-    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-        &lt;!-- 加载数据库信息 --&gt;
-        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-        &lt;!-- 加载maybatis的核心配置文件 --&gt;
-        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:sqlmapConfig.xml&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 分别配置两个mapper代理 --&gt;
-    &lt;bean id=&quot;userMapperFactoryBean&quot; class=&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;&gt;
-        &lt;property name=&quot;mapperInterface&quot; value=&quot;com.yyt.mybayis.mapper.UserMapper&quot;/&gt;
-        &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-    &lt;bean id=&quot;ordersMapperFactoryBean&quot; class=&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;&gt;
-        &lt;property name=&quot;mapperInterface&quot; value=&quot;com.yyt.mybayis.mapper.OrdersMapper&quot;/&gt;
-        &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-&lt;/beans&gt;
-</code></pre></li>
-<li><p>db.properties文件配置</p>
-<pre><code>jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8
-jdbc.username=root
-jdbc.password=123
-</code></pre></li>
-<li><p>测试方法</p>
-<pre><code>public class UserMapperTest {
-
-private ApplicationContext  applicationContext;
-
-    @Before
-    public void init() throws Exception {
-        applicationContext = new ClassPathXmlApplicationContext(&quot;classpath:applicationContext.xml&quot;);
-    }
-
-    @Test
-    public void testFindAllUser() {
-        UserMapper userMapper = applicationContext.getBean(UserMapper.class);
-        List&lt;User&gt; list = userMapper.findAllUser();
-        for (User user : list) {
-            System.out.println(user);
-        }
-    }
-
-}
-</code></pre></li>
-</ul>
-
           
+SqlMapConfig.xml文件的配置
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration
+PUBLIC &quot;-//mybatis.org//DTD Co
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/09/mybatis与spring的整合/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1153,8 +716,15 @@ private ApplicationContext  applicationContext;
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/09/第一篇笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1273,17 +843,15 @@ private ApplicationContext  applicationContext;
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/09/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
