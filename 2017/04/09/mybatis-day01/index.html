@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法 public class User {     private Integer id;     private String username;     private Date birthday;     private String sex;     private String address;">
+<meta name="description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法  12345678public class User &amp;#123;	private Integer id;	private String username;	private Date birthday;	private String sex;	private String address;	........&amp;#">
 <meta name="keywords" content="mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis_day01">
 <meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day01/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法 public class User {     private Integer id;     private String username;     private Date birthday;     private String sex;     private String address;">
-<meta property="og:updated_time" content="2017-04-10T10:38:47.950Z">
+<meta property="og:description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法  12345678public class User &amp;#123;	private Integer id;	private String username;	private Date birthday;	private String sex;	private String address;	........&amp;#">
+<meta property="og:updated_time" content="2017-04-10T13:02:00.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis_day01">
-<meta name="twitter:description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法 public class User {     private Integer id;     private String username;     private Date birthday;     private String sex;     private String address;">
+<meta name="twitter:description" content="Mybatis基本的配置 首先创建一个实体类并提供get,set和toString方法  12345678public class User &amp;#123;	private Integer id;	private String username;	private Date birthday;	private String sex;	private String address;	........&amp;#">
 
 
 
@@ -333,147 +333,38 @@
 
       
         <h3 id="Mybatis基本的配置"><a href="#Mybatis基本的配置" class="headerlink" title="Mybatis基本的配置"></a>Mybatis基本的配置</h3><ul>
-<li><p>首先创建一个实体类并提供get,set和toString方法</p>
-<pre><code>public class User {
-    private Integer id;
-    private String username;
-    private Date birthday;
-    private String sex;
-    private String address;
-    ........
-}
-</code></pre></li>
-<li><p>加载log4j配置文件<code>内容如下</code></p>
-<pre><code># Global logging configuration
-log4j.rootLogger=DEBUG, stdout
-# Console output...
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
-</code></pre></li>
-<li><p>在同级目录下创建接口和mapper配置文件<code>两个文件的名称要相同</code></p>
+<li>首先创建一个实体类并提供get,set和toString方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Integer id;</div><div class="line">	<span class="keyword">private</span> String username;</div><div class="line">	<span class="keyword">private</span> Date birthday;</div><div class="line">	<span class="keyword">private</span> String sex;</div><div class="line">	<span class="keyword">private</span> String address;</div><div class="line">	........</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li><p>接口里面填写的是各种增删改查的方法</p>
-<pre><code>public interface UserMapper {
-    public User findUserByid(int id);
-    public void insertUser(User user);
-    public List&lt;User&gt; findAllUser();
-}
-</code></pre></li>
-<li><p>mapper配置文件的代码</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE mapper
-PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;!-- 这里因为接口和mapper文件都在同级目录,所以要填写本文件的包全路径  --&gt;
-&lt;mapper namespace=&quot;com.yyt.mybatis.mapper.UserMapper&quot;&gt;
-    &lt;!-- id:方法名,parameterType:传入方法里面的参数,resultType:方法执行后返回的参数类型 --&gt;
-    &lt;select id=&quot;findUserByid&quot; parameterType=&quot;int&quot;
-        resultType=&quot;com.yyt.mybatis.po.User&quot;&gt;
-        select * from `user` where id=#{id};
-    &lt;/select&gt;
-    &lt;select id=&quot;insertUser&quot; parameterType=&quot;com.yyt.mybatis.po.User&quot;&gt;
-        INSERT INTO
-        USER(username,birthday,sex,address) VALUES
-        (#{username},#{birthday},#{sex},#{address});
-
-    &lt;/select&gt;
-</code></pre></li>
+<li>加载log4j配置文件<code>内容如下</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Global logging configuration</div><div class="line">log4j.rootLogger=DEBUG, stdout</div><div class="line"># Console output...</div><div class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n</div></pre></td></tr></table></figure>
+<ul>
+<li>在同级目录下创建接口和mapper配置文件<code>两个文件的名称要相同</code><ul>
+<li>接口里面填写的是各种增删改查的方法</li>
 </ul>
 </li>
 </ul>
-<pre><code>    &lt;select id=&quot;findAllUser&quot; resultType=&quot;com.yyt.mybatis.po.User&quot;&gt;
-        select * from `user`;
-    &lt;/select&gt;
-&lt;/mapper&gt;
-</code></pre><ul>
-<li><p>mybatis核心配置文件的配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">findUserByid</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertUser</span><span class="params">(User user)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAllUser</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>* mapper配置文件的代码
+</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE mapper</span></div><div class="line">PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</div><div class="line">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</div><div class="line"><span class="comment">&lt;!-- 这里因为接口和mapper文件都在同级目录,所以要填写本文件的包全路径  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.yyt.mybatis.mapper.UserMapper"</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- id:方法名,parameterType:传入方法里面的参数,resultType:方法执行后返回的参数类型 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserByid"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span></span></div><div class="line">		<span class="attr">resultType</span>=<span class="string">"com.yyt.mybatis.po.User"</span>&gt;</div><div class="line">		select * from `user` where id=#&#123;id&#125;;</div><div class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"insertUser"</span> <span class="attr">parameterType</span>=<span class="string">"com.yyt.mybatis.po.User"</span>&gt;</span></div><div class="line">		INSERT INTO</div><div class="line">		USER(username,birthday,sex,address) VALUES</div><div class="line">		(#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;);</div><div class="line"></div><div class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAllUser"</span> <span class="attr">resultType</span>=<span class="string">"com.yyt.mybatis.po.User"</span>&gt;</span></div><div class="line">		select * from `user`;</div><div class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
-<li><p>SqlMapConfig.xml文件代码</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE configuration
-PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-    &lt;environments default=&quot;development&quot;&gt;
-        &lt;environment id=&quot;development&quot;&gt;
-            &lt;transactionManager type=&quot;JDBC&quot;&gt;&lt;/transactionManager&gt;
-            &lt;dataSource type=&quot;POOLED&quot;&gt;
-                &lt;!-- 链接数据库 --&gt;
-                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
-                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8&quot;/&gt;
-                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
-                &lt;property name=&quot;password&quot; value=&quot;123&quot;/&gt;
-            &lt;/dataSource&gt;
-        &lt;/environment&gt;
-    &lt;/environments&gt;
-
-    &lt;!-- 加载映射文件 --&gt;
-    &lt;mappers&gt;
-        &lt;mapper class=&quot;com.yyt.mybatis.mapper.UserMapper&quot;/&gt;
-    &lt;/mappers&gt;
-
-&lt;/configuration&gt;
-</code></pre></li>
+<li>mybatis核心配置文件的配置<ul>
+<li>SqlMapConfig.xml文件代码</li>
 </ul>
 </li>
-<li><p>创建一个测试类测试一下</p>
-<pre><code>public class UserMapperTest {
-
-private SqlSessionFactory sqlSessionFactory = null;
-
-    @Before
-    public void init() throws Exception {
-        //第一步：创建一个SQLSessionFactoryBuilder对象。
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        //第二步：加载配置文件。
-        InputStream inputStream = Resources.getResourceAsStream(&quot;SqlMapConfig.xml&quot;);
-        //第三步：创建SQLSessionFactory对象
-        sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);
-    }
-
-    @Test
-    public void testFindUserByid() {
-        SqlSession sqlsession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
-        User user = userMapper.findUserByid(1);
-        sqlsession.close();
-        System.out.println(user);
-    }
-
-    @Test
-    public void testInsertUser() {
-        SqlSession sqlsession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
-        User user = new  User();
-        user.setUsername(&quot;尼古拉斯赵四&quot;);
-        user.setSex(&quot;1&quot;);
-        user.setBirthday(new Date());
-        user.setAddress(&quot;湖北省武汉市江夏区汤逊湖北路8号长城科技园5栋1405&quot;);
-        userMapper.insertUser(user);
-        sqlsession.commit();
-        sqlsession.close();
-    }
-
-    @Test
-    public void testFindAllUser() {
-        SqlSession sqlsession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
-        List&lt;User&gt; list = userMapper.findAllUser();
-        sqlsession.close();
-        for (User user : list) {
-            System.out.println(user);
-        }
-    }
-
-}
-</code></pre></li>
-<li><p><code>#{}和${}的区别</code></p>
-<pre><code>#{}表示一个占位符号，通过#{}可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。
- #{}可以接收简单类型值或pojo属性值。 如果parameterType传输单个简单类型值，#{}括号中可以是value或其它名称。“%”#{name}”%”
-${}表示拼接sql串，通过${}可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换，
- ${}可以接收简单类型值或pojo属性值，如果parameterType传输单个简单类型值，${}括号中只能是value。
-</code></pre></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE configuration</span></div><div class="line">PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</div><div class="line">"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 链接数据库 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"</span>/&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"123"</span>/&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 加载映射文件 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"com.yyt.mybatis.mapper.UserMapper"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>创建一个测试类测试一下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserMapperTest</span> </span>&#123;</div><div class="line">	</div><div class="line"><span class="keyword">private</span> SqlSessionFactory sqlSessionFactory = <span class="keyword">null</span>;</div><div class="line">	</div><div class="line">	<span class="meta">@Before</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="comment">//第一步：创建一个SQLSessionFactoryBuilder对象。</span></div><div class="line">		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</div><div class="line">		<span class="comment">//第二步：加载配置文件。</span></div><div class="line">		InputStream inputStream = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</div><div class="line">		<span class="comment">//第三步：创建SQLSessionFactory对象</span></div><div class="line">		sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindUserByid</span><span class="params">()</span> </span>&#123;</div><div class="line">		SqlSession sqlsession = sqlSessionFactory.openSession();</div><div class="line">		UserMapper userMapper = sqlsession.getMapper(UserMapper.class);</div><div class="line">		User user = userMapper.findUserByid(<span class="number">1</span>);</div><div class="line">		sqlsession.close();</div><div class="line">		System.out.println(user);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testInsertUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		SqlSession sqlsession = sqlSessionFactory.openSession();</div><div class="line">		UserMapper userMapper = sqlsession.getMapper(UserMapper.class);</div><div class="line">		User user = <span class="keyword">new</span>  User();</div><div class="line">		user.setUsername(<span class="string">"尼古拉斯赵四"</span>);</div><div class="line">		user.setSex(<span class="string">"1"</span>);</div><div class="line">		user.setBirthday(<span class="keyword">new</span> Date());</div><div class="line">		user.setAddress(<span class="string">"湖北省武汉市江夏区汤逊湖北路8号长城科技园5栋1405"</span>);</div><div class="line">		userMapper.insertUser(user);</div><div class="line">		sqlsession.commit();</div><div class="line">		sqlsession.close();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindAllUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		SqlSession sqlsession = sqlSessionFactory.openSession();</div><div class="line">		UserMapper userMapper = sqlsession.getMapper(UserMapper.class);</div><div class="line">		List&lt;User&gt; list = userMapper.findAllUser();</div><div class="line">		sqlsession.close();</div><div class="line">		<span class="keyword">for</span> (User user : list) &#123;</div><div class="line">			System.out.println(user);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>#{}和${}的区别</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*#&#123;&#125;表示一个占位符号，通过#&#123;&#125;可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#&#123;&#125;可以有效防止sql注入。</span></div><div class="line"> #&#123;&#125;可以接收简单类型值或pojo属性值。 如果parameterType传输单个简单类型值，#&#123;&#125;括号中可以是value或其它名称。“%”#&#123;name&#125;”%”</div><div class="line">$&#123;&#125;表示拼接sql串，通过$&#123;&#125;可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换，</div><div class="line"> $&#123;&#125;可以接收简单类型值或pojo属性值，如果parameterType传输单个简单类型值，$&#123;&#125;括号中只能是value。*/</div></pre></td></tr></table></figure>
+<ul>
 <li>parameterType<ul>
 <li>指定输入参数类型，mybatis通过ognl从输入对象中获取参数值拼接在sql中</li>
 </ul>
@@ -482,16 +373,13 @@ ${}表示拼接sql串，通过${}可以将parameterType 传入的内容拼接在
 <li>指定输出结果类型，mybatis将sql查询结果的一行记录数据映射为resultType指定类型的对象</li>
 </ul>
 </li>
-<li><p>selectOne</p>
-<ul>
-<li><p>查询一条记录，如果使用selectOne查询多条记录则抛出异常</p>
-<pre><code>org.apache.ibatis.exceptions.TooManyResultsException:
-Expected one result (or null) to be returned by selectOne(), but found: 3
-    at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:70)
--------------------------------没有找到selectOne方法的返回值,但发现了3个对象-----------------------------
-</code></pre></li>
+<li>selectOne<ul>
+<li>查询一条记录，如果使用selectOne查询多条记录则抛出异常</li>
 </ul>
 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">org.apache.ibatis.exceptions.TooManyResultsException:</div><div class="line"><span class="function">Expected one <span class="title">result</span> <span class="params">(or <span class="keyword">null</span>)</span> to be returned by <span class="title">selectOne</span><span class="params">()</span>, but found: 3</span></div><div class="line">	at org.apache.ibatis.session.defaults.DefaultSqlSession.<span class="title">selectOne</span><span class="params">(DefaultSqlSession.java:<span class="number">70</span>)</span></div><div class="line">-------------------------------没有找到selectOne方法的返回值,但发现了3个对象-----------------------------</div></pre></td></tr></table></figure>
+<ul>
 <li>selectList<ul>
 <li>可以查询一条或多条记录。</li>
 </ul>
@@ -515,20 +403,15 @@ Expected one result (or null) to be returned by selectOne(), but found: 3
 </li>
 </ul>
 </li>
-<li><p>给mybatis配置别名</p>
-<ul>
-<li><p>在SqlMapConfig.xml文件中配置</p>
-<pre><code>&lt;typeAliases&gt;    
-    &lt;!--配置别名, 填写实体类的路径  --&gt;
-    &lt;package name=&quot;com.yyt.mybatis.po&quot;/&gt;
-&lt;/typeAliases&gt;
-</code></pre></li>
-<li>表示在该包路径中的实体类的别名就是他们的名字,不区分大小写.<ul>
-<li>这样以后在mapper文件中的参数或者返回值类型就不用填写类的全路名了,直接填写别名就行了</li>
+<li>给mybatis配置别名<ul>
+<li>在SqlMapConfig.xml文件中配置</li>
 </ul>
 </li>
 </ul>
-</li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span>	</div><div class="line">	<span class="comment">&lt;!--配置别名, 填写实体类的路径  --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.yyt.mybatis.po"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code>* 表示在该包路径中的实体类的别名就是他们的名字,不区分大小写.
+    * 这样以后在mapper文件中的参数或者返回值类型就不用填写类的全路名了,直接填写别名就行了
+</code></pre><ul>
 <li><p>mybatis支持的别名</p>
 <pre><code>别名                        映射的类型
 _byte                         byte 
