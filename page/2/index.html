@@ -89,7 +89,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="����˼��">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="����˼��">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="����˼��">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
 
 
@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis-day02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis与spring的整合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -279,8 +279,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/09/mybatis-day02/" itemprop="url">
-                  mybatis_day02
+                <a class="post-title-link" href="/2017/04/09/mybatis与spring的整合/" itemprop="url">
+                  mybatis与spring的整合
                 </a>
               
             
@@ -296,7 +296,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T19:03:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T18:35:21+08:00">
                 2017-04-09
               </time>
             
@@ -334,12 +334,15 @@
       
         
           
-          定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
-resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list
+          
+SqlMapConfig.xml文件的配置
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration
+PUBLIC &quot;-//mybatis.org//DTD Co
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/09/mybatis-day02/#more" rel="contents">
+            <a class="btn" href="/2017/04/09/mybatis与spring的整合/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -385,7 +388,7 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis-day01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/第一篇笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -407,8 +410,8 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
             
               
                 
-                <a class="post-title-link" href="/2017/04/09/mybatis-day01/" itemprop="url">
-                  mybatis_day01
+                <a class="post-title-link" href="/2017/04/09/第一篇笔记/" itemprop="url">
+                  第一篇笔记
                 </a>
               
             
@@ -424,7 +427,7 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T19:00:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T16:30:24+08:00">
                 2017-04-09
               </time>
             
@@ -462,17 +465,11 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
       
         
           
-          Mybatis基本的配置
-首先创建一个实体类并提供get,set和toString方法
-public class User {
-    private Integer id;
-    private String username;
-    private Date birthday;
-    pr
-          ...
+          
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/09/mybatis-day01/#more" rel="contents">
+            <a class="btn" href="/2017/04/09/第一篇笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -513,7 +510,7 @@ public class User {
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
