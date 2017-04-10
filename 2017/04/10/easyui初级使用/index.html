@@ -1,0 +1,873 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="easyui," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="什么是easyui jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果 使用jquery easyui和后台进行交互 通过后台（action）返回json数据到页面 底层使用jquery ajax+json数据   应用场景 使用jquery easyui一般用在后台管理系统基本案例DataGrid(数据表格)     DataGrid属性&amp;lt;table cl">
+<meta name="keywords" content="easyui">
+<meta property="og:type" content="article">
+<meta property="og:title" content="easyui初级使用">
+<meta property="og:url" content="http://yoursite.com/2017/04/10/easyui初级使用/index.html">
+<meta property="og:site_name" content="YYT">
+<meta property="og:description" content="什么是easyui jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果 使用jquery easyui和后台进行交互 通过后台（action）返回json数据到页面 底层使用jquery ajax+json数据   应用场景 使用jquery easyui一般用在后台管理系统基本案例DataGrid(数据表格)     DataGrid属性&amp;lt;table cl">
+<meta property="og:image" content="http://i.imgur.com/96G8LkF.png">
+<meta property="og:image" content="http://i.imgur.com/pQ3z9Xu.png">
+<meta property="og:image" content="http://i.imgur.com/a4WOZyz.png">
+<meta property="og:image" content="http://i.imgur.com/vD7EHku.png">
+<meta property="og:image" content="http://i.imgur.com/lHkROWL.png">
+<meta property="og:image" content="http://i.imgur.com/HHGzBrV.png">
+<meta property="og:updated_time" content="2017-04-10T10:35:58.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="easyui初级使用">
+<meta name="twitter:description" content="什么是easyui jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果 使用jquery easyui和后台进行交互 通过后台（action）返回json数据到页面 底层使用jquery ajax+json数据   应用场景 使用jquery easyui一般用在后台管理系统基本案例DataGrid(数据表格)     DataGrid属性&amp;lt;table cl">
+<meta name="twitter:image" content="http://i.imgur.com/96G8LkF.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/10/easyui初级使用/"/>
+
+
+
+
+
+  <title> easyui初级使用 | YYT </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YYT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/easyui初级使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YYT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://i.imgur.com/q50MUsV.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YYT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                easyui初级使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T17:25:15+08:00">
+                2017-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是easyui"><a href="#什么是easyui" class="headerlink" title="什么是easyui"></a>什么是easyui</h3><ul>
+<li>jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果</li>
+<li>使用jquery easyui和后台进行交互<ul>
+<li>通过后台（action）返回json数据到页面</li>
+<li>底层使用jquery ajax+json数据</li>
+</ul>
+</li>
+<li>应用场景<ul>
+<li>使用jquery easyui一般用在后台管理系统<h1 id="基本案例"><a href="#基本案例" class="headerlink" title="基本案例"></a>基本案例</h1><h2 id="DataGrid-数据表格"><a href="#DataGrid-数据表格" class="headerlink" title="DataGrid(数据表格)"></a>DataGrid(数据表格)</h2></li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/96G8LkF.png" alt=""></p>
+<h3 id="DataGrid属性"><a href="#DataGrid属性" class="headerlink" title="DataGrid属性"></a>DataGrid属性</h3><pre><code>&lt;table class=&quot;easyui-datagrid&quot;&gt;   
+    &lt;thead&gt;   
+        &lt;tr&gt;   
+            &lt;th data-options=&quot;field:&apos;code&apos;&quot;&gt;编码&lt;/th&gt;   
+            &lt;th data-options=&quot;field:&apos;name&apos;&quot;&gt;名称&lt;/th&gt;   
+            &lt;th data-options=&quot;field:&apos;price&apos;&quot;&gt;价格&lt;/th&gt;   
+        &lt;/tr&gt;   
+    &lt;/thead&gt;   
+    &lt;tbody&gt;   
+        &lt;tr&gt;   
+            &lt;td&gt;001&lt;/td&gt;&lt;td&gt;名称1&lt;/td&gt;&lt;td&gt;2323&lt;/td&gt;   
+        &lt;/tr&gt;   
+        &lt;tr&gt;   
+            &lt;td&gt;002&lt;/td&gt;&lt;td&gt;名称2&lt;/td&gt;&lt;td&gt;4612&lt;/td&gt;   
+        &lt;/tr&gt;   
+    &lt;/tbody&gt;   
+&lt;/table&gt;
+</code></pre><ul>
+<li>class=”easyui-datagrid”<code>表示引入easy的表格样式</code></li>
+<li>field :列字段的名称</li>
+<li>pagination :是否显示分页条工具</li>
+<li>rownumbers :是否显示数据表格的行号</li>
+<li>pagePosition :定义分页工具栏的位置,可选值有’top’,’bottom’,’both’</li>
+<li>loader <ul>
+<li>定义如何从远程服务器加载数据。返回false可以放弃本次请求动作。该函数接受以下参数：<ul>
+<li>param：参数对象传递给远程服务器。</li>
+<li>success(data)：当检索数据成功的时候会调用该回调函数</li>
+<li>error()：当检索数据失败的时候会调用该回调函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>loadFilter</p>
+<ul>
+<li><p>返回过滤数据显示。该函数带一个参数’data’用来指向源数据（即：获取的数据源，比如Json对象）。您可以改变源数据的标准数据格式。这个函数必须返回包含’total’和’rows’属性的标准数据对象。 </p>
+</li>
+<li><p>代码示例</p>
+<pre><code>// 从Web Service（asp.net、java、php等）输出的JSON对象中移除&apos;d&apos;对象
+$(&apos;#dg&apos;).datagrid({
+    loadFilter: function(data){
+        if (data.d){
+            return data.d;
+        } else {
+            return data;
+        }
+    }
+});
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="列属性"><a href="#列属性" class="headerlink" title="列属性"></a>列属性</h3><pre><code>columns:[[    
+    {field:&apos;itemid&apos;,title:&apos;Item ID&apos;,rowspan:2,width:80,sortable:true},    
+    {field:&apos;productid&apos;,title:&apos;Product ID&apos;,rowspan:2,width:80,sortable:true},    
+    {title:&apos;Item Details&apos;,colspan:4}    
+],[    
+    {field:&apos;listprice&apos;,title:&apos;List Price&apos;,width:80,align:&apos;right&apos;,sortable:true},    
+    {field:&apos;unitcost&apos;,title:&apos;Unit Cost&apos;,width:80,align:&apos;right&apos;,sortable:true},    
+    {field:&apos;attr1&apos;,title:&apos;Attribute&apos;,width:100},    
+    {field:&apos;status&apos;,title:&apos;Status&apos;,width:60}    
+]]  
+</code></pre><ul>
+<li>title :列标题文本</li>
+<li>field :列字段名</li>
+<li>width :列的宽度,如果没有设置则表示自适应</li>
+<li>rowspan :合并行</li>
+<li>colspan :合并列</li>
+<li>resizable :允许列改变大小</li>
+<li>hidden :如果为true,表示隐藏</li>
+<li><p>checkbox :如果为true则显示复选框</p>
+<h2 id="对话窗口"><a href="#对话窗口" class="headerlink" title="对话窗口"></a>对话窗口</h2><p><img src="http://i.imgur.com/pQ3z9Xu.png" alt=""></p>
+  <div class="easyui-dialog" style="width:600px;height:300px" data-options="title:'我的对话框',toolbar:'#tb',modal:true"><br>      对话框窗口内容。里面可以插入一个表格<br>  </div><br>  <div id="tb"><br>      <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" a=""><br>      <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" a=""><br>  </a></a></div>
+
+</li>
+</ul>
+<h2 id="layout布局"><a href="#layout布局" class="headerlink" title="layout布局"></a>layout布局</h2><h3 id="tab选项卡"><a href="#tab选项卡" class="headerlink" title="tab选项卡"></a>tab选项卡</h3><p><img src="http://i.imgur.com/a4WOZyz.png" alt=""></p>
+<pre><code>&lt;div id=&quot;tt&quot; class=&quot;easyui-tabs&quot; style=&quot;width:500px;height:250px;&quot;&gt;   
+    &lt;div title=&quot;Tab1&quot; style=&quot;padding:20px;display:none;&quot;&gt;   
+        tab1    
+    &lt;/div&gt;   
+    &lt;div title=&quot;Tab2&quot; data-options=&quot;closable:true&quot; style=&quot;overflow:auto;padding:20px;display:none;&quot;&gt;   
+        tab2    
+    &lt;/div&gt;   
+    &lt;div title=&quot;Tab3&quot; data-options=&quot;iconCls:&apos;icon-reload&apos;,closable:true&quot; style=&quot;padding:20px;display:none;&quot;&gt;   
+        tab3    
+    &lt;/div&gt;   
+&lt;/div&gt; 
+</code></pre><ul>
+<li><p>tools <code>工具栏添加在选项卡面板头的左侧或右侧</code></p>
+<pre><code>$(&apos;#tt&apos;).tabs({
+    tools:&apos;#tab-tools&apos;
+});
+&lt;div id=&quot;tab-tools&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; plain=&quot;true&quot; iconCls=&quot;icon-add&quot;&gt;&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; plain=&quot;true&quot; iconCls=&quot;icon-save&quot;&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre></li>
+<li><p>onSelect </p>
+<ul>
+<li>在选中一个选项卡时触发</li>
+</ul>
+</li>
+<li><p>onAdd</p>
+<ul>
+<li><p>在添加一个选项卡时触发</p>
+<h3 id="Accordion分类"><a href="#Accordion分类" class="headerlink" title="Accordion分类"></a>Accordion分类</h3><p><img src="http://i.imgur.com/vD7EHku.png" alt=""></p>
+<p><div id="aa" class="easyui-accordion" style="width:300px;height:200px;"><br>  <div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">   </div></div></p>
+<pre><code>&lt;h3 style=&quot;color:#0099FF;&quot;&gt;Accordion for jQuery&lt;/h3&gt;   
+&lt;p&gt;Accordion is a part of easyui framework for jQuery.     
+It lets you define your accordion component on web page more easily.&lt;/p&gt;   
+</code></pre><p>  <br>  <div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">   </div></p>
+<pre><code>content2    
+</code></pre><p>  <br>  <div title="Title3">   </div></p>
+<pre><code>content3    
+</code></pre><p>  <br><br><img src="http://i.imgur.com/lHkROWL.png" alt=""></p>
+<h3 id="layout布局-1"><a href="#layout布局-1" class="headerlink" title="layout布局"></a>layout布局</h3><p><img src="http://i.imgur.com/HHGzBrV.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>完整页面布局</p>
+<pre><code>&lt;body class=&quot;easyui-layout&quot;&gt;   
+    &lt;div data-options=&quot;region:&apos;north&apos;,title:&apos;North Title&apos;,split:true&quot; style=&quot;height:100px;&quot;&gt;&lt;/div&gt;   
+    &lt;div data-options=&quot;region:&apos;south&apos;,title:&apos;South Title&apos;,split:true&quot; style=&quot;height:100px;&quot;&gt;&lt;/div&gt;   
+    &lt;div data-options=&quot;region:&apos;east&apos;,iconCls:&apos;icon-reload&apos;,title:&apos;East&apos;,split:true&quot; style=&quot;width:100px;&quot;&gt;&lt;/div&gt;   
+    &lt;div data-options=&quot;region:&apos;west&apos;,title:&apos;West&apos;,split:true&quot; style=&quot;width:100px;&quot;&gt;&lt;/div&gt;   
+    &lt;div data-options=&quot;region:&apos;center&apos;,title:&apos;center title&apos;&quot; style=&quot;padding:5px;background:#eee;&quot;&gt;&lt;/div&gt;   
+&lt;/body&gt; 
+</code></pre></li>
+<li><p>嵌套布局</p>
+<pre><code>&lt;body class=&quot;easyui-layout&quot;&gt;   
+    &lt;div data-options=&quot;region:&apos;north&apos;&quot; style=&quot;height:100px&quot;&gt;&lt;/div&gt;   
+    &lt;div data-options=&quot;region:&apos;center&apos;&quot;&gt;   
+        &lt;div class=&quot;easyui-layout&quot; data-options=&quot;fit:true&quot;&gt;   
+            &lt;div data-options=&quot;region:&apos;west&apos;,collapsed:true&quot; style=&quot;width:180px&quot;&gt;&lt;/div&gt;   
+            &lt;div data-options=&quot;region:&apos;center&apos;&quot;&gt;&lt;/div&gt;   
+        &lt;/div&gt;   
+    &lt;/div&gt;   
+&lt;/body&gt;  
+</code></pre></li>
+<li><p>布局面板加载外部数据</p>
+<pre><code>&lt;body class=&quot;easyui-layout&quot;&gt;   
+    &lt;div data-options=&quot;region:&apos;west&apos;,href:&apos;west_content.php&apos;&quot; style=&quot;width:180px&quot; &gt;&lt;/div&gt;   
+    &lt;div data-options=&quot;region:&apos;center&apos;,href:&apos;center_content.php&apos;&quot; &gt;&lt;/div&gt;   
+&lt;/body&gt;  
+</code></pre></li>
+<li><p>把布局面板区域添加指定面板</p>
+<ul>
+<li><p>具体操作看面板</p>
+<pre><code>$(&apos;#cc&apos;).layout(&apos;add&apos;,{    
+    region: &apos;west&apos;,    
+    width: 180,    
+    title: &apos;West Title&apos;,    
+    split: true,    
+    tools: [{    
+        iconCls:&apos;icon-add&apos;,    
+        handler:function(){alert(&apos;add&apos;)}    
+    },{    
+        iconCls:&apos;icon-remove&apos;,    
+        handler:function(){alert(&apos;remove&apos;)}    
+    }]    
+});  
+</code></pre><p><strong>先写这么多</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/easyui/" rel="tag"># easyui</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/09/mybatis-day02/" rel="prev" title="mybatis_day02">
+                mybatis_day02 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i.imgur.com/q50MUsV.jpg"
+               alt="YYT" />
+          <p class="site-author-name" itemprop="name">YYT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是easyui"><span class="nav-number">1.</span> <span class="nav-text">什么是easyui</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本案例"><span class="nav-number"></span> <span class="nav-text">基本案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataGrid-数据表格"><span class="nav-number"></span> <span class="nav-text">DataGrid(数据表格)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataGrid属性"><span class="nav-number">1.</span> <span class="nav-text">DataGrid属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列属性"><span class="nav-number">2.</span> <span class="nav-text">列属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对话窗口"><span class="nav-number"></span> <span class="nav-text">对话窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layout布局"><span class="nav-number"></span> <span class="nav-text">layout布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tab选项卡"><span class="nav-number">1.</span> <span class="nav-text">tab选项卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accordion分类"><span class="nav-number">2.</span> <span class="nav-text">Accordion分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#layout布局-1"><span class="nav-number">3.</span> <span class="nav-text">layout布局</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YYT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
