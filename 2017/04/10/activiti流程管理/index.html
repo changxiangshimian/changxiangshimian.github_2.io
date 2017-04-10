@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/10/activiti流程管理/index.html">
 <meta property="og:site_name" content="YYT">
 <meta property="og:description" content="activiti的搭建.完成自动创表 创建一个xml的配置文件  123456789101112131415161718192021222324252627&amp;lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;	xmlns:context=&quot;http://www.springframework.org/schema/context">
-<meta property="og:updated_time" content="2017-04-10T12:20:07.457Z">
+<meta property="og:updated_time" content="2017-04-10T12:32:58.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="activiti流程管理">
 <meta name="twitter:description" content="activiti的搭建.完成自动创表 创建一个xml的配置文件  123456789101112131415161718192021222324252627&amp;lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;	xmlns:context=&quot;http://www.springframework.org/schema/context">
@@ -338,23 +338,9 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">	<span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span> <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></div><div class="line">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></div><div class="line">						http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">						http://www.springframework.org/schema/context </div><div class="line">						http://www.springframework.org/schema/context/spring-context-2.5.xsd</div><div class="line">						http://www.springframework.org/schema/tx </div><div class="line">						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"&gt;</div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 配置一个流程引擎对象 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngineConfiguration"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration"</span>&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcDriver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql:///activiti_day01"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUsername"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcPassword"</span> <span class="attr">value</span>=<span class="string">"123"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"databaseSchemaUpdate"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 配置一个流程引擎工厂bean，用于创建流程引擎对象 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"processEngine"</span> <span class="attr">class</span>=<span class="string">"org.activiti.spring.ProcessEngineFactoryBean"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"processEngineConfiguration"</span> <span class="attr">ref</span>=<span class="string">"processEngineConfiguration"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
 <hr>
 <ul>
-<li><p>创建一个测试类<code>运行测试类,在数据库里面表就创建好了</code></p>
-<pre><code>package com.yyt.activiti;
-
-import org.activiti.engine.ProcessEngineConfiguration;
-import org.junit.Test;
-
-public class Demo {
-
-    @Test
-    public void test1() {
-        ProcessEngineConfiguration conf = ProcessEngineConfiguration
-                .createProcessEngineConfigurationFromResource(&quot;activiti-context.xml&quot;, &quot;processEngineConfiguration&quot;);
-        conf.buildProcessEngine();
-    }
-}
-</code></pre></li>
+<li>创建一个测试类<code>运行测试类,在数据库里面表就创建好了</code></li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.yyt.activiti;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.activiti.engine.ProcessEngineConfiguration;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">		ProcessEngineConfiguration conf = ProcessEngineConfiguration</div><div class="line">				.createProcessEngineConfigurationFromResource(<span class="string">"activiti-context.xml"</span>, <span class="string">"processEngineConfiguration"</span>);</div><div class="line">		conf.buildProcessEngine();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li><p>或者在xml配置文件内容不变的前提下,测试类还可以这样写</p>
@@ -400,77 +386,24 @@ public void test2(){
 </code></pre></li>
 <li><p>部署流程定义就是将设计的流程规则保存到数据库中</p>
 </li>
-<li><p>代码</p>
-<pre><code>@Test
-public void test3(){
-    //配置流程的规则把myActiviti.bpmn导入进去
-    //配置流程的图解,导入myActiviti.png
-
-    /*
-     先获取流程定义和流程静态资源 （图片，规则，等等）对象,然后再在关于流程规则和定义中的表中,创建deployment表的对象,这与数据库中的deployment表对应
-     */
-     DeploymentBuilder deploymentBuilder = processEngine.getRepositoryService().createDeployment();
-     //在数据库中插入图片
-     deploymentBuilder.addClasspathResource(&quot;myActiviti.png&quot;);
-     //在数据库中插入规则
-     deploymentBuilder.addClasspathResource(&quot;myActiviti.bpmn&quot;);
-     //提交数据,把数据提交到数据库中
-     Deployment deployment = deploymentBuilder.deploy();
-     //打印deployment表中的id值
-     System.out.println(deployment.getId());
-
-}
-</code></pre><h3 id="查询流程定义"><a href="#查询流程定义" class="headerlink" title="查询流程定义"></a>查询流程定义</h3></li>
-<li><p>代码实现</p>
-<pre><code>// 查询流程的定义
-@Test
-public void test4() {
-    // 获得流程查询对象
-    ProcessDefinitionQuery query = processEngine.getRepositoryService().createProcessDefinitionQuery();
-    //根据数据库中的key过滤
-    query.processDefinitionKey(&quot;myProcess&quot;);
-    //根据Version 版本 进行降序排序
-    query.orderByProcessDefinitionVersion().desc();
-    //把query转成list集合,泛型为ProcessDefinition
-    List&lt;ProcessDefinition&gt; list = query.list();
-    for (ProcessDefinition processDefinition : list) {
-        System.out.println(processDefinition.getVersion());
-    }
-
-}
-</code></pre><h3 id="流程实例"><a href="#流程实例" class="headerlink" title="流程实例"></a>流程实例</h3><p>  根据某个流程定义(流程的规则)的一次具体执行过程，就是一个流程实例(按照流程规则执行的一次事件)。流程定义和流程实例是一对多的关系</p>
-</li>
-<li><p>启动一个流程实例</p>
-<pre><code>@Test
-public void test5(){
-    //写出在数据库名为procdef的表中的id
-    String procdefId = &quot;myProcess:1:4&quot;;
-    //获得运行时的Service,并开始处理流程实例,根据procdef表中的id
-    //一般根据KEY生成一个实例,根据KEY生成的话,默认是按照最新版本的流程规则创造流程实例
-    ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(procdefId);
-    //打印出流程实例对象的id   对应数据表中的execution中表的id  ps:execution表中ACT_ID_ 表示的是该任务节点的处理人
-    System.out.println(processInstance.getId());
-}
-</code></pre></li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//配置流程的规则把myActiviti.bpmn导入进去</span></div><div class="line">	<span class="comment">//配置流程的图解,导入myActiviti.png</span></div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 先获取流程定义和流程静态资源 （图片，规则，等等）对象,然后再在关于流程规则和定义中的表中,创建deployment表的对象,这与数据库中的deployment表对应</div><div class="line">	 */</div><div class="line">	 DeploymentBuilder deploymentBuilder = processEngine.getRepositoryService().createDeployment();</div><div class="line">	 <span class="comment">//在数据库中插入图片</span></div><div class="line">	 deploymentBuilder.addClasspathResource(<span class="string">"myActiviti.png"</span>);</div><div class="line">	 <span class="comment">//在数据库中插入规则</span></div><div class="line">	 deploymentBuilder.addClasspathResource(<span class="string">"myActiviti.bpmn"</span>);</div><div class="line">	 <span class="comment">//提交数据,把数据提交到数据库中</span></div><div class="line">	 Deployment deployment = deploymentBuilder.deploy();</div><div class="line">	 <span class="comment">//打印deployment表中的id值</span></div><div class="line">	 System.out.println(deployment.getId());</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="查询流程定义"><a href="#查询流程定义" class="headerlink" title="查询流程定义"></a>查询流程定义</h3><ul>
+<li>代码实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 查询流程的定义</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 获得流程查询对象</span></div><div class="line">	ProcessDefinitionQuery query = processEngine.getRepositoryService().createProcessDefinitionQuery();</div><div class="line">	<span class="comment">//根据数据库中的key过滤</span></div><div class="line">	query.processDefinitionKey(<span class="string">"myProcess"</span>);</div><div class="line">	<span class="comment">//根据Version 版本 进行降序排序</span></div><div class="line">	query.orderByProcessDefinitionVersion().desc();</div><div class="line">	<span class="comment">//把query转成list集合,泛型为ProcessDefinition</span></div><div class="line">	List&lt;ProcessDefinition&gt; list = query.list();</div><div class="line">	<span class="keyword">for</span> (ProcessDefinition processDefinition : list) &#123;</div><div class="line">		System.out.println(processDefinition.getVersion());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="流程实例"><a href="#流程实例" class="headerlink" title="流程实例"></a>流程实例</h3><pre><code>根据某个流程定义(流程的规则)的一次具体执行过程，就是一个流程实例(按照流程规则执行的一次事件)。流程定义和流程实例是一对多的关系
+</code></pre><ul>
+<li>启动一个流程实例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//写出在数据库名为procdef的表中的id</span></div><div class="line">	String procdefId = <span class="string">"myProcess:1:4"</span>;</div><div class="line">	<span class="comment">//获得运行时的Service,并开始处理流程实例,根据procdef表中的id</span></div><div class="line">	<span class="comment">//一般根据KEY生成一个实例,根据KEY生成的话,默认是按照最新版本的流程规则创造流程实例</span></div><div class="line">	ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(procdefId);</div><div class="line">	<span class="comment">//打印出流程实例对象的id   对应数据表中的execution中表的id  ps:execution表中ACT_ID_ 表示的是该任务节点的处理人</span></div><div class="line">	System.out.println(processInstance.getId());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
 <li>在<code>act_ru_task</code>表里会保存当前任务的信息，包括流程实例的Id<code>PROC_INST_ID_</code>，任务名称<code>NAME_</code>，任务的办理人<code>ASSIGNEE_</code></li>
 </ul>
-<h3 id="查询任务"><a href="#查询任务" class="headerlink" title="查询任务"></a>查询任务</h3><pre><code>@Test
-public void test6(){
-    //通过获取task的service,来创建task的查询对象       ps  task:正在执行任务的表
-    TaskQuery query = processEngine.getTaskService().createTaskQuery();
-    //向查询对象中添加过滤条件(通过Assignee:本次任务第一阶段的处理人),并转换为list集合
-    List&lt;Task&gt; list = query.taskAssignee(&quot;张三&quot;).list();
-    for (Task task : list) {
-        //打印task表中满足过滤条件的name信息
-        System.out.println(task.getName());
-    }
-}
-</code></pre><h3 id="办理任务把任务推往下一层"><a href="#办理任务把任务推往下一层" class="headerlink" title="办理任务把任务推往下一层"></a>办理任务<code>把任务推往下一层</code></h3><pre><code>@Test
-public void test7(){
-    //里面填写task表中的ID,就把当前任务id的流程推向了下一层去审批
-    processEngine.getTaskService().complete(&quot;504&quot;);
-}
-</code></pre><hr>
+<h3 id="查询任务"><a href="#查询任务" class="headerlink" title="查询任务"></a>查询任务</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//通过获取task的service,来创建task的查询对象       ps  task:正在执行任务的表</span></div><div class="line">	TaskQuery query = processEngine.getTaskService().createTaskQuery();</div><div class="line">	<span class="comment">//向查询对象中添加过滤条件(通过Assignee:本次任务第一阶段的处理人),并转换为list集合</span></div><div class="line">	List&lt;Task&gt; list = query.taskAssignee(<span class="string">"张三"</span>).list();</div><div class="line">	<span class="keyword">for</span> (Task task : list) &#123;</div><div class="line">		<span class="comment">//打印task表中满足过滤条件的name信息</span></div><div class="line">		System.out.println(task.getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="办理任务把任务推往下一层"><a href="#办理任务把任务推往下一层" class="headerlink" title="办理任务把任务推往下一层"></a>办理任务<code>把任务推往下一层</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//里面填写task表中的ID,就把当前任务id的流程推向了下一层去审批</span></div><div class="line">	processEngine.getTaskService().complete(<span class="string">"504"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
 <h3 id="流程变量"><a href="#流程变量" class="headerlink" title="流程变量"></a>流程变量</h3><ul>
 <li><code>就比如你请假,向领导报告请假理由和请假天数,而这些参数就是流程变量,这些变量在整个流程中都是可以被随时调用的</code></li>
 <li><p>流程变量保存在act_ru_variable表中</p>
@@ -481,124 +414,54 @@ public void test7(){
 <li><p>代码一:<code>在创建实例的时候向方法里面添加参数(有参构造)</code></p>
 </li>
 </ul>
-<pre><code>@Test
-public void test8(){
-    Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
-    map.put(&quot;请假原因&quot;, &quot;割包皮&quot;); 
-    map.put(&quot;请假天数&quot;,&quot;15&quot;);
-    //ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(&quot;myProcess&quot;, map);
-    ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(&quot;myProcess:2:104&quot;, map);
-}
-</code></pre><ul>
-<li><p>代码二:<code>办理任务时设置</code></p>
-<pre><code>@Test
-public void test9(){
-    Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
-    map.put(&quot;请假原因&quot;, &quot;世界这麽大我想去看看&quot;); 
-    map.put(&quot;请假天数&quot;,&quot;无限期&quot;);
-    processEngine.getTaskService().complete(&quot;404&quot;,map);
-}
-</code></pre></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span></span>&#123;</div><div class="line">	Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"请假原因"</span>, <span class="string">"割包皮"</span>); </div><div class="line">	map.put(<span class="string">"请假天数"</span>,<span class="string">"15"</span>);</div><div class="line">	<span class="comment">//ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("myProcess", map);</span></div><div class="line">	ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(<span class="string">"myProcess:2:104"</span>, map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>代码二:<code>办理任务时设置</code></li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test9</span><span class="params">()</span></span>&#123;</div><div class="line">	Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"请假原因"</span>, <span class="string">"世界这麽大我想去看看"</span>); </div><div class="line">	map.put(<span class="string">"请假天数"</span>,<span class="string">"无限期"</span>);</div><div class="line">	processEngine.getTaskService().complete(<span class="string">"404"</span>,map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
 <ul>
-<li><p><strong><code>ps:在流程变量设置好后,向下一级提交的时候,该流程变量也可以改变</code></strong></p>
-<ul>
+<li><strong><code>ps:在流程变量设置好后,向下一级提交的时候,该流程变量也可以改变</code></strong><ul>
 <li>就比如你向项目经理请假,想请2天假原因是XXX过生日,但是项目经理向部门经理反映的是你想请20天的假原因是世界这麽大我想去看看</li>
-<li><p>代码:</p>
-<pre><code>@Test
-public void test10(){
-    //里面填写task表中的ID,就把当前任务id的流程推向了下一层去审批
-    Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
-    map.put(&quot;请假原因&quot;, &quot;他不想干了&quot;); 
-    map.put(&quot;请假天数&quot;,&quot;干脆把他开除了吧!&quot;);
-    processEngine.getTaskService().complete(&quot;1304&quot;,map);
-}
-</code></pre></li>
+<li>代码:</li>
 </ul>
 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test10</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//里面填写task表中的ID,就把当前任务id的流程推向了下一层去审批</span></div><div class="line">	Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"请假原因"</span>, <span class="string">"他不想干了"</span>); </div><div class="line">	map.put(<span class="string">"请假天数"</span>,<span class="string">"干脆把他开除了吧!"</span>);</div><div class="line">	processEngine.getTaskService().complete(<span class="string">"1304"</span>,map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
 <li>代码三:<code>在RuntimeService方法里面设置</code></li>
 </ul>
-<pre><code>@Test
-public void test11(){
-    Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
-    map.put(&quot;请假原因&quot;, &quot;不想上班了&quot;); 
-    map.put(&quot;请假天数&quot;,&quot;辞职&quot;);
-    //设置多个流程变量用这个,设置单个的话用setVariables(&quot;流程id&quot;,流程变量标题,流程变量的内容)
-    processEngine.getRuntimeService().setVariables(&quot;1001&quot;, map);
-}
-</code></pre><ul>
-<li><p>代码四:<code>TaskService的方法设置流程变量</code></p>
-<pre><code>@Test
-public void test12() {
-    Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
-    map.put(&quot;请假原因&quot;, &quot;不吻&quot;);
-    map.put(&quot;请假天数&quot;, &quot;滚&quot;);
-    processEngine.getTaskService().setVariables(&quot;1106&quot;, map);
-}
-</code></pre><h3 id="获取流程变量"><a href="#获取流程变量" class="headerlink" title="获取流程变量"></a>获取流程变量</h3></li>
-<li><p>代码一<code>根据RuntimeService方法获取</code></p>
-<pre><code>@Test
-public void test13() {
-
-    Map&lt;String, Object&gt; map = processEngine.getRuntimeService().getVariables(&quot;1101&quot;);
-    Set&lt;String&gt; set = map.keySet();
-    for (String string : set) {
-        System.out.println(string + &quot;--&quot; + map.get(string));
-    }
-
-}
-</code></pre></li>
-<li><p>代码二<code>根据TaskService方法获取</code></p>
-<pre><code>@Test
-public void test14() {
-    Map&lt;String, Object&gt; map = processEngine.getTaskService().getVariables(&quot;1106&quot;);
-    Set&lt;String&gt; set = map.keySet();
-    for (String string : set) {
-        System.out.println(string + &quot;--&quot; + map.get(string));
-    }
-
-}
-</code></pre><h3 id="候选组-组任务"><a href="#候选组-组任务" class="headerlink" title="候选组 组任务"></a>候选组 组任务</h3></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test11</span><span class="params">()</span></span>&#123;</div><div class="line">	Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"请假原因"</span>, <span class="string">"不想上班了"</span>); </div><div class="line">	map.put(<span class="string">"请假天数"</span>,<span class="string">"辞职"</span>);</div><div class="line">	<span class="comment">//设置多个流程变量用这个,设置单个的话用setVariables("流程id",流程变量标题,流程变量的内容)</span></div><div class="line">	processEngine.getRuntimeService().setVariables(<span class="string">"1001"</span>, map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>代码四:<code>TaskService的方法设置流程变量</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test12</span><span class="params">()</span> </span>&#123;</div><div class="line">	Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">	map.put(<span class="string">"请假原因"</span>, <span class="string">"不吻"</span>);</div><div class="line">	map.put(<span class="string">"请假天数"</span>, <span class="string">"滚"</span>);</div><div class="line">	processEngine.getTaskService().setVariables(<span class="string">"1106"</span>, map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="获取流程变量"><a href="#获取流程变量" class="headerlink" title="获取流程变量"></a>获取流程变量</h3><ul>
+<li>代码一<code>根据RuntimeService方法获取</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test13</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">	Map&lt;String, Object&gt; map = processEngine.getRuntimeService().getVariables(<span class="string">"1101"</span>);</div><div class="line">	Set&lt;String&gt; set = map.keySet();</div><div class="line">	<span class="keyword">for</span> (String string : set) &#123;</div><div class="line">		System.out.println(string + <span class="string">"--"</span> + map.get(string));</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>代码二<code>根据TaskService方法获取</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test14</span><span class="params">()</span> </span>&#123;</div><div class="line">	Map&lt;String, Object&gt; map = processEngine.getTaskService().getVariables(<span class="string">"1106"</span>);</div><div class="line">	Set&lt;String&gt; set = map.keySet();</div><div class="line">	<span class="keyword">for</span> (String string : set) &#123;</div><div class="line">		System.out.println(string + <span class="string">"--"</span> + map.get(string));</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="候选组-组任务"><a href="#候选组-组任务" class="headerlink" title="候选组 组任务"></a>候选组 组任务</h3><ul>
 <li>先启动一个流程实例</li>
-<li><p>创建一个组</p>
-<pre><code>//创建财务人员组
-@Test
-public void test3(){
-    Group group = new GroupEntity();
-    group.setId(&quot;财务人员组&quot;);
-    group.setName(&quot;财务人员组猪猪&quot;);
-    processEngine.getIdentityService().saveGroup(group);
-}
-</code></pre></li>
-<li><p>再创建一个用户</p>
-<pre><code>//创建一个用户
-@Test
-public void test4(){
-    Group group = new GroupEntity();
-    User user = new UserEntity();
-    user.setId(&quot;002&quot;);
-    user.setFirstName(&quot;小黄&quot;);
-    processEngine.getIdentityService().saveUser(user);
-}
-</code></pre></li>
-<li><p>将用户加入组中</p>
-<pre><code>//将用户加入组中
-@Test
-public void test5(){
-    String userid = &quot;002&quot;;
-    String group = &quot;主管人员组&quot;;
-    processEngine.getIdentityService().createMembership(userid, group);
-}
-</code></pre></li>
-<li><p>然后在流程处理到了组哪里的时候,就把组里面的单个人提取出来,为你办理任务</p>
-<pre><code>@Test
-public void test8(){
-    String taskid = &quot;2805&quot;;
-    String userid = &quot;002&quot;;
-    processEngine.getTaskService().claim(taskid, userid);
-}
-</code></pre><h3 id="排他网关"><a href="#排他网关" class="headerlink" title="排他网关"></a>排他网关</h3></li>
+<li>创建一个组</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建财务人员组</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line">	Group group = <span class="keyword">new</span> GroupEntity();</div><div class="line">	group.setId(<span class="string">"财务人员组"</span>);</div><div class="line">	group.setName(<span class="string">"财务人员组猪猪"</span>);</div><div class="line">	processEngine.getIdentityService().saveGroup(group);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>再创建一个用户</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建一个用户</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</div><div class="line">	Group group = <span class="keyword">new</span> GroupEntity();</div><div class="line">	User user = <span class="keyword">new</span> UserEntity();</div><div class="line">	user.setId(<span class="string">"002"</span>);</div><div class="line">	user.setFirstName(<span class="string">"小黄"</span>);</div><div class="line">	processEngine.getIdentityService().saveUser(user);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>将用户加入组中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将用户加入组中</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span></span>&#123;</div><div class="line">	String userid = <span class="string">"002"</span>;</div><div class="line">	String group = <span class="string">"主管人员组"</span>;</div><div class="line">	processEngine.getIdentityService().createMembership(userid, group);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>然后在流程处理到了组哪里的时候,就把组里面的单个人提取出来,为你办理任务<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span></span>&#123;</div><div class="line">	String taskid = <span class="string">"2805"</span>;</div><div class="line">	String userid = <span class="string">"002"</span>;</div><div class="line">	processEngine.getTaskService().claim(taskid, userid);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="排他网关"><a href="#排他网关" class="headerlink" title="排他网关"></a>排他网关</h3><ul>
 <li>结构图</li>
 </ul>
 <pre><code>              ${qjtj&lt;50}
@@ -612,32 +475,18 @@ public void test8(){
               ${qjtj&lt;250}
 </code></pre><ul>
 <li>在导入流程规则和图片,并开始处理流程实例后执行下面的代码</li>
-<li><p>执行流程</p>
-<pre><code>//执行流程
-@Test
-public void test3(){
-    Map&lt;String,Object&gt; map =new HashMap&lt;String, Object&gt;();
-    //map集合里面,第一个是条件的名称,给该条件的值
-    map.put(&quot;qjtj&quot;, 25);
-    //把条件与流程的id一并提交
-    processEngine.getTaskService().complete(&quot;3204&quot;, map);
-}
-</code></pre></li>
-<li><p>查询执行上一个带条件的流程后,现在改流程的name字段,结果应该为  “部门经理”</p>
-<pre><code>@Test
-public void test4(){
-    TaskQuery query = processEngine.getTaskService().createTaskQuery();
-    query.taskId(&quot;3304&quot;);
-    List&lt;Task&gt; list = query.list();
-    for (Task task : list) {
-        System.out.println(task.getName());
-    }
-}
-</code></pre><h3 id="并行网关"><a href="#并行网关" class="headerlink" title="并行网关"></a>并行网关</h3><p>  当工作流程运行到并行网关时，会同时开启多条运行的流程实例，多条流程实例可以同时进行，而且，只有所有并行网关的分支流程实例全部执行完毕，流程汇聚，当前任务完成。</p>
-<p>  分支（fork）:通过了并行网关后，流程实例被分成了若干个子流程<br>  汇聚（join）:子流程执行完毕，最后会集中到主流程上，只要有任意一个子流程没有执行完毕，那么就不会汇聚。</p>
-</li>
+<li>执行流程</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//执行流程</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line">	Map&lt;String,Object&gt; map =<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">	<span class="comment">//map集合里面,第一个是条件的名称,给该条件的值</span></div><div class="line">	map.put(<span class="string">"qjtj"</span>, <span class="number">25</span>);</div><div class="line">	<span class="comment">//把条件与流程的id一并提交</span></div><div class="line">	processEngine.getTaskService().complete(<span class="string">"3204"</span>, map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>查询执行上一个带条件的流程后,现在改流程的name字段,结果应该为  “部门经理”</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</div><div class="line">	TaskQuery query = processEngine.getTaskService().createTaskQuery();</div><div class="line">	query.taskId(<span class="string">"3304"</span>);</div><div class="line">	List&lt;Task&gt; list = query.list();</div><div class="line">	<span class="keyword">for</span> (Task task : list) &#123;</div><div class="line">		System.out.println(task.getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="并行网关"><a href="#并行网关" class="headerlink" title="并行网关"></a>并行网关</h3><pre><code>当工作流程运行到并行网关时，会同时开启多条运行的流程实例，多条流程实例可以同时进行，而且，只有所有并行网关的分支流程实例全部执行完毕，流程汇聚，当前任务完成。
 
+分支（fork）:通过了并行网关后，流程实例被分成了若干个子流程
+汇聚（join）:子流程执行完毕，最后会集中到主流程上，只要有任意一个子流程没有执行完毕，那么就不会汇聚。
+</code></pre>
       
     </div>
 
