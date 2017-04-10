@@ -89,7 +89,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="YYT">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="YYT">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="YYT">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
 
 
@@ -257,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/ssh的Dao-Service-action/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis-day02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -279,8 +279,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/10/ssh的Dao-Service-action/" itemprop="url">
-                  ssh的Dao,Service,action
+                <a class="post-title-link" href="/2017/04/09/mybatis-day02/" itemprop="url">
+                  mybatis_day02
                 </a>
               
             
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T19:18:48+08:00">
-                2017-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T19:03:54+08:00">
+                2017-04-09
               </time>
             
 
@@ -334,21 +334,12 @@
       
         
           
-          创建实体类和映射
-PowerDesigner
-创建表与表之间的关系
-生成pdm文件
-让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系
-
-
-Dao
-
-先创建一个BaseDao的接口里面提供一些通用的方法
-public interface Ba
+          定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
+resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/10/ssh的Dao-Service-action/#more" rel="contents">
+            <a class="btn" href="/2017/04/09/mybatis-day02/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -394,7 +385,7 @@ public interface Ba
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/activiti流程管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis-day01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -416,8 +407,8 @@ public interface Ba
             
               
                 
-                <a class="post-title-link" href="/2017/04/10/activiti流程管理/" itemprop="url">
-                  activiti流程管理
+                <a class="post-title-link" href="/2017/04/09/mybatis-day01/" itemprop="url">
+                  mybatis_day01
                 </a>
               
             
@@ -433,8 +424,8 @@ public interface Ba
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T19:12:03+08:00">
-                2017-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T19:00:39+08:00">
+                2017-04-09
               </time>
             
 
@@ -471,14 +462,17 @@ public interface Ba
       
         
           
-          activiti的搭建.完成自动创表
-创建一个xml的配置文件
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-    xmlns:context=&quot;http://www.springframe
+          Mybatis基本的配置
+首先创建一个实体类并提供get,set和toString方法
+public class User {
+    private Integer id;
+    private String username;
+    private Date birthday;
+    pr
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/10/activiti流程管理/#more" rel="contents">
+            <a class="btn" href="/2017/04/09/mybatis-day01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -524,7 +518,7 @@ public interface Ba
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/Shiro权限管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis与spring的整合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -546,8 +540,8 @@ public interface Ba
             
               
                 
-                <a class="post-title-link" href="/2017/04/10/Shiro权限管理/" itemprop="url">
-                  Shiro权限管理
+                <a class="post-title-link" href="/2017/04/09/mybatis与spring的整合/" itemprop="url">
+                  mybatis与spring的整合
                 </a>
               
             
@@ -563,8 +557,8 @@ public interface Ba
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T19:09:38+08:00">
-                2017-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T18:35:21+08:00">
+                2017-04-09
               </time>
             
 
@@ -601,278 +595,15 @@ public interface Ba
       
         
           
-          shiro的配置过程
-在web.xml中配置一个过滤器代理对象
-&lt;!-- 加入spring框架提供的过滤器代理对象 --&gt;
-&lt;filter&gt;
-    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
-    &lt;filt
+          
+SqlMapConfig.xml文件的配置
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration
+PUBLIC &quot;-//mybatis.org//DTD Co
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/10/Shiro权限管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/ssm三大框架整合/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YYT">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.imgur.com/q50MUsV.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YYT">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/10/ssm三大框架整合/" itemprop="url">
-                  ssm三大框架整合
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T18:53:13+08:00">
-                2017-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/10/ssm三大框架整合/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/easyui初级使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YYT">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://i.imgur.com/q50MUsV.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YYT">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/10/easyui初级使用/" itemprop="url">
-                  easyui初级使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T17:25:15+08:00">
-                2017-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          什么是easyui
-jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果
-使用jquery easyui和后台进行交互
-通过后台（action）返回json数据到页面
-底层使用jquery ajax+json数据
-
-
-应用场景
-使用jquery easyui一般用在后
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/10/easyui初级使用/#more" rel="contents">
+            <a class="btn" href="/2017/04/09/mybatis与spring的整合/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -913,7 +644,7 @@ jquery easyui不需要写复杂的css和html代码，就可以实现一些页面
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 

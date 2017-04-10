@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mybatis," />
+  <meta name="keywords" content="shiro," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
-<meta name="keywords" content="mybatis">
+<meta name="description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
+<meta name="keywords" content="shiro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis_day02">
-<meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day02/index.html">
+<meta property="og:title" content="Shiro权限管理">
+<meta property="og:url" content="http://yoursite.com/2017/04/10/Shiro权限管理/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
-<meta property="og:updated_time" content="2017-04-10T10:38:47.951Z">
+<meta property="og:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
+<meta property="og:updated_time" content="2017-04-10T11:10:23.331Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis_day02">
-<meta name="twitter:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
+<meta name="twitter:title" content="Shiro权限管理">
+<meta name="twitter:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/09/mybatis-day02/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/10/Shiro权限管理/"/>
 
 
 
 
 
-  <title> mybatis_day02 | YYT </title>
+  <title> Shiro权限管理 | YYT </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis-day02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/Shiro权限管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -281,7 +281,7 @@
             
             
               
-                mybatis_day02
+                Shiro权限管理
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T19:03:54+08:00">
-                2017-04-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T19:09:38+08:00">
+                2017-04-10
               </time>
             
 
@@ -332,167 +332,156 @@
       
 
       
-        <h3 id="定义resultMap"><a href="#定义resultMap" class="headerlink" title="定义resultMap"></a>定义resultMap</h3><pre><code>如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
-resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。
-</code></pre><ul>
-<li><p>resultMap的配置</p>
-<pre><code>&lt;resultMap type=&quot;com.yyt.mybatis.po.User&quot; id=&quot;userListResultMap&quot;&gt;
-    &lt;id column=&quot;_id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;_name&quot; property=&quot;username&quot;/&gt;
-    &lt;result column=&quot;_birthday&quot; property=&quot;birthday&quot;/&gt;
-    &lt;result column=&quot;_sex&quot; property=&quot;sex&quot;/&gt;
-    &lt;result column=&quot;_address&quot; property=&quot;address&quot;/&gt;
-&lt;/resultMap&gt;
+        <h3 id="shiro的配置过程"><a href="#shiro的配置过程" class="headerlink" title="shiro的配置过程"></a>shiro的配置过程</h3><ul>
+<li><p>在web.xml中配置一个过滤器代理对象</p>
+<pre><code>&lt;!-- 加入spring框架提供的过滤器代理对象 --&gt;
+&lt;filter&gt;
+    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
 </code></pre></li>
-</ul>
-<hr>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-        SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-&lt;/select&gt;
-</code></pre><h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><ul>
-<li><p>if语句</p>
-<pre><code>&lt;!-- 传递pojo综合查询用户信息 --&gt;
-&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    where 1=1 
-    &lt;if test=&quot;id!=null&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>where语句</p>
-<pre><code>&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    &lt;where&gt;
-    &lt;if test=&quot;id!=null and id!=&apos;&apos;&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>foreach语句</p>
-<ul>
-<li>向sql传递数组或List，mybatis使用foreach解析</li>
-<li><p>mapper配置<code>queryvo类中包括一个Integer集合ids</code></p>
-<pre><code>&lt;select id=&quot;findUserByForeach&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT * FROM USER WHERE username LIKE &apos;%张%&apos;
-    &lt;!-- 判断queryvo对象里面的ids集合--&gt;
-    &lt;if test=&quot;ids !=null and ids.size&gt;0&quot;&gt;
-        &lt;!-- 遍历ids,并非在上面sql语句上加入 and id in(......) 括号中间写遍历的参数以逗号隔开--&gt;
-        &lt;foreach collection=&quot;ids&quot; open=&quot;and id in(&quot; close=&quot;)&quot; item=&quot;id&quot; separator=&quot;,&quot;&gt;
-            #{id}
-        &lt;/foreach&gt;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li>运行结果<ul>
-<li><code>Preparing: SELECT * FROM USER WHERE username LIKE &#39;%张%&#39; and id in( ? , ? , ? )</code></li>
-<li><code>Parameters: 10(Integer), 89(Integer), 16(Integer)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>sql片段</p>
-<ul>
-<li>Sql中可将重复的sql提取出来，使用时用include引用即可，最终达到sql重用的目的</li>
-<li><p>代码如下</p>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-    &lt;where&gt;
-        &lt;include refid=&quot;id_username_user&quot;/&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-&lt;sql id=&quot;id_username_user&quot;&gt;
-    &lt;if test=&quot;user.id != null and user.id != &apos;&apos;&quot;&gt;
-        and id=${user.id}
-    &lt;/if&gt;
-    &lt;if test=&quot;user.username != null and user.username != &apos;&apos;&quot;&gt;
-        and username like &apos;%${user.username}%&apos;
-    &lt;/if&gt;
-&lt;/sql&gt;
-</code></pre><h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3></li>
-</ul>
-</li>
-<li><p>一对一的查询<code>一张订单对应只有一个用户</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 查询订单关联用户信息使用resultmap --&gt;
-&lt;resultMap type=&quot;Orders&quot; id=&quot;orderUserResultMap&quot;&gt;
-    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;
-    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
-    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;
-    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;
-    &lt;!-- 一对一关联映射 --&gt;
-    &lt;!-- 
-    property:Orders对象的user属性
-    javaType：user属性对应 的类型
-     --&gt;
-    &lt;association property=&quot;user&quot; javaType=&quot;cn.itcast.po.User&quot;&gt;
-        &lt;!-- column:user表的主键对应的列  property：user对象中id属性--&gt;
-        &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;
-        &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;
-    &lt;/association&gt;
-&lt;/resultMap&gt;
-&lt;select id=&quot;findOrdersWithUserResultMap&quot; resultMap=&quot;orderUserResultMap&quot;&gt;
-    SELECT
-        o.id,
-        o.user_id,
-        o.number,
-        o.createtime,
-        o.note,
-        u.username,
-        u.address
-    FROM
-        orders o
-    JOIN `user` u ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在订单实体类中加入用户的属性,并提供get,set方法</li>
-</ul>
-</li>
-<li><p>一对多查询<code>一个用户可以有多个订单</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 配置一对多的关系 --&gt;
-&lt;resultMap type=&quot;user&quot; id=&quot;userAndordersMapper&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
-    &lt;result property=&quot;birthday&quot; column=&quot;birthday&quot;/&gt;
-    &lt;result property=&quot;sex&quot; column=&quot;sex&quot;/&gt;
-    &lt;result property=&quot;address&quot; column=&quot;address&quot;/&gt;
-    &lt;!-- 配置一对多的关系 --&gt;
-    &lt;collection property=&quot;orders&quot; ofType=&quot;orders&quot;&gt;
-        &lt;id property=&quot;id&quot; column=&quot;oid&quot;/&gt;
-        &lt;result property=&quot;number&quot; column=&quot;number&quot;/&gt;
-        &lt;result property=&quot;createtime&quot; column=&quot;createtime&quot;/&gt;
-        &lt;result property=&quot;note&quot; column=&quot;note&quot;/&gt;
-    &lt;/collection&gt;
-&lt;/resultMap&gt;
-&lt;!-- 一对多的sql语句的写法配置 --&gt;
-&lt;select id=&quot;findUserOrdersByUser&quot; resultMap=&quot;userAndordersMapper&quot;&gt;
-    SELECT
-    u.*, o.id oid,
-    o.number,
-    o.createtime,
-    o.note
-    FROM
-    `user` u
-    LEFT JOIN orders o ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在用户实体类中加入订单对象的list集合属性,并提供get和set方法</li>
-</ul>
-</li>
-</ul>
+<li><p>在spring配置文件中配置一个名称为shiroFilter的bean,并注入安全管理器</p>
+<pre><code>&lt;!-- 配置安全管理器 --&gt;
+&lt;bean name=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;
+    &lt;property name=&quot;realm&quot; ref=&quot;bosRealm&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
 
+&lt;bean name=&quot;bosRealm&quot; class=&quot;com.yyt.bos.shiro.BOSRealm&quot;&gt;&lt;/bean&gt;
+
+&lt;!-- 配置shiro的bean --&gt;
+&lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&gt;
+    &lt;!-- 注入安全管理器对象 --&gt;
+    &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;&gt;&lt;/property&gt;
+    &lt;!-- 成功的界面 --&gt;
+    &lt;property name=&quot;successUrl&quot; value=&quot;/index.jsp&quot;&gt;&lt;/property&gt;
+    &lt;!-- 权限不足提示页面 --&gt;
+    &lt;property name=&quot;unauthorizedUrl&quot; value=&quot;/unauthorized.jsp&quot;&gt;&lt;/property&gt;
+    &lt;!-- 登录页面的Url --&gt;
+    &lt;property name=&quot;loginUrl&quot; value=&quot;/login.jsp&quot;&gt;&lt;/property&gt;
+    &lt;!-- 基于url拦截,使用过滤器进行拦截 --&gt;
+    &lt;property name=&quot;filterChainDefinitions&quot;&gt;
+        &lt;!-- anon:权限拦截白名单 --&gt;
+        &lt;value&gt;
+            /css/** = anon
+            /images/** = anon
+            /js/** = anon
+            /login.jsp = anon
+            /validatecode.jsp* = anon
+            /userAction_login.action = anon
+            /page_base_staff.action = perms[&quot;staff&quot;]
+            /** = authc
+
+        &lt;/value&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre></li>
+<li><p>bean的名字为bosRealm所在类的内容</p>
+<pre><code>public class BOSRealm extends AuthorizingRealm {
+
+    @Resource
+    private UserDao userDao;
+
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection paramPrincipalCollection) {
+        // TODO Auto-generated method stub
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addStringPermission(&quot;staff&quot;);
+        info.addStringPermission(&quot;staff-delete&quot;);
+        return info;
+    }
+
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        UsernamePasswordToken mytoken = (UsernamePasswordToken) token;
+        String username = mytoken.getUsername();
+        char[] password = mytoken.getPassword();
+        User user = userDao.findUserByUsername(username);
+        if(user == null){
+            return null;
+        }
+        //如果从数据库里面返回的user部位null的话,就说明签名通过了.
+        //三个参数分别为:签名对象;从数据库中查到的密码;reaml的类名
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user,user.getPassword(),this.getClass().getName());
+        return info;
+    }
+
+}
+</code></pre></li>
+<li><p>修改用户Action里面的登录方法</p>
+<pre><code>public String login(){
+
+    Subject subject = SecurityUtils.getSubject();
+    String username = model.getUsername();
+    String password = model.getPassword();
+    password = MD5Utils.md5(password);
+    try{
+        AuthenticationToken token = new UsernamePasswordToken(username,password);
+        subject.login(token);
+        User user = (User) subject.getPrincipal();
+        ServletActionContext.getRequest().getSession().setAttribute(&quot;user&quot;, user);
+    }catch (UnknownAccountException e) {
+        e.printStackTrace();
+        this.addActionError(&quot;用户名不存在&quot;);
+        return &quot;login&quot;;
+        // TODO: handle exception
+    }catch (IncorrectCredentialsException e){
+        e.printStackTrace();
+        this.addActionError(&quot;密码错误&quot;);
+        return &quot;login&quot;;
+    }
+    return &quot;home&quot;;
+}
+</code></pre><h4 id="注解方式权限控制"><a href="#注解方式权限控制" class="headerlink" title="注解方式权限控制"></a>注解方式权限控制</h4></li>
+<li><p>在spring的配置文件中写自动代理和切面</p>
+<pre><code>&lt;!-- 自动代理 --&gt;
+&lt;bean class=&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot;&gt;
+    &lt;property name=&quot;proxyTargetClass&quot; value=&quot;true&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 切面 --&gt;
+&lt;bean class=&quot;org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor&quot;&gt;&lt;/bean&gt;
+</code></pre></li>
+<li><p>在Action作废的方法上面写注解</p>
+<pre><code>@RequiresPermissions(&quot;staff-delete&quot;)
+public String deleteStaff(){...}
+</code></pre></li>
+<li><p>修改BaseAction的构造方法<code>虚线中间的为要修改的内容</code></p>
+<pre><code>//在构造方法中动态获得实体的类型，并通过反射实例化模型对象
+public BaseAction() {
+---------------------------------------------------------------------------------------------------
+    // 获得父类（BaseAction&lt;T&gt;）类型
+    ParameterizedType genericSuperclass = null;
+
+    Type genericSuperclass2 = this.getClass().getGenericSuperclass();
+    if(genericSuperclass2 instanceof ParameterizedType){
+        genericSuperclass = (ParameterizedType) genericSuperclass2;
+    }else{
+        genericSuperclass = (ParameterizedType) this.getClass().getSuperclass().getGenericSuperclass();
+    }
+---------------------------------------------------------------------------------------------------
+    //获得父类上的泛型数组
+    Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
+    //实体类型
+    Class&lt;T&gt; domainClass = (Class&lt;T&gt;) actualTypeArguments[0];
+    try {
+        //创建PageBean的离线查询对象
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(domainClass);
+        pageBean.setDetachedCriteria(detachedCriteria);
+        //创建模型对象并赋给model
+        model = domainClass.newInstance();
+</code></pre></li>
+</ul>
+<pre><code>    } catch (InstantiationException e) {
+        e.printStackTrace();
+    } catch (IllegalAccessException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
       
     </div>
 
@@ -521,7 +510,7 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
       
         <div class="post-tags">
           
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+            <a href="/tags/shiro/" rel="tag"># shiro</a>
           
         </div>
       
@@ -534,8 +523,8 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/10/easyui初级使用/" rel="next" title="easyui初级使用">
-                <i class="fa fa-chevron-left"></i> easyui初级使用
+              <a href="/2017/04/10/activiti流程管理/" rel="next" title="activiti流程管理">
+                <i class="fa fa-chevron-left"></i> activiti流程管理
               </a>
             
           </div>
@@ -544,8 +533,8 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/09/mybatis-day01/" rel="prev" title="mybatis_day01">
-                mybatis_day01 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/10/ssm三大框架整合/" rel="prev" title="ssm三大框架整合">
+                ssm三大框架整合 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -666,7 +655,7 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义resultMap"><span class="nav-number">1.</span> <span class="nav-text">定义resultMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态sql"><span class="nav-number">2.</span> <span class="nav-text">动态sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联查询"><span class="nav-number">3.</span> <span class="nav-text">关联查询</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro的配置过程"><span class="nav-number">1.</span> <span class="nav-text">shiro的配置过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注解方式权限控制"><span class="nav-number">1.1.</span> <span class="nav-text">注解方式权限控制</span></a></li></ol></li></ol></div>
             
 
           </div>

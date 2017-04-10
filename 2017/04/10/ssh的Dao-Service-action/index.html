@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mybatis," />
+  <meta name="keywords" content="ssh," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
-<meta name="keywords" content="mybatis">
+<meta name="description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao  先创建一个BaseDao的接口里面提供一些通用的方法 public interface BaseDao&amp;lt;T&amp;gt; {     public void save(T entity);">
+<meta name="keywords" content="ssh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis_day02">
-<meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day02/index.html">
+<meta property="og:title" content="ssh的Dao,Service,action">
+<meta property="og:url" content="http://yoursite.com/2017/04/10/ssh的Dao-Service-action/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
-<meta property="og:updated_time" content="2017-04-10T10:38:47.951Z">
+<meta property="og:description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao  先创建一个BaseDao的接口里面提供一些通用的方法 public interface BaseDao&amp;lt;T&amp;gt; {     public void save(T entity);">
+<meta property="og:updated_time" content="2017-04-10T11:19:41.531Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis_day02">
-<meta name="twitter:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
+<meta name="twitter:title" content="ssh的Dao,Service,action">
+<meta name="twitter:description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao  先创建一个BaseDao的接口里面提供一些通用的方法 public interface BaseDao&amp;lt;T&amp;gt; {     public void save(T entity);">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/09/mybatis-day02/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/10/ssh的Dao-Service-action/"/>
 
 
 
 
 
-  <title> mybatis_day02 | YYT </title>
+  <title> ssh的Dao,Service,action | YYT </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/09/mybatis-day02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/ssh的Dao-Service-action/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YYT">
@@ -281,7 +281,7 @@
             
             
               
-                mybatis_day02
+                ssh的Dao,Service,action
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T19:03:54+08:00">
-                2017-04-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T19:18:48+08:00">
+                2017-04-10
               </time>
             
 
@@ -332,167 +332,211 @@
       
 
       
-        <h3 id="定义resultMap"><a href="#定义resultMap" class="headerlink" title="定义resultMap"></a>定义resultMap</h3><pre><code>如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
-resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。
-</code></pre><ul>
-<li><p>resultMap的配置</p>
-<pre><code>&lt;resultMap type=&quot;com.yyt.mybatis.po.User&quot; id=&quot;userListResultMap&quot;&gt;
-    &lt;id column=&quot;_id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;_name&quot; property=&quot;username&quot;/&gt;
-    &lt;result column=&quot;_birthday&quot; property=&quot;birthday&quot;/&gt;
-    &lt;result column=&quot;_sex&quot; property=&quot;sex&quot;/&gt;
-    &lt;result column=&quot;_address&quot; property=&quot;address&quot;/&gt;
-&lt;/resultMap&gt;
-</code></pre></li>
+        <h3 id="创建实体类和映射"><a href="#创建实体类和映射" class="headerlink" title="创建实体类和映射"></a>创建实体类和映射</h3><ul>
+<li>PowerDesigner<ul>
+<li>创建表与表之间的关系</li>
+<li>生成pdm文件</li>
+<li>让myeclipse链接上数据库生成实体类和对应的映射文件<h3 id="建立Dao-Service-action之间的关系"><a href="#建立Dao-Service-action之间的关系" class="headerlink" title="建立Dao,Service,action之间的关系"></a>建立Dao,Service,action之间的关系</h3></li>
 </ul>
-<hr>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-        SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-&lt;/select&gt;
-</code></pre><h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><ul>
-<li><p>if语句</p>
-<pre><code>&lt;!-- 传递pojo综合查询用户信息 --&gt;
-&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    where 1=1 
-    &lt;if test=&quot;id!=null&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>where语句</p>
-<pre><code>&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    &lt;where&gt;
-    &lt;if test=&quot;id!=null and id!=&apos;&apos;&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>foreach语句</p>
+</li>
+<li><p>Dao</p>
 <ul>
-<li>向sql传递数组或List，mybatis使用foreach解析</li>
-<li><p>mapper配置<code>queryvo类中包括一个Integer集合ids</code></p>
-<pre><code>&lt;select id=&quot;findUserByForeach&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT * FROM USER WHERE username LIKE &apos;%张%&apos;
-    &lt;!-- 判断queryvo对象里面的ids集合--&gt;
-    &lt;if test=&quot;ids !=null and ids.size&gt;0&quot;&gt;
-        &lt;!-- 遍历ids,并非在上面sql语句上加入 and id in(......) 括号中间写遍历的参数以逗号隔开--&gt;
-        &lt;foreach collection=&quot;ids&quot; open=&quot;and id in(&quot; close=&quot;)&quot; item=&quot;id&quot; separator=&quot;,&quot;&gt;
-            #{id}
-        &lt;/foreach&gt;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li>运行结果<ul>
-<li><code>Preparing: SELECT * FROM USER WHERE username LIKE &#39;%张%&#39; and id in( ? , ? , ? )</code></li>
-<li><code>Parameters: 10(Integer), 89(Integer), 16(Integer)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>sql片段</p>
-<ul>
-<li>Sql中可将重复的sql提取出来，使用时用include引用即可，最终达到sql重用的目的</li>
-<li><p>代码如下</p>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-    &lt;where&gt;
-        &lt;include refid=&quot;id_username_user&quot;/&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-&lt;sql id=&quot;id_username_user&quot;&gt;
-    &lt;if test=&quot;user.id != null and user.id != &apos;&apos;&quot;&gt;
-        and id=${user.id}
-    &lt;/if&gt;
-    &lt;if test=&quot;user.username != null and user.username != &apos;&apos;&quot;&gt;
-        and username like &apos;%${user.username}%&apos;
-    &lt;/if&gt;
-&lt;/sql&gt;
-</code></pre><h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3></li>
-</ul>
-</li>
-<li><p>一对一的查询<code>一张订单对应只有一个用户</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 查询订单关联用户信息使用resultmap --&gt;
-&lt;resultMap type=&quot;Orders&quot; id=&quot;orderUserResultMap&quot;&gt;
-    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;
-    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
-    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;
-    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;
-    &lt;!-- 一对一关联映射 --&gt;
-    &lt;!-- 
-    property:Orders对象的user属性
-    javaType：user属性对应 的类型
-     --&gt;
-    &lt;association property=&quot;user&quot; javaType=&quot;cn.itcast.po.User&quot;&gt;
-        &lt;!-- column:user表的主键对应的列  property：user对象中id属性--&gt;
-        &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;
-        &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;
-    &lt;/association&gt;
-&lt;/resultMap&gt;
-&lt;select id=&quot;findOrdersWithUserResultMap&quot; resultMap=&quot;orderUserResultMap&quot;&gt;
-    SELECT
-        o.id,
-        o.user_id,
-        o.number,
-        o.createtime,
-        o.note,
-        u.username,
-        u.address
-    FROM
-        orders o
-    JOIN `user` u ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在订单实体类中加入用户的属性,并提供get,set方法</li>
-</ul>
-</li>
-<li><p>一对多查询<code>一个用户可以有多个订单</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 配置一对多的关系 --&gt;
-&lt;resultMap type=&quot;user&quot; id=&quot;userAndordersMapper&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
-    &lt;result property=&quot;birthday&quot; column=&quot;birthday&quot;/&gt;
-    &lt;result property=&quot;sex&quot; column=&quot;sex&quot;/&gt;
-    &lt;result property=&quot;address&quot; column=&quot;address&quot;/&gt;
-    &lt;!-- 配置一对多的关系 --&gt;
-    &lt;collection property=&quot;orders&quot; ofType=&quot;orders&quot;&gt;
-        &lt;id property=&quot;id&quot; column=&quot;oid&quot;/&gt;
-        &lt;result property=&quot;number&quot; column=&quot;number&quot;/&gt;
-        &lt;result property=&quot;createtime&quot; column=&quot;createtime&quot;/&gt;
-        &lt;result property=&quot;note&quot; column=&quot;note&quot;/&gt;
-    &lt;/collection&gt;
-&lt;/resultMap&gt;
-&lt;!-- 一对多的sql语句的写法配置 --&gt;
-&lt;select id=&quot;findUserOrdersByUser&quot; resultMap=&quot;userAndordersMapper&quot;&gt;
-    SELECT
-    u.*, o.id oid,
-    o.number,
-    o.createtime,
-    o.note
-    FROM
-    `user` u
-    LEFT JOIN orders o ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在用户实体类中加入订单对象的list集合属性,并提供get和set方法</li>
-</ul>
-</li>
-</ul>
+<li><p>先创建一个BaseDao的接口里面提供一些通用的方法</p>
+<pre><code>public interface BaseDao&lt;T&gt; {
+    public void save(T entity);
 
+    public void delete(T entity);
+
+    public void update(T entity);
+
+    public T findById(Serializable id);
+
+    public List&lt;T&gt; findAll();
+
+    /**
+     * 根据条件查询对象查询
+     */
+    public List&lt;T&gt; findByCriteria(DetachedCriteria criteria);
+    /**
+     * 根据命名查询语句查询
+     */
+    public List&lt;T&gt; findByNamedQuery(String queryName,Object...args);
+    /**
+     * 执行增删改操作的命名语句
+     */
+    public void executeNamedQuery(String queryName,Object ...args);
+
+    public Map&lt;String,Object&gt; getPage(PageBean pageBean);
+}
+</code></pre></li>
+<li><p>然后创建Base的实现类,实现BaseDao里面的一些抽象方法</p>
+<ul>
+<li><p>首先得获得Service里面传过来的类型的对象:<code>如下</code></p>
+<pre><code>// 定义一个属性，表示实体的类型
+private Class&lt;T&gt; domainClass;
+
+/**
+ * 在构造方法中动态获得实体的类型
+ */
+public BaseDaoImpl() {
+    // 获得父类类型
+    ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+    // 获得父类上的泛型数组
+    Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
+    // 获得实体类型
+    domainClass = (Class&lt;T&gt;) actualTypeArguments[0];
+}
+</code></pre></li>
+<li><p>注入会话工厂对象</p>
+<pre><code>@Resource
+public void setSF(SessionFactory sessionFactory){
+    //调用父类的方法注入会话工厂对象
+    super.setSessionFactory(sessionFactory);
+}
+</code></pre></li>
+<li><p>对BaseDao接口里面的方法进行实现</p>
+<pre><code>@Override
+    public void save(T entity) {
+        this.getHibernateTemplate().save(entity);
+
+    }
+
+    @Override
+    public void delete(T entity) {
+        this.getHibernateTemplate().delete(entity);
+
+    }
+
+    @Override
+    public void update(T entity) {
+        this.getHibernateTemplate().update(entity);
+
+    }
+
+    @Override
+    public T findById(Serializable id) {
+
+        return this.getHibernateTemplate().get(domainClass, id);
+    }
+
+    @Override
+    public List&lt;T&gt; findAll() {
+        String hql = &quot;From &quot;+domainClass.getSimpleName();
+        // TODO Auto-generated method stub
+        return this.getHibernateTemplate().find(hql);
+    }
+
+    @Override
+    public List&lt;T&gt; findByCriteria(DetachedCriteria criteria) {
+        // TODO Auto-generated method stub
+        return this.getHibernateTemplate().findByCriteria(criteria);
+    }
+
+    @Override
+    public List&lt;T&gt; findByNamedQuery(String queryName, Object... args) {
+        // TODO Auto-generated method stub
+        return this.getHibernateTemplate().findByNamedQuery(queryName, args);
+    }
+
+    @Override
+    public void executeNamedQuery(String queryName, Object... args) {
+        // TODO Auto-generated method stub
+        Session session = (Session) this.getSession();
+        Query query = session.getNamedQuery(queryName);
+        if (args != null &amp;&amp; args.length &gt; 0) {
+            int i = 0;
+            for (Object arg : args) {
+                query.setParameter(i++, arg);
+            }
+        }
+        query.executeUpdate();
+    }
+
+    @Override
+    public Map&lt;String,Object&gt; getPage(PageBean pageBean) {
+        // TODO Auto-generated method stub
+        pageBean.setTotal(findAll().size());
+        Map&lt;String,Object&gt; map = new HashMap&lt;String, Object&gt;();
+        map.put(&quot;total&quot;, pageBean.getTotal());
+        int firstResult = (pageBean.getCurrentPage()-1)*pageBean.getPageSize();
+        int maxResults = pageBean.getPageSize();
+        List&lt;Object&gt; list = this.getHibernateTemplate().findByCriteria(pageBean.getDetachedCriteria(), firstResult, maxResults);
+        map.put(&quot;rows&quot;, list);
+/*        Set&lt;String&gt; set = map.keySet();
+        for (String string : set) {
+            System.out.println(&quot;key:&quot;+string+&quot;   value:&quot;+map.get(string));
+        }*/
+        return map;
+    }
+</code></pre></li>
+</ul>
+</li>
+<li><code>在书写实体类Dao的接口时,这个接口要继承BaseDao接口</code></li>
+<li><code>在书写实体类Dao接口的实现类的时候,要继承BaseDao接口的实现类.</code><ul>
+<li>注意类上面要写  <code>@Repository</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Service<ul>
+<li>提供service层的实现类和接口,并在实现类里面注入Dao层的实体对象接口<code>@Resource</code></li>
+<li>在实现类上面要加上注解<code>@Service</code> <code>@Transactional</code></li>
+</ul>
+</li>
+<li><p>Action</p>
+<ul>
+<li><p>创建BaseAction</p>
+<ul>
+<li>继承ActionSupport类 实现 ModelDriven<t>接口<ul>
+<li><code>public class BaseAction&lt;T&gt; extends ActionSupport implements ModelDriven&lt;T&gt; { }</code></li>
+</ul>
+</t></li>
+<li><p>获得传过来的模型对象</p>
+<pre><code>//声明模型对象
+protected T model;
+public T getModel() {
+    return model;
+}
+    //在构造方法中动态获得实体的类型，并通过反射实例化模型对象
+public BaseAction() {
+    //获得父类（BaseAction&lt;T&gt;）类型
+    ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+    //获得父类上的泛型数组
+    Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
+    //实体类型
+    Class&lt;T&gt; domainClass = (Class&lt;T&gt;) actualTypeArguments[0];
+    try {
+        //创建PageBean的离线查询对象
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(domainClass);
+        pageBean.setDetachedCriteria(detachedCriteria);
+        //创建模型对象并赋给model
+        model = domainClass.newInstance();
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+* 在里面填写`@Resource`标签注入XxxService
+    * 注意权限访问范围是&apos;protected&apos;
+* 其余代码
+
+        protected PageBean pageBean = new PageBean();
+
+        public void setCurrentPage(int currentPage){
+            pageBean.setCurrentPage(currentPage);
+        }
+
+        public void setPageSize(int pageSize){
+            pageBean.setPageSize(pageSize);
+        }
+</code></pre>
       
     </div>
 
@@ -521,7 +565,7 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
       
         <div class="post-tags">
           
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
           
         </div>
       
@@ -534,18 +578,14 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/10/easyui初级使用/" rel="next" title="easyui初级使用">
-                <i class="fa fa-chevron-left"></i> easyui初级使用
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/09/mybatis-day01/" rel="prev" title="mybatis_day01">
-                mybatis_day01 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/10/activiti流程管理/" rel="prev" title="activiti流程管理">
+                activiti流程管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -666,7 +706,7 @@ resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义resultMap"><span class="nav-number">1.</span> <span class="nav-text">定义resultMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态sql"><span class="nav-number">2.</span> <span class="nav-text">动态sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联查询"><span class="nav-number">3.</span> <span class="nav-text">关联查询</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建实体类和映射"><span class="nav-number">1.</span> <span class="nav-text">创建实体类和映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立Dao-Service-action之间的关系"><span class="nav-number">2.</span> <span class="nav-text">建立Dao,Service,action之间的关系</span></a></li></ol></div>
             
 
           </div>
