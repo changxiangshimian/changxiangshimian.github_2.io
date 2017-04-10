@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://i.imgur.com/vD7EHku.png">
 <meta property="og:image" content="http://i.imgur.com/lHkROWL.png">
 <meta property="og:image" content="http://i.imgur.com/HHGzBrV.png">
-<meta property="og:updated_time" content="2017-04-10T12:41:44.519Z">
+<meta property="og:updated_time" content="2017-04-10T12:46:39.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="easyui初级使用">
 <meta name="twitter:description" content="什么是easyui jquery easyui不需要写复杂的css和html代码，就可以实现一些页面效果 使用jquery easyui和后台进行交互 通过后台（action）返回json数据到页面 底层使用jquery ajax+json数据   应用场景 使用jquery easyui一般用在后台管理系统基本案例DataGrid(数据表格)     DataGrid属性123456789101">
@@ -377,7 +377,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 从Web Service（asp.net、java、php等）输出的JSON对象中移除'd'对象</div><div class="line">$('#dg').datagrid(&#123;</div><div class="line">	loadFilter: function(data)&#123;</div><div class="line">		if (data.d)&#123;</div><div class="line">			return data.d;</div><div class="line">		&#125; else &#123;</div><div class="line">			return data;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 从Web Service（asp.net、java、php等）输出的JSON对象中移除'd'对象</span></div><div class="line">$(<span class="string">'#dg'</span>).datagrid(&#123;</div><div class="line">	<span class="attr">loadFilter</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span> (data.d)&#123;</div><div class="line">			<span class="keyword">return</span> data.d;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> data;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="列属性"><a href="#列属性" class="headerlink" title="列属性"></a>列属性</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">columns:[[    </div><div class="line">    &#123;field:'itemid',title:'Item ID',rowspan:2,width:80,sortable:true&#125;,    </div><div class="line">    &#123;field:'productid',title:'Product ID',rowspan:2,width:80,sortable:true&#125;,    </div><div class="line">    &#123;title:'Item Details',colspan:4&#125;    </div><div class="line">],[    </div><div class="line">    &#123;field:'listprice',title:'List Price',width:80,align:'right',sortable:true&#125;,    </div><div class="line">    &#123;field:'unitcost',title:'Unit Cost',width:80,align:'right',sortable:true&#125;,    </div><div class="line">    &#123;field:'attr1',title:'Attribute',width:100&#125;,    </div><div class="line">    &#123;field:'status',title:'Status',width:60&#125;    </div><div class="line">]]</div></pre></td></tr></table></figure>
 <ul>
 <li>title :列标题文本</li>
@@ -429,17 +429,17 @@
 </ul>
 </li>
 </ul>
-<pre><code class="html">$('#cc').layout('add',{    
-    region: 'west',    
-    width: 180,    
-    title: 'West Title',    
-    split: true,    
-    tools: [{    
-        iconCls:'icon-add',    
-        handler:function(){alert('add')}    
+<pre><code class="javascript">$(<span class="string">'#cc'</span>).layout(<span class="string">'add'</span>,{    
+    <span class="attr">region</span>: <span class="string">'west'</span>,    
+    <span class="attr">width</span>: <span class="number">180</span>,    
+    <span class="attr">title</span>: <span class="string">'West Title'</span>,    
+    <span class="attr">split</span>: <span class="literal">true</span>,    
+    <span class="attr">tools</span>: [{    
+        <span class="attr">iconCls</span>:<span class="string">'icon-add'</span>,    
+        <span class="attr">handler</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{alert(<span class="string">'add'</span>)}    
     },{    
-        iconCls:'icon-remove',    
-        handler:function(){alert('remove')}    
+        <span class="attr">iconCls</span>:<span class="string">'icon-remove'</span>,    
+        <span class="attr">handler</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{alert(<span class="string">'remove'</span>)}    
     }]    
 });
 </code></pre>
