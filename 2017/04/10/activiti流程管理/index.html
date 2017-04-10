@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/10/activiti流程管理/index.html">
 <meta property="og:site_name" content="YYT">
 <meta property="og:description" content="activiti的搭建.完成自动创表 创建一个xml的配置文件  123456789101112131415161718192021222324252627&amp;lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;	xmlns:context=&quot;http://www.springframework.org/schema/context">
-<meta property="og:updated_time" content="2017-04-10T12:32:58.349Z">
+<meta property="og:updated_time" content="2017-04-10T13:28:32.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="activiti流程管理">
 <meta name="twitter:description" content="activiti的搭建.完成自动创表 创建一个xml的配置文件  123456789101112131415161718192021222324252627&amp;lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;	xmlns:context=&quot;http://www.springframework.org/schema/context">
@@ -343,21 +343,15 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.yyt.activiti;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.activiti.engine.ProcessEngineConfiguration;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">		ProcessEngineConfiguration conf = ProcessEngineConfiguration</div><div class="line">				.createProcessEngineConfigurationFromResource(<span class="string">"activiti-context.xml"</span>, <span class="string">"processEngineConfiguration"</span>);</div><div class="line">		conf.buildProcessEngine();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
 <ul>
-<li><p>或者在xml配置文件内容不变的前提下,测试类还可以这样写</p>
-<ul>
-<li><p>前提:</p>
-<ul>
-<li><p>配置文件的名称必须为activiti-context.xml或者为activiti.cfg.xml,xml配置文件中必须配置流程引擎配置对象，id必须为processEngineConfiguration，必须配置流程引擎工厂bean，id必须为processEngine</p>
-<pre><code>@Test
-public void test2(){
-    ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-}
-</code></pre></li>
+<li>或者在xml配置文件内容不变的前提下,测试类还可以这样写<ul>
+<li>前提:<ul>
+<li>配置文件的名称必须为activiti-context.xml或者为activiti.cfg.xml,xml配置文件中必须配置流程引擎配置对象，id必须为processEngineConfiguration，必须配置流程引擎工厂bean，id必须为processEngine</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</div><div class="line">	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="了解activiti框架提供的23张表"><a href="#了解activiti框架提供的23张表" class="headerlink" title="了解activiti框架提供的23张表"></a>了解activiti框架提供的23张表</h3><pre><code>Activiti的后台是有数据库的支持，所有的表都以ACT_开头。 第二部分是表示表的用途的两个字母标识。 用途也和服务的API对应。
 </code></pre><hr>
 <ul>
