@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
+<meta name="description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置  1234567&amp;lt;resultMap">
 <meta name="keywords" content="mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis_day02">
 <meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis-day02/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
-<meta property="og:updated_time" content="2017-04-10T10:38:47.951Z">
+<meta property="og:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置  1234567&amp;lt;resultMap">
+<meta property="og:updated_time" content="2017-04-10T13:10:44.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis_day02">
-<meta name="twitter:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置 &amp;lt;resultMap type=&amp;q">
+<meta name="twitter:description" content="定义resultMap如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。  resultMap的配置  1234567&amp;lt;resultMap">
 
 
 
@@ -335,164 +335,55 @@
         <h3 id="定义resultMap"><a href="#定义resultMap" class="headerlink" title="定义resultMap"></a>定义resultMap</h3><pre><code>如果sql查询字段名和pojo的属性名不一致，可以通过resultMap将字段名和属性名作一个对应关系 ，resultMap实质上还需要将查询结果映射到pojo对象中。
 resultMap可以实现将查询结果映射为复杂类型的pojo，比如在查询结果映射对象中包括pojo和list实现一对一查询和一对多查询。
 </code></pre><ul>
-<li><p>resultMap的配置</p>
-<pre><code>&lt;resultMap type=&quot;com.yyt.mybatis.po.User&quot; id=&quot;userListResultMap&quot;&gt;
-    &lt;id column=&quot;_id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;_name&quot; property=&quot;username&quot;/&gt;
-    &lt;result column=&quot;_birthday&quot; property=&quot;birthday&quot;/&gt;
-    &lt;result column=&quot;_sex&quot; property=&quot;sex&quot;/&gt;
-    &lt;result column=&quot;_address&quot; property=&quot;address&quot;/&gt;
-&lt;/resultMap&gt;
-</code></pre></li>
+<li>resultMap的配置</li>
 </ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.yyt.mybatis.po.User"</span> <span class="attr">id</span>=<span class="string">"userListResultMap"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"_name"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"_birthday"</span> <span class="attr">property</span>=<span class="string">"birthday"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"_sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"_address"</span> <span class="attr">property</span>=<span class="string">"address"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div></pre></td></tr></table></figure>
 <hr>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-        SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-&lt;/select&gt;
-</code></pre><h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><ul>
-<li><p>if语句</p>
-<pre><code>&lt;!-- 传递pojo综合查询用户信息 --&gt;
-&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    where 1=1 
-    &lt;if test=&quot;id!=null&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>where语句</p>
-<pre><code>&lt;select id=&quot;findUserList&quot; parameterType=&quot;user&quot; resultType=&quot;user&quot;&gt;
-    select * from user 
-    &lt;where&gt;
-    &lt;if test=&quot;id!=null and id!=&apos;&apos;&quot;&gt;
-    and id=#{id}
-    &lt;/if&gt;
-    &lt;if test=&quot;username!=null and username!=&apos;&apos;&quot;&gt;
-    and username like &apos;%${username}%&apos;
-    &lt;/if&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li><p>foreach语句</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserListForResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"queryvo"</span> <span class="attr">resultMap</span>=<span class="string">"userListResultMap"</span>&gt;</span></div><div class="line">		SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h3><ul>
+<li>if语句</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 传递pojo综合查询用户信息 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserList"</span> <span class="attr">parameterType</span>=<span class="string">"user"</span> <span class="attr">resultType</span>=<span class="string">"user"</span>&gt;</span></div><div class="line">	select * from user </div><div class="line">	where 1=1 </div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"id!=null"</span>&gt;</span></div><div class="line">	and id=#&#123;id&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"username!=null and username!=''"</span>&gt;</span></div><div class="line">	and username like '%$&#123;username&#125;%'</div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
+<li>where语句</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserList"</span> <span class="attr">parameterType</span>=<span class="string">"user"</span> <span class="attr">resultType</span>=<span class="string">"user"</span>&gt;</span></div><div class="line">	select * from user </div><div class="line">	<span class="tag">&lt;<span class="name">where</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"id!=null and id!=''"</span>&gt;</span></div><div class="line">	and id=#&#123;id&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"username!=null and username!=''"</span>&gt;</span></div><div class="line">	and username like '%$&#123;username&#125;%'</div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">where</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>foreach语句<ul>
 <li>向sql传递数组或List，mybatis使用foreach解析</li>
-<li><p>mapper配置<code>queryvo类中包括一个Integer集合ids</code></p>
-<pre><code>&lt;select id=&quot;findUserByForeach&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT * FROM USER WHERE username LIKE &apos;%张%&apos;
-    &lt;!-- 判断queryvo对象里面的ids集合--&gt;
-    &lt;if test=&quot;ids !=null and ids.size&gt;0&quot;&gt;
-        &lt;!-- 遍历ids,并非在上面sql语句上加入 and id in(......) 括号中间写遍历的参数以逗号隔开--&gt;
-        &lt;foreach collection=&quot;ids&quot; open=&quot;and id in(&quot; close=&quot;)&quot; item=&quot;id&quot; separator=&quot;,&quot;&gt;
-            #{id}
-        &lt;/foreach&gt;
-    &lt;/if&gt;
-&lt;/select&gt;
-</code></pre></li>
-<li>运行结果<ul>
-<li><code>Preparing: SELECT * FROM USER WHERE username LIKE &#39;%张%&#39; and id in( ? , ? , ? )</code></li>
-<li><code>Parameters: 10(Integer), 89(Integer), 16(Integer)</code></li>
+<li>mapper配置<code>queryvo类中包括一个Integer集合ids</code></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>sql片段</p>
-<ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserByForeach"</span> <span class="attr">parameterType</span>=<span class="string">"queryvo"</span> <span class="attr">resultMap</span>=<span class="string">"userListResultMap"</span>&gt;</span></div><div class="line">	SELECT * FROM USER WHERE username LIKE '%张%'</div><div class="line">	<span class="comment">&lt;!-- 判断queryvo对象里面的ids集合--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids !=null and ids.size&gt;0"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 遍历ids,并非在上面sql语句上加入 and id in(......) 括号中间写遍历的参数以逗号隔开--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">open</span>=<span class="string">"and id in("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></div><div class="line">			#&#123;id&#125;</div><div class="line">		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code>* 运行结果
+    * `Preparing: SELECT * FROM USER WHERE username LIKE &apos;%张%&apos; and id in( ? , ? , ? )`
+    * `Parameters: 10(Integer), 89(Integer), 16(Integer)`
+</code></pre><ul>
+<li>sql片段<ul>
 <li>Sql中可将重复的sql提取出来，使用时用include引用即可，最终达到sql重用的目的</li>
-<li><p>代码如下</p>
-<pre><code>&lt;select id=&quot;findUserListForResultMap&quot; parameterType=&quot;queryvo&quot; resultMap=&quot;userListResultMap&quot;&gt;
-    SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`
-    &lt;where&gt;
-        &lt;include refid=&quot;id_username_user&quot;/&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-&lt;sql id=&quot;id_username_user&quot;&gt;
-    &lt;if test=&quot;user.id != null and user.id != &apos;&apos;&quot;&gt;
-        and id=${user.id}
-    &lt;/if&gt;
-    &lt;if test=&quot;user.username != null and user.username != &apos;&apos;&quot;&gt;
-        and username like &apos;%${user.username}%&apos;
-    &lt;/if&gt;
-&lt;/sql&gt;
-</code></pre><h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3></li>
-</ul>
-</li>
-<li><p>一对一的查询<code>一张订单对应只有一个用户</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 查询订单关联用户信息使用resultmap --&gt;
-&lt;resultMap type=&quot;Orders&quot; id=&quot;orderUserResultMap&quot;&gt;
-    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;
-    &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;
-    &lt;result column=&quot;number&quot; property=&quot;number&quot;/&gt;
-    &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot;/&gt;
-    &lt;result column=&quot;note&quot; property=&quot;note&quot;/&gt;
-    &lt;!-- 一对一关联映射 --&gt;
-    &lt;!-- 
-    property:Orders对象的user属性
-    javaType：user属性对应 的类型
-     --&gt;
-    &lt;association property=&quot;user&quot; javaType=&quot;cn.itcast.po.User&quot;&gt;
-        &lt;!-- column:user表的主键对应的列  property：user对象中id属性--&gt;
-        &lt;id column=&quot;user_id&quot; property=&quot;id&quot;/&gt;
-        &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;
-        &lt;result column=&quot;address&quot; property=&quot;address&quot;/&gt;
-    &lt;/association&gt;
-&lt;/resultMap&gt;
-&lt;select id=&quot;findOrdersWithUserResultMap&quot; resultMap=&quot;orderUserResultMap&quot;&gt;
-    SELECT
-        o.id,
-        o.user_id,
-        o.number,
-        o.createtime,
-        o.note,
-        u.username,
-        u.address
-    FROM
-        orders o
-    JOIN `user` u ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在订单实体类中加入用户的属性,并提供get,set方法</li>
-</ul>
-</li>
-<li><p>一对多查询<code>一个用户可以有多个订单</code></p>
-<ul>
-<li><p>mapper代码</p>
-<pre><code>&lt;!-- 配置一对多的关系 --&gt;
-&lt;resultMap type=&quot;user&quot; id=&quot;userAndordersMapper&quot;&gt;
-    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
-    &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;
-    &lt;result property=&quot;birthday&quot; column=&quot;birthday&quot;/&gt;
-    &lt;result property=&quot;sex&quot; column=&quot;sex&quot;/&gt;
-    &lt;result property=&quot;address&quot; column=&quot;address&quot;/&gt;
-    &lt;!-- 配置一对多的关系 --&gt;
-    &lt;collection property=&quot;orders&quot; ofType=&quot;orders&quot;&gt;
-        &lt;id property=&quot;id&quot; column=&quot;oid&quot;/&gt;
-        &lt;result property=&quot;number&quot; column=&quot;number&quot;/&gt;
-        &lt;result property=&quot;createtime&quot; column=&quot;createtime&quot;/&gt;
-        &lt;result property=&quot;note&quot; column=&quot;note&quot;/&gt;
-    &lt;/collection&gt;
-&lt;/resultMap&gt;
-&lt;!-- 一对多的sql语句的写法配置 --&gt;
-&lt;select id=&quot;findUserOrdersByUser&quot; resultMap=&quot;userAndordersMapper&quot;&gt;
-    SELECT
-    u.*, o.id oid,
-    o.number,
-    o.createtime,
-    o.note
-    FROM
-    `user` u
-    LEFT JOIN orders o ON u.id = o.user_id
-&lt;/select&gt;
-</code></pre></li>
-<li>在用户实体类中加入订单对象的list集合属性,并提供get和set方法</li>
+<li>代码如下</li>
 </ul>
 </li>
 </ul>
-
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserListForResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"queryvo"</span> <span class="attr">resultMap</span>=<span class="string">"userListResultMap"</span>&gt;</span></div><div class="line">	SELECT id _id,username _name,birthday _birthday,sex _sex,address _address FROM `user`</div><div class="line">	<span class="tag">&lt;<span class="name">where</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"id_username_user"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">where</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"id_username_user"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"user.id != null and user.id != ''"</span>&gt;</span></div><div class="line">		and id=$&#123;user.id&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"user.username != null and user.username != ''"</span>&gt;</span></div><div class="line">		and username like '%$&#123;user.username&#125;%'</div><div class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3><ul>
+<li>一对一的查询<code>一张订单对应只有一个用户</code><ul>
+<li>mapper代码</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 查询订单关联用户信息使用resultmap --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"Orders"</span> <span class="attr">id</span>=<span class="string">"orderUserResultMap"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"userId"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"number"</span> <span class="attr">property</span>=<span class="string">"number"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"createtime"</span> <span class="attr">property</span>=<span class="string">"createtime"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span>/&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 一对一关联映射 --&gt;</span></div><div class="line">	<span class="comment">&lt;!-- </span></div><div class="line">	property:Orders对象的user属性</div><div class="line">	javaType：user属性对应 的类型</div><div class="line">	 --&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"user"</span> <span class="attr">javaType</span>=<span class="string">"cn.itcast.po.User"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- column:user表的主键对应的列  property：user对象中id属性--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"user_id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"username"</span> <span class="attr">property</span>=<span class="string">"username"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"address"</span> <span class="attr">property</span>=<span class="string">"address"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">association</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findOrdersWithUserResultMap"</span> <span class="attr">resultMap</span>=<span class="string">"orderUserResultMap"</span>&gt;</span></div><div class="line">	SELECT</div><div class="line">		o.id,</div><div class="line">		o.user_id,</div><div class="line">		o.number,</div><div class="line">		o.createtime,</div><div class="line">		o.note,</div><div class="line">		u.username,</div><div class="line">		u.address</div><div class="line">	FROM</div><div class="line">		orders o</div><div class="line">	JOIN `user` u ON u.id = o.user_id</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code>* 在订单实体类中加入用户的属性,并提供get,set方法
+</code></pre><ul>
+<li>一对多查询<code>一个用户可以有多个订单</code><ul>
+<li>mapper代码</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 配置一对多的关系 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"user"</span> <span class="attr">id</span>=<span class="string">"userAndordersMapper"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"username"</span> <span class="attr">column</span>=<span class="string">"username"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"birthday"</span> <span class="attr">column</span>=<span class="string">"birthday"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"sex"</span> <span class="attr">column</span>=<span class="string">"sex"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"address"</span> <span class="attr">column</span>=<span class="string">"address"</span>/&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 配置一对多的关系 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"orders"</span> <span class="attr">ofType</span>=<span class="string">"orders"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"oid"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"number"</span> <span class="attr">column</span>=<span class="string">"number"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"createtime"</span> <span class="attr">column</span>=<span class="string">"createtime"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"note"</span> <span class="attr">column</span>=<span class="string">"note"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">collection</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 一对多的sql语句的写法配置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserOrdersByUser"</span> <span class="attr">resultMap</span>=<span class="string">"userAndordersMapper"</span>&gt;</span></div><div class="line">	SELECT</div><div class="line">	u.*, o.id oid,</div><div class="line">	o.number,</div><div class="line">	o.createtime,</div><div class="line">	o.note</div><div class="line">	FROM</div><div class="line">	`user` u</div><div class="line">	LEFT JOIN orders o ON u.id = o.user_id</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code>* 在用户实体类中加入订单对象的list集合属性,并提供get和set方法
+</code></pre>
       
     </div>
 

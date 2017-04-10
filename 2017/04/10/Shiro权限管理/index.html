@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
+<meta name="description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象  123456789&amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt;&amp;lt;filter&amp;gt;	&amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;	&amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delega">
 <meta name="keywords" content="shiro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shiro权限管理">
 <meta property="og:url" content="http://yoursite.com/2017/04/10/Shiro权限管理/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
-<meta property="og:updated_time" content="2017-04-10T11:47:12.718Z">
+<meta property="og:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象  123456789&amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt;&amp;lt;filter&amp;gt;	&amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;	&amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delega">
+<meta property="og:updated_time" content="2017-04-10T13:18:12.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro权限管理">
-<meta name="twitter:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象 &amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt; &amp;lt;filter&amp;gt;     &amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;     &amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delegat">
+<meta name="twitter:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象  123456789&amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt;&amp;lt;filter&amp;gt;	&amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;	&amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delega">
 
 
 
@@ -333,209 +333,37 @@
 
       
         <h3 id="shiro的配置过程"><a href="#shiro的配置过程" class="headerlink" title="shiro的配置过程"></a>shiro的配置过程</h3><ul>
-<li><p>在web.xml中配置一个过滤器代理对象</p>
-<pre><code>&lt;!-- 加入spring框架提供的过滤器代理对象 --&gt;
-&lt;filter&gt;
-    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;
-&lt;/filter&gt;
-&lt;filter-mapping&gt;
-    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-&lt;/filter-mapping&gt;
-</code></pre></li>
-<li><p>在spring配置文件中配置一个名称为shiroFilter的bean,并注入安全管理器</p>
-<pre><code>&lt;!-- 配置安全管理器 --&gt;
-&lt;bean name=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;
-    &lt;property name=&quot;realm&quot; ref=&quot;bosRealm&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;bean name=&quot;bosRealm&quot; class=&quot;com.yyt.bos.shiro.BOSRealm&quot;&gt;&lt;/bean&gt;
-
-&lt;!-- 配置shiro的bean --&gt;
-&lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&gt;
-    &lt;!-- 注入安全管理器对象 --&gt;
-    &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;&gt;&lt;/property&gt;
-    &lt;!-- 成功的界面 --&gt;
-    &lt;property name=&quot;successUrl&quot; value=&quot;/index.jsp&quot;&gt;&lt;/property&gt;
-    &lt;!-- 权限不足提示页面 --&gt;
-    &lt;property name=&quot;unauthorizedUrl&quot; value=&quot;/unauthorized.jsp&quot;&gt;&lt;/property&gt;
-    &lt;!-- 登录页面的Url --&gt;
-    &lt;property name=&quot;loginUrl&quot; value=&quot;/login.jsp&quot;&gt;&lt;/property&gt;
-    &lt;!-- 基于url拦截,使用过滤器进行拦截 --&gt;
-    &lt;property name=&quot;filterChainDefinitions&quot;&gt;
-        &lt;!-- anon:权限拦截白名单 --&gt;
-        &lt;value&gt;
-            /css/** = anon
-            /images/** = anon
-            /js/** = anon
-            /login.jsp = anon
-            /validatecode.jsp* = anon
-            /userAction_login.action = anon
-            /page_base_staff.action = perms[&quot;staff&quot;]
-            /** = authc
-
-        &lt;/value&gt;
-    &lt;/property&gt;
-&lt;/bean&gt;
-</code></pre></li>
-<li><p>bean的名字为bosRealm所在类的内容</p>
-<pre><code>package com.yyt.bos.shiro;
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.subject.PrincipalCollection;
-
-import com.yyt.bos.dao.FunctionDao;
-import com.yyt.bos.dao.UserDao;
-import com.yyt.bos.entity.Function;
-import com.yyt.bos.entity.User;
-
-public class BOSRealm extends AuthorizingRealm {
-
-    @Resource
-    private UserDao userDao;
-
-    @Resource
-    private FunctionDao functionDao;
-
-    @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection paramPrincipalCollection) {
-        // TODO Auto-generated method stub
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        /*info.addStringPermission(&quot;staff&quot;);
-        info.addStringPermission(&quot;staff-delete&quot;);*/
-        User user = (User) paramPrincipalCollection.getPrimaryPrincipal();
-        if(&quot;李四&quot;.equals(user.getUsername())){
-            List&lt;Function&gt; list = functionDao.findAll();
-            info.addStringPermission(&quot;staff-delete&quot;);
-            info.addStringPermission(&quot;staff-add&quot;);
-            for (Function function : list) {
-                System.out.println(function.getName());
-                info.addStringPermission(function.getCode());
-            }
-        }else{
-            String id = user.getId();
-            List&lt;Function&gt; list = functionDao.findFunctionByUsername(id);
-            for (Function function : list) {
-                System.out.println(function.getName());
-                info.addStringPermission(function.getCode());
-            }
-        }
-        return info;
-    }
-
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        UsernamePasswordToken mytoken = (UsernamePasswordToken) token;
-        String username = mytoken.getUsername();
-        char[] password = mytoken.getPassword();
-        User user = userDao.findUserByUsername(username);
-        if(user == null){
-            return null;
-        }
-        //如果从数据库里面返回的user部位null的话,就说明签名通过了.
-        //三个参数分别为:签名对象;从数据库中查到的密码;reaml的类名
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user,user.getPassword(),this.getClass().getName());
-        return info;
-    }
-
-}
-</code></pre></li>
-<li><p>修改用户Action里面的登录方法</p>
-<pre><code>public String login(){
-
-    Subject subject = SecurityUtils.getSubject();
-    String username = model.getUsername();
-    String password = model.getPassword();
-    password = MD5Utils.md5(password);
-    try{
-        AuthenticationToken token = new UsernamePasswordToken(username,password);
-        subject.login(token);
-        User user = (User) subject.getPrincipal();
-        ServletActionContext.getRequest().getSession().setAttribute(&quot;user&quot;, user);
-    }catch (UnknownAccountException e) {
-        e.printStackTrace();
-        this.addActionError(&quot;用户名不存在&quot;);
-        return &quot;login&quot;;
-        // TODO: handle exception
-    }catch (IncorrectCredentialsException e){
-        e.printStackTrace();
-        this.addActionError(&quot;密码错误&quot;);
-        return &quot;login&quot;;
-    }
-    return &quot;home&quot;;
-}
-</code></pre><h4 id="注解方式权限控制"><a href="#注解方式权限控制" class="headerlink" title="注解方式权限控制"></a>注解方式权限控制</h4></li>
-<li><p>在spring的配置文件中写自动代理和切面</p>
-<pre><code>&lt;!-- 自动代理 --&gt;
-&lt;bean class=&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot;&gt;
-    &lt;property name=&quot;proxyTargetClass&quot; value=&quot;true&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-
-&lt;!-- 切面 --&gt;
-&lt;bean class=&quot;org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor&quot;&gt;&lt;/bean&gt;
-</code></pre></li>
-<li><p>在Action作废的方法上面写注解</p>
-<pre><code>@RequiresPermissions(&quot;staff-delete&quot;)
-public String deleteStaff(){...}
-</code></pre></li>
-<li><p>修改BaseAction的构造方法<code>虚线中间的为要修改的内容</code></p>
-<pre><code>//在构造方法中动态获得实体的类型，并通过反射实例化模型对象
-public BaseAction() {
----------------------------------------------------------------------------------------------------
-    // 获得父类（BaseAction&lt;T&gt;）类型
-    ParameterizedType genericSuperclass = null;
-
-    Type genericSuperclass2 = this.getClass().getGenericSuperclass();
-    if(genericSuperclass2 instanceof ParameterizedType){
-        genericSuperclass = (ParameterizedType) genericSuperclass2;
-    }else{
-        genericSuperclass = (ParameterizedType) this.getClass().getSuperclass().getGenericSuperclass();
-    }
----------------------------------------------------------------------------------------------------
-    //获得父类上的泛型数组
-    Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
-    //实体类型
-    Class&lt;T&gt; domainClass = (Class&lt;T&gt;) actualTypeArguments[0];
-    try {
-        //创建PageBean的离线查询对象
-        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(domainClass);
-        pageBean.setDetachedCriteria(detachedCriteria);
-        //创建模型对象并赋给model
-        model = domainClass.newInstance();
-</code></pre></li>
+<li>在web.xml中配置一个过滤器代理对象</li>
 </ul>
-<pre><code>    } catch (InstantiationException e) {
-        e.printStackTrace();
-    } catch (IllegalAccessException e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><ul>
-<li><p>在jsp页面上根据不同登录用户隐藏按钮</p>
-<pre><code>/* 如果登录的用户有此权限则按钮不隐藏,没有此权限则 隐藏按钮*/
-&lt;shiro:hasPermission name=&quot;staff-add&quot;&gt;
-, {
-    id : &apos;button-add&apos;,
-    text : &apos;增加&apos;,
-    iconCls : &apos;icon-add&apos;,
-    handler : doAdd
-}
-&lt;/shiro:hasPermission&gt;
-</code></pre></li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 加入spring框架提供的过滤器代理对象 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在spring配置文件中配置一个名称为shiroFilter的bean,并注入安全管理器</li>
 </ul>
-
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 配置安全管理器 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"securityManager"</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.web.mgt.DefaultWebSecurityManager"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"realm"</span> <span class="attr">ref</span>=<span class="string">"bosRealm"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"bosRealm"</span> <span class="attr">class</span>=<span class="string">"com.yyt.bos.shiro.BOSRealm"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 配置shiro的bean --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"shiroFilter"</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.spring.web.ShiroFilterFactoryBean"</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 注入安全管理器对象 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"securityManager"</span> <span class="attr">ref</span>=<span class="string">"securityManager"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 成功的界面 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"successUrl"</span> <span class="attr">value</span>=<span class="string">"/index.jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 权限不足提示页面 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"unauthorizedUrl"</span> <span class="attr">value</span>=<span class="string">"/unauthorized.jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 登录页面的Url --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"loginUrl"</span> <span class="attr">value</span>=<span class="string">"/login.jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 基于url拦截,使用过滤器进行拦截 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"filterChainDefinitions"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- anon:权限拦截白名单 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">			/css/** = anon</div><div class="line">			/images/** = anon</div><div class="line">			/js/** = anon</div><div class="line">			/login.jsp = anon</div><div class="line">			/validatecode.jsp* = anon</div><div class="line">			/userAction_login.action = anon</div><div class="line">			/page_base_staff.action = perms["staff"]</div><div class="line">			/** = authc</div><div class="line">			</div><div class="line">		<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>bean的名字为bosRealm所在类的内容</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.yyt.bos.shiro;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.annotation.Resource;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.shiro.authc.AuthenticationException;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.authc.AuthenticationInfo;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.authc.AuthenticationToken;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.authc.SimpleAuthenticationInfo;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.authc.UsernamePasswordToken;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.authz.AuthorizationInfo;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.authz.SimpleAuthorizationInfo;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.realm.AuthorizingRealm;</div><div class="line"><span class="keyword">import</span> org.apache.shiro.subject.PrincipalCollection;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.yyt.bos.dao.FunctionDao;</div><div class="line"><span class="keyword">import</span> com.yyt.bos.dao.UserDao;</div><div class="line"><span class="keyword">import</span> com.yyt.bos.entity.Function;</div><div class="line"><span class="keyword">import</span> com.yyt.bos.entity.User;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BOSRealm</span> <span class="keyword">extends</span> <span class="title">AuthorizingRealm</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserDao userDao;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> FunctionDao functionDao;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(PrincipalCollection paramPrincipalCollection)</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		SimpleAuthorizationInfo info = <span class="keyword">new</span> SimpleAuthorizationInfo();</div><div class="line">		<span class="comment">/*info.addStringPermission("staff");</span></div><div class="line">		info.addStringPermission("staff-delete");*/</div><div class="line">		User user = (User) paramPrincipalCollection.getPrimaryPrincipal();</div><div class="line">		<span class="keyword">if</span>(<span class="string">"李四"</span>.equals(user.getUsername()))&#123;</div><div class="line">			List&lt;Function&gt; list = functionDao.findAll();</div><div class="line">			info.addStringPermission(<span class="string">"staff-delete"</span>);</div><div class="line">			info.addStringPermission(<span class="string">"staff-add"</span>);</div><div class="line">			<span class="keyword">for</span> (Function function : list) &#123;</div><div class="line">				System.out.println(function.getName());</div><div class="line">				info.addStringPermission(function.getCode());</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			String id = user.getId();</div><div class="line">			List&lt;Function&gt; list = functionDao.findFunctionByUsername(id);</div><div class="line">			<span class="keyword">for</span> (Function function : list) &#123;</div><div class="line">				System.out.println(function.getName());</div><div class="line">				info.addStringPermission(function.getCode());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> info;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</div><div class="line">		UsernamePasswordToken mytoken = (UsernamePasswordToken) token;</div><div class="line">		String username = mytoken.getUsername();</div><div class="line">		<span class="keyword">char</span>[] password = mytoken.getPassword();</div><div class="line">		User user = userDao.findUserByUsername(username);</div><div class="line">		<span class="keyword">if</span>(user == <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//如果从数据库里面返回的user部位null的话,就说明签名通过了.</span></div><div class="line">		<span class="comment">//三个参数分别为:签名对象;从数据库中查到的密码;reaml的类名</span></div><div class="line">		SimpleAuthenticationInfo info = <span class="keyword">new</span> SimpleAuthenticationInfo(user,user.getPassword(),<span class="keyword">this</span>.getClass().getName());</div><div class="line">		<span class="keyword">return</span> info;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>修改用户Action里面的登录方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">()</span></span>&#123;</div><div class="line">	</div><div class="line">	Subject subject = SecurityUtils.getSubject();</div><div class="line">	String username = model.getUsername();</div><div class="line">	String password = model.getPassword();</div><div class="line">	password = MD5Utils.md5(password);</div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		AuthenticationToken token = <span class="keyword">new</span> UsernamePasswordToken(username,password);</div><div class="line">		subject.login(token);</div><div class="line">		User user = (User) subject.getPrincipal();</div><div class="line">		ServletActionContext.getRequest().getSession().setAttribute(<span class="string">"user"</span>, user);</div><div class="line">	&#125;<span class="keyword">catch</span> (UnknownAccountException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">		<span class="keyword">this</span>.addActionError(<span class="string">"用户名不存在"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="string">"login"</span>;</div><div class="line">		<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></div><div class="line">	&#125;<span class="keyword">catch</span> (IncorrectCredentialsException e)&#123;</div><div class="line">		e.printStackTrace();</div><div class="line">		<span class="keyword">this</span>.addActionError(<span class="string">"密码错误"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="string">"login"</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="string">"home"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="注解方式权限控制"><a href="#注解方式权限控制" class="headerlink" title="注解方式权限控制"></a>注解方式权限控制</h4><ul>
+<li>在spring的配置文件中写自动代理和切面</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 自动代理 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyTargetClass"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 切面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在Action作废的方法上面写注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequiresPermissions</span>(<span class="string">"staff-delete"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">deleteStaff</span><span class="params">()</span></span>&#123;...&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>修改BaseAction的构造方法<code>虚线中间的为要修改的内容</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//在构造方法中动态获得实体的类型，并通过反射实例化模型对象</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">BaseAction</span><span class="params">()</span> </span>&#123;</div><div class="line">---------------------------------------------------------------------------------------------------</div><div class="line">	<span class="comment">// 获得父类（BaseAction&lt;T&gt;）类型</span></div><div class="line">	ParameterizedType genericSuperclass = <span class="keyword">null</span>;</div><div class="line">			</div><div class="line">	Type genericSuperclass2 = <span class="keyword">this</span>.getClass().getGenericSuperclass();</div><div class="line">	<span class="keyword">if</span>(genericSuperclass2 <span class="keyword">instanceof</span> ParameterizedType)&#123;</div><div class="line">		genericSuperclass = (ParameterizedType) genericSuperclass2;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		genericSuperclass = (ParameterizedType) <span class="keyword">this</span>.getClass().getSuperclass().getGenericSuperclass();</div><div class="line">	&#125;</div><div class="line">---------------------------------------------------------------------------------------------------</div><div class="line">	<span class="comment">//获得父类上的泛型数组</span></div><div class="line">	Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();</div><div class="line">	<span class="comment">//实体类型</span></div><div class="line">	Class&lt;T&gt; domainClass = (Class&lt;T&gt;) actualTypeArguments[<span class="number">0</span>];</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">//创建PageBean的离线查询对象</span></div><div class="line">		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(domainClass);</div><div class="line">		pageBean.setDetachedCriteria(detachedCriteria);</div><div class="line">		<span class="comment">//创建模型对象并赋给model</span></div><div class="line">		model = domainClass.newInstance();</div><div class="line">		</div><div class="line">		</div><div class="line">	&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在jsp页面上根据不同登录用户隐藏按钮</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/* 如果登录的用户有此权限则按钮不隐藏,没有此权限则 隐藏按钮*/</div><div class="line"><span class="tag">&lt;<span class="name">shiro:hasPermission</span> <span class="attr">name</span>=<span class="string">"staff-add"</span>&gt;</span></div><div class="line">, &#123;</div><div class="line">	id : 'button-add',</div><div class="line">	text : '增加',</div><div class="line">	iconCls : 'icon-add',</div><div class="line">	handler : doAdd</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">shiro:hasPermission</span>&gt;</span></div></pre></td></tr></table></figure>
       
     </div>
 

@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao  先创建一个BaseDao的接口里面提供一些通用的方法 public interface BaseDao&amp;lt;T&amp;gt; {     public void save(T entity);">
+<meta name="description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao 先创建一个BaseDao的接口里面提供一些通用的方法    1234567891011121314151617181920212223242526public interface BaseDao">
 <meta name="keywords" content="ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssh的Dao,Service,action">
 <meta property="og:url" content="http://yoursite.com/2017/04/10/ssh的Dao-Service-action/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao  先创建一个BaseDao的接口里面提供一些通用的方法 public interface BaseDao&amp;lt;T&amp;gt; {     public void save(T entity);">
-<meta property="og:updated_time" content="2017-04-10T11:19:41.531Z">
+<meta property="og:description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao 先创建一个BaseDao的接口里面提供一些通用的方法    1234567891011121314151617181920212223242526public interface BaseDao">
+<meta property="og:updated_time" content="2017-04-10T13:22:24.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh的Dao,Service,action">
-<meta name="twitter:description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao  先创建一个BaseDao的接口里面提供一些通用的方法 public interface BaseDao&amp;lt;T&amp;gt; {     public void save(T entity);">
+<meta name="twitter:description" content="创建实体类和映射 PowerDesigner 创建表与表之间的关系 生成pdm文件 让myeclipse链接上数据库生成实体类和对应的映射文件建立Dao,Service,action之间的关系   Dao 先创建一个BaseDao的接口里面提供一些通用的方法    1234567891011121314151617181920212223242526public interface BaseDao">
 
 
 
@@ -339,204 +339,45 @@
 <li>让myeclipse链接上数据库生成实体类和对应的映射文件<h3 id="建立Dao-Service-action之间的关系"><a href="#建立Dao-Service-action之间的关系" class="headerlink" title="建立Dao,Service,action之间的关系"></a>建立Dao,Service,action之间的关系</h3></li>
 </ul>
 </li>
-<li><p>Dao</p>
-<ul>
-<li><p>先创建一个BaseDao的接口里面提供一些通用的方法</p>
-<pre><code>public interface BaseDao&lt;T&gt; {
-    public void save(T entity);
-
-    public void delete(T entity);
-
-    public void update(T entity);
-
-    public T findById(Serializable id);
-
-    public List&lt;T&gt; findAll();
-
-    /**
-     * 根据条件查询对象查询
-     */
-    public List&lt;T&gt; findByCriteria(DetachedCriteria criteria);
-    /**
-     * 根据命名查询语句查询
-     */
-    public List&lt;T&gt; findByNamedQuery(String queryName,Object...args);
-    /**
-     * 执行增删改操作的命名语句
-     */
-    public void executeNamedQuery(String queryName,Object ...args);
-
-    public Map&lt;String,Object&gt; getPage(PageBean pageBean);
-}
-</code></pre></li>
-<li><p>然后创建Base的实现类,实现BaseDao里面的一些抽象方法</p>
-<ul>
-<li><p>首先得获得Service里面传过来的类型的对象:<code>如下</code></p>
-<pre><code>// 定义一个属性，表示实体的类型
-private Class&lt;T&gt; domainClass;
-
-/**
- * 在构造方法中动态获得实体的类型
- */
-public BaseDaoImpl() {
-    // 获得父类类型
-    ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
-    // 获得父类上的泛型数组
-    Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
-    // 获得实体类型
-    domainClass = (Class&lt;T&gt;) actualTypeArguments[0];
-}
-</code></pre></li>
-<li><p>注入会话工厂对象</p>
-<pre><code>@Resource
-public void setSF(SessionFactory sessionFactory){
-    //调用父类的方法注入会话工厂对象
-    super.setSessionFactory(sessionFactory);
-}
-</code></pre></li>
-<li><p>对BaseDao接口里面的方法进行实现</p>
-<pre><code>@Override
-    public void save(T entity) {
-        this.getHibernateTemplate().save(entity);
-
-    }
-
-    @Override
-    public void delete(T entity) {
-        this.getHibernateTemplate().delete(entity);
-
-    }
-
-    @Override
-    public void update(T entity) {
-        this.getHibernateTemplate().update(entity);
-
-    }
-
-    @Override
-    public T findById(Serializable id) {
-
-        return this.getHibernateTemplate().get(domainClass, id);
-    }
-
-    @Override
-    public List&lt;T&gt; findAll() {
-        String hql = &quot;From &quot;+domainClass.getSimpleName();
-        // TODO Auto-generated method stub
-        return this.getHibernateTemplate().find(hql);
-    }
-
-    @Override
-    public List&lt;T&gt; findByCriteria(DetachedCriteria criteria) {
-        // TODO Auto-generated method stub
-        return this.getHibernateTemplate().findByCriteria(criteria);
-    }
-
-    @Override
-    public List&lt;T&gt; findByNamedQuery(String queryName, Object... args) {
-        // TODO Auto-generated method stub
-        return this.getHibernateTemplate().findByNamedQuery(queryName, args);
-    }
-
-    @Override
-    public void executeNamedQuery(String queryName, Object... args) {
-        // TODO Auto-generated method stub
-        Session session = (Session) this.getSession();
-        Query query = session.getNamedQuery(queryName);
-        if (args != null &amp;&amp; args.length &gt; 0) {
-            int i = 0;
-            for (Object arg : args) {
-                query.setParameter(i++, arg);
-            }
-        }
-        query.executeUpdate();
-    }
-
-    @Override
-    public Map&lt;String,Object&gt; getPage(PageBean pageBean) {
-        // TODO Auto-generated method stub
-        pageBean.setTotal(findAll().size());
-        Map&lt;String,Object&gt; map = new HashMap&lt;String, Object&gt;();
-        map.put(&quot;total&quot;, pageBean.getTotal());
-        int firstResult = (pageBean.getCurrentPage()-1)*pageBean.getPageSize();
-        int maxResults = pageBean.getPageSize();
-        List&lt;Object&gt; list = this.getHibernateTemplate().findByCriteria(pageBean.getDetachedCriteria(), firstResult, maxResults);
-        map.put(&quot;rows&quot;, list);
-/*        Set&lt;String&gt; set = map.keySet();
-        for (String string : set) {
-            System.out.println(&quot;key:&quot;+string+&quot;   value:&quot;+map.get(string));
-        }*/
-        return map;
-    }
-</code></pre></li>
-</ul>
-</li>
-<li><code>在书写实体类Dao的接口时,这个接口要继承BaseDao接口</code></li>
-<li><code>在书写实体类Dao接口的实现类的时候,要继承BaseDao接口的实现类.</code><ul>
-<li>注意类上面要写  <code>@Repository</code></li>
+<li>Dao<ul>
+<li>先创建一个BaseDao的接口里面提供一些通用的方法</li>
 </ul>
 </li>
 </ul>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseDao</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(T entity)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(T entity)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(T entity)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> T <span class="title">findById</span><span class="params">(Serializable id)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">findAll</span><span class="params">()</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据条件查询对象查询</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">findByCriteria</span><span class="params">(DetachedCriteria criteria)</span></span>;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据命名查询语句查询</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">findByNamedQuery</span><span class="params">(String queryName,Object...args)</span></span>;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 执行增删改操作的命名语句</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">executeNamedQuery</span><span class="params">(String queryName,Object ...args)</span></span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title">getPage</span><span class="params">(PageBean pageBean)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>* 然后创建Base的实现类,实现BaseDao里面的一些抽象方法
+    * 首先得获得Service里面传过来的类型的对象:`如下`
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义一个属性，表示实体的类型</span></div><div class="line"><span class="keyword">private</span> Class&lt;T&gt; domainClass;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 在构造方法中动态获得实体的类型</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">BaseDaoImpl</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 获得父类类型</span></div><div class="line">	ParameterizedType genericSuperclass = (ParameterizedType) <span class="keyword">this</span>.getClass().getGenericSuperclass();</div><div class="line">	<span class="comment">// 获得父类上的泛型数组</span></div><div class="line">	Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();</div><div class="line">	<span class="comment">// 获得实体类型</span></div><div class="line">	domainClass = (Class&lt;T&gt;) actualTypeArguments[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>* 注入会话工厂对象
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Resource</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSF</span><span class="params">(SessionFactory sessionFactory)</span></span>&#123;</div><div class="line">	<span class="comment">//调用父类的方法注入会话工厂对象</span></div><div class="line">	<span class="keyword">super</span>.setSessionFactory(sessionFactory);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>* 对BaseDao接口里面的方法进行实现
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(T entity)</span> </span>&#123;</div><div class="line">	<span class="keyword">this</span>.getHibernateTemplate().save(entity);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(T entity)</span> </span>&#123;</div><div class="line">	<span class="keyword">this</span>.getHibernateTemplate().delete(entity);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(T entity)</span> </span>&#123;</div><div class="line">	<span class="keyword">this</span>.getHibernateTemplate().update(entity);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> T <span class="title">findById</span><span class="params">(Serializable id)</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.getHibernateTemplate().get(domainClass, id);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">	String hql = <span class="string">"From "</span>+domainClass.getSimpleName();</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.getHibernateTemplate().find(hql);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">findByCriteria</span><span class="params">(DetachedCriteria criteria)</span> </span>&#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.getHibernateTemplate().findByCriteria(criteria);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">findByNamedQuery</span><span class="params">(String queryName, Object... args)</span> </span>&#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.getHibernateTemplate().findByNamedQuery(queryName, args);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">executeNamedQuery</span><span class="params">(String queryName, Object... args)</span> </span>&#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	Session session = (Session) <span class="keyword">this</span>.getSession();</div><div class="line">	Query query = session.getNamedQuery(queryName);</div><div class="line">	<span class="keyword">if</span> (args != <span class="keyword">null</span> &amp;&amp; args.length &gt; <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (Object arg : args) &#123;</div><div class="line">			query.setParameter(i++, arg);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	query.executeUpdate();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title">getPage</span><span class="params">(PageBean pageBean)</span> </span>&#123;</div><div class="line">	<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">	pageBean.setTotal(findAll().size());</div><div class="line">	Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">	map.put(<span class="string">"total"</span>, pageBean.getTotal());</div><div class="line">	<span class="keyword">int</span> firstResult = (pageBean.getCurrentPage()-<span class="number">1</span>)*pageBean.getPageSize();</div><div class="line">	<span class="keyword">int</span> maxResults = pageBean.getPageSize();</div><div class="line">	List&lt;Object&gt; list = <span class="keyword">this</span>.getHibernateTemplate().findByCriteria(pageBean.getDetachedCriteria(), firstResult, maxResults);</div><div class="line">	map.put(<span class="string">"rows"</span>, list);</div><div class="line"><span class="comment">/*	Set&lt;String&gt; set = map.keySet();</span></div><div class="line">	for (String string : set) &#123;</div><div class="line">		System.out.println("key:"+string+"   value:"+map.get(string));</div><div class="line">	&#125;*/</div><div class="line">	<span class="keyword">return</span> map;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>* `在书写实体类Dao的接口时,这个接口要继承BaseDao接口`
+* `在书写实体类Dao接口的实现类的时候,要继承BaseDao接口的实现类.`
+    * 注意类上面要写  `@Repository`
+</code></pre><ul>
 <li>Service<ul>
 <li>提供service层的实现类和接口,并在实现类里面注入Dao层的实体对象接口<code>@Resource</code></li>
 <li>在实现类上面要加上注解<code>@Service</code> <code>@Transactional</code></li>
 </ul>
 </li>
-<li><p>Action</p>
-<ul>
-<li><p>创建BaseAction</p>
-<ul>
+<li>Action<ul>
+<li>创建BaseAction<ul>
 <li>继承ActionSupport类 实现 ModelDriven<t>接口<ul>
 <li><code>public class BaseAction&lt;T&gt; extends ActionSupport implements ModelDriven&lt;T&gt; { }</code></li>
 </ul>
 </t></li>
-<li><p>获得传过来的模型对象</p>
-<pre><code>//声明模型对象
-protected T model;
-public T getModel() {
-    return model;
-}
-    //在构造方法中动态获得实体的类型，并通过反射实例化模型对象
-public BaseAction() {
-    //获得父类（BaseAction&lt;T&gt;）类型
-    ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
-    //获得父类上的泛型数组
-    Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
-    //实体类型
-    Class&lt;T&gt; domainClass = (Class&lt;T&gt;) actualTypeArguments[0];
-    try {
-        //创建PageBean的离线查询对象
-        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(domainClass);
-        pageBean.setDetachedCriteria(detachedCriteria);
-        //创建模型对象并赋给model
-        model = domainClass.newInstance();
-</code></pre></li>
+<li>获得传过来的模型对象</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<pre><code>            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-* 在里面填写`@Resource`标签注入XxxService
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//声明模型对象</span></div><div class="line"><span class="keyword">protected</span> T model;</div><div class="line"><span class="function"><span class="keyword">public</span> T <span class="title">getModel</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> model;</div><div class="line">&#125;</div><div class="line">	<span class="comment">//在构造方法中动态获得实体的类型，并通过反射实例化模型对象</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">BaseAction</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//获得父类（BaseAction&lt;T&gt;）类型</span></div><div class="line">	ParameterizedType genericSuperclass = (ParameterizedType) <span class="keyword">this</span>.getClass().getGenericSuperclass();</div><div class="line">	<span class="comment">//获得父类上的泛型数组</span></div><div class="line">	Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();</div><div class="line">	<span class="comment">//实体类型</span></div><div class="line">	Class&lt;T&gt; domainClass = (Class&lt;T&gt;) actualTypeArguments[<span class="number">0</span>];</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">//创建PageBean的离线查询对象</span></div><div class="line">		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(domainClass);</div><div class="line">		pageBean.setDetachedCriteria(detachedCriteria);</div><div class="line">		<span class="comment">//创建模型对象并赋给model</span></div><div class="line">		model = domainClass.newInstance();</div><div class="line">		</div><div class="line">		</div><div class="line">	&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>* 在里面填写`@Resource`标签注入XxxService
     * 注意权限访问范围是&apos;protected&apos;
 * 其余代码
-
-        protected PageBean pageBean = new PageBean();
-
-        public void setCurrentPage(int currentPage){
-            pageBean.setCurrentPage(currentPage);
-        }
-
-        public void setPageSize(int pageSize){
-            pageBean.setPageSize(pageSize);
-        }
-</code></pre>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> PageBean pageBean = <span class="keyword">new</span> PageBean();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCurrentPage</span><span class="params">(<span class="keyword">int</span> currentPage)</span></span>&#123;</div><div class="line">	pageBean.setCurrentPage(currentPage);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPageSize</span><span class="params">(<span class="keyword">int</span> pageSize)</span></span>&#123;</div><div class="line">	pageBean.setPageSize(pageSize);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
