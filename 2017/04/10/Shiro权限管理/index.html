@@ -87,17 +87,16 @@
 
 
 
-<meta name="description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象  123456789&amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt;&amp;lt;filter&amp;gt;	&amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;	&amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delega">
 <meta name="keywords" content="shiro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shiro权限管理">
 <meta property="og:url" content="http://yoursite.com/2017/04/10/Shiro权限管理/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象  123456789&amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt;&amp;lt;filter&amp;gt;	&amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;	&amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delega">
-<meta property="og:updated_time" content="2017-04-11T04:02:03.383Z">
+<meta property="og:image" content="http://i.imgur.com/gUr13Ey.png">
+<meta property="og:updated_time" content="2017-04-12T00:55:31.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro权限管理">
-<meta name="twitter:description" content="shiro的配置过程 在web.xml中配置一个过滤器代理对象  123456789&amp;lt;!-- 加入spring框架提供的过滤器代理对象 --&amp;gt;&amp;lt;filter&amp;gt;	&amp;lt;filter-name&amp;gt;shiroFilter&amp;lt;/filter-name&amp;gt;	&amp;lt;filter-class&amp;gt;org.springframework.web.filter.Delega">
+<meta name="twitter:image" content="http://i.imgur.com/gUr13Ey.png">
 
 
 
@@ -408,7 +407,9 @@
       
 
       
-        <h3 id="shiro的配置过程"><a href="#shiro的配置过程" class="headerlink" title="shiro的配置过程"></a>shiro的配置过程</h3><ul>
+        <p><img src="http://i.imgur.com/gUr13Ey.png" alt=""></p>
+<a id="more"></a>
+<h3 id="shiro的配置过程"><a href="#shiro的配置过程" class="headerlink" title="shiro的配置过程"></a>shiro的配置过程</h3><ul>
 <li>在web.xml中配置一个过滤器代理对象</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 加入spring框架提供的过滤器代理对象 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>

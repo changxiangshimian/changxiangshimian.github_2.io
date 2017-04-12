@@ -87,17 +87,16 @@
 
 
 
-<meta name="description" content="SqlMapConfig.xml文件的配置  123456789101112131415&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;!DOCTYPE configurationPUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;&quot;http://mybatis.org/dtd/mybatis-3-config.d">
 <meta name="keywords" content="mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis与spring的整合">
 <meta property="og:url" content="http://yoursite.com/2017/04/09/mybatis与spring的整合/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="SqlMapConfig.xml文件的配置  123456789101112131415&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;!DOCTYPE configurationPUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;&quot;http://mybatis.org/dtd/mybatis-3-config.d">
-<meta property="og:updated_time" content="2017-04-11T04:02:03.382Z">
+<meta property="og:image" content="http://i.imgur.com/g6rtnYv.png">
+<meta property="og:updated_time" content="2017-04-12T00:50:49.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis与spring的整合">
-<meta name="twitter:description" content="SqlMapConfig.xml文件的配置  123456789101112131415&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;!DOCTYPE configurationPUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;&quot;http://mybatis.org/dtd/mybatis-3-config.d">
+<meta name="twitter:image" content="http://i.imgur.com/g6rtnYv.png">
 
 
 
@@ -408,7 +407,9 @@
       
 
       
-        <ul>
+        <p><img src="http://i.imgur.com/g6rtnYv.png" alt=""></p>
+<a id="more"></a>
+<ul>
 <li>SqlMapConfig.xml文件的配置</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE configuration</span></div><div class="line">PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</div><div class="line">"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 配置别名 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"com.yyt.mybayis.po"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 加载映射文件 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"com.yyt.mybayis.mapper.UserMapper"</span>/&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"com.yyt.mybayis.mapper.OrdersMapper"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
