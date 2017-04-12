@@ -87,13 +87,11 @@
 
 
 
-<meta name="description" content="Lucene实现全文检索的流程 数据分类 结构化数据：指具有固定格式或有限长度的数据，如数据库，元数据等 非结构化数据: 指不定长或无固定格式的数据，如邮件，word文档等磁盘上的文件    Lucene不提供制作用户搜索界面的功能，需要根据自己的需求开发搜索界面索引和搜索流程图 创建文档对象 获取原始内容的目的是为了索引，在索引前需要将原始内容创建成文档（Document），文档中包括一个一个">
 <meta name="keywords" content="lucene">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lucene&Solr_day01">
 <meta property="og:url" content="http://yoursite.com/2017/04/11/Lucene-Solr-day01/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="Lucene实现全文检索的流程 数据分类 结构化数据：指具有固定格式或有限长度的数据，如数据库，元数据等 非结构化数据: 指不定长或无固定格式的数据，如邮件，word文档等磁盘上的文件    Lucene不提供制作用户搜索界面的功能，需要根据自己的需求开发搜索界面索引和搜索流程图 创建文档对象 获取原始内容的目的是为了索引，在索引前需要将原始内容创建成文档（Document），文档中包括一个一个">
 <meta property="og:image" content="http://i.imgur.com/Bi9K9Jk.png">
 <meta property="og:image" content="http://i.imgur.com/lv2x7fl.png">
 <meta property="og:image" content="http://i.imgur.com/cwgINN9.png">
@@ -101,10 +99,9 @@
 <meta property="og:image" content="http://i.imgur.com/USIKnci.png">
 <meta property="og:image" content="http://i.imgur.com/7EpMStA.png">
 <meta property="og:image" content="http://i.imgur.com/6UkLsqj.png">
-<meta property="og:updated_time" content="2017-04-11T14:32:01.757Z">
+<meta property="og:updated_time" content="2017-04-12T00:32:42.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lucene&Solr_day01">
-<meta name="twitter:description" content="Lucene实现全文检索的流程 数据分类 结构化数据：指具有固定格式或有限长度的数据，如数据库，元数据等 非结构化数据: 指不定长或无固定格式的数据，如邮件，word文档等磁盘上的文件    Lucene不提供制作用户搜索界面的功能，需要根据自己的需求开发搜索界面索引和搜索流程图 创建文档对象 获取原始内容的目的是为了索引，在索引前需要将原始内容创建成文档（Document），文档中包括一个一个">
 <meta name="twitter:image" content="http://i.imgur.com/Bi9K9Jk.png">
 
 
@@ -417,6 +414,7 @@
 
       
         <p><img src="http://i.imgur.com/Bi9K9Jk.png" alt=""></p>
+<a id="more"></a>
 <h1 id="Lucene实现全文检索的流程"><a href="#Lucene实现全文检索的流程" class="headerlink" title="Lucene实现全文检索的流程"></a>Lucene实现全文检索的流程</h1><ul>
 <li>数据分类<ul>
 <li>结构化数据：<code>指具有固定格式或有限长度的数据，如数据库，元数据等</code></li>
