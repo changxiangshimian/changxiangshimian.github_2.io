@@ -93,7 +93,23 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/12/Lucene-Solr-day02/index.html">
 <meta property="og:site_name" content="YYT">
 <meta property="og:image" content="http://i.imgur.com/HzjOxQA.png">
-<meta property="og:updated_time" content="2017-04-12T06:29:29.426Z">
+<meta property="og:image" content="http://i.imgur.com/QhKV5co.png">
+<meta property="og:image" content="http://i.imgur.com/QZwFvfN.png">
+<meta property="og:image" content="http://i.imgur.com/wDIMxJn.png">
+<meta property="og:image" content="http://i.imgur.com/9OlnhbW.png">
+<meta property="og:image" content="http://i.imgur.com/yO6kPEA.png">
+<meta property="og:image" content="http://i.imgur.com/eSl8mrR.png">
+<meta property="og:image" content="http://i.imgur.com/V1STXvE.png">
+<meta property="og:image" content="http://i.imgur.com/HVZy0KN.png">
+<meta property="og:image" content="http://i.imgur.com/uPEUEIc.png">
+<meta property="og:image" content="http://i.imgur.com/r4e0RDM.png">
+<meta property="og:image" content="http://i.imgur.com/93ouEv8.png">
+<meta property="og:image" content="http://i.imgur.com/8EZnXEZ.png">
+<meta property="og:image" content="http://i.imgur.com/zi5PmYI.png">
+<meta property="og:image" content="http://i.imgur.com/xcTLrjL.png">
+<meta property="og:image" content="http://i.imgur.com/AqUsW8o.png">
+<meta property="og:image" content="http://i.imgur.com/e3N3Oni.png">
+<meta property="og:updated_time" content="2017-04-13T07:15:06.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lucene&Solr_day02">
 <meta name="twitter:image" content="http://i.imgur.com/HzjOxQA.png">
@@ -409,6 +425,138 @@
       
         <p><img src="http://i.imgur.com/HzjOxQA.png" alt=""></p>
 <a id="more"></a>
+<h2 id="solr与Tomcat整合"><a href="#solr与Tomcat整合" class="headerlink" title="solr与Tomcat整合"></a>solr与Tomcat整合</h2><ul>
+<li>tomcat<a href="http://tomcat.apache.org/" target="_blank" rel="external">下载</a>:</li>
+</ul>
+<ul>
+<li>solr<a href="http://lucene.apache.org/solr/" target="_blank" rel="external">下载</a>:</li>
+</ul>
+<ul>
+<li>把下载下来的包解压<ul>
+<li>进入到dist目录下找到<code>solr-x.xx.x.war</code>的war包</li>
+<li>把该war包复制到tomcat目录下的webapp目录下,并改名为solr.war  方便标记</li>
+<li>把\solr-x.xx.x\example\lib\ext目录下的所有的jar包添加到solr工程中</li>
+<li>把\solr-x.xx.x\example\solr文件夹复制到任意盘符路径下，改名为solrhome<code>改名是为了方便理解</code></li>
+<li>在solrhome下有一个文件夹叫做collection1这就是一个solrcore的实例<ul>
+<li>一个solrcore相当于mysql中一个数据库,Solrcore之间是相互隔离.</li>
+</ul>
+</li>
+<li>在solrhome\collection1的目录下创建一个lib目录</li>
+<li>在tomcat中进入刚才的项目,解压war文件再在web.xml中进行配置,让其与solrhome关联<code>大约在配置文件中的第40行</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">env-entry</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">env-entry-name</span>&gt;</span>solr/home<span class="tag">&lt;/<span class="name">env-entry-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">env-entry-value</span>&gt;</span>E:\apache-tomcat-7.0.75-windows-x86\solr_home<span class="tag">&lt;/<span class="name">env-entry-value</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">env-entry-type</span>&gt;</span>java.lang.String<span class="tag">&lt;/<span class="name">env-entry-type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">env-entry</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>启动tomcat,在网址中输入<code>http://localhost:8080/solr/</code></p>
+</li>
+<li><p>效果:</p>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/QhKV5co.png" alt=""></p>
+<h2 id="具体功能介绍"><a href="#具体功能介绍" class="headerlink" title="具体功能介绍"></a>具体功能介绍</h2><ul>
+<li>Dashboard: 仪表盘，显示了该Solr实例开始启动运行的时间、版本、系统资源、jvm等信息。</li>
+<li>Logging: Solr运行日志信息</li>
+<li>Core Admin: Solr Core的管理界面。Solr Core 是Solr的一个独立运行实例单位，它可以对外提供索引和搜索服务，一个Solr工程可以运行多个SolrCore（Solr实例），一个Core对应一个索引目录。</li>
+<li>java properties: Solr在JVM 运行环境中的属性信息，包括类路径、文件编码、jvm内存设置等信息</li>
+<li>Tread Dump: 显示Solr Server中当前活跃线程信息，同时也可以跟踪线程运行栈信息</li>
+<li>Core selector: 选择一个SolrCore进行详细操作</li>
+<li>Analysis: 可以测试索引分析器和搜索分析器的执行情况</li>
+</ul>
+<p><img src="http://i.imgur.com/QZwFvfN.png" alt=""></p>
+<ul>
+<li>Dataimport: 可以定义数据导入处理器，从关系数据库将数据导入 到Solr索引库中</li>
+<li>Document: 通过此菜单可以创建索引、更新索引、删除索引等操作<ul>
+<li>/update表示更新索引，solr默认根据id（唯一约束）域来更新Document的内容，如果根据id值搜索不到id域则会执行添加操作，如果找到则更新。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/wDIMxJn.png" alt=""></p>
+<ul>
+<li>Query: 通过/select执行搜索索引，必须指定“q”查询条件方可搜索</li>
+</ul>
+<p><img src="http://i.imgur.com/9OlnhbW.png" alt=""></p>
+<ul>
+<li>Schema.xml: 它是Solr数据表配置文件，它定义了加入索引的数据的数据类型的。主要包括FieldTypes、Fields和其他的一些缺省设置在<code>solrhome\collection1\conf</code>目录下</li>
+<li>FieldType: 子结点包括：name,class,positionIncrementGap等一些参数<ul>
+<li>name：是这个FieldType的名称</li>
+<li>class：是Solr提供的包solr.TextField，solr.TextField 允许用户通过分析器来定制索引和查询，分析器包括一个分词器（tokenizer）和多个过滤器（filter）</li>
+<li>positionIncrementGap：可选属性，定义在同一个文档中此类型数据的空白间隔，避免短语匹配错误，此值相当于Lucene的短语查询设置slop值，根据经验设置为100。</li>
+<li>multiValued: 该Field如果要存储多个值时设置为true，solr允许一个Field存储多个值</li>
+<li>uniqueKey: Solr中默认定义唯一主键key为id域</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/yO6kPEA.png" alt=""></p>
+<ul>
+<li>copyField复制域<code>copyField复制域，可以将多个Field复制到一个Field中，以便进行统一的检索</code><ul>
+<li>根据关键字只搜索text域的内容就相当于搜索title和content，将title和content复制到text中</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/eSl8mrR.png" alt=""></p>
+<p><img src="http://i.imgur.com/V1STXvE.png" alt=""></p>
+<ul>
+<li>dynamicField(动态字段)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">动态字段就是不用指定具体的名称，只要定义字段名称的规则，例如定义一个 dynamicField，name 为*_i，定义它的type为text，那么在使用这个字段的时候，任何以_i结尾的字段都被认为是符合这个定义的，例如：name_i，gender_i，school_i等。</div><div class="line"></div><div class="line">自定义Field名为：product_title_t，“product_title_t”和scheam.xml中的dynamicField规则匹配成功</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p><img src="http://i.imgur.com/HVZy0KN.png" alt=""></p>
+<ul>
+<li>创建索引</li>
+</ul>
+<p><img src="http://i.imgur.com/uPEUEIc.png" alt=""></p>
+<ul>
+<li>搜索索引</li>
+</ul>
+<p><img src="http://i.imgur.com/r4e0RDM.png" alt=""></p>
+<h2 id="安装中文分词器"><a href="#安装中文分词器" class="headerlink" title="安装中文分词器"></a>安装中文分词器</h2><ul>
+<li>把IKAnalyzer2012FF_u1.jar添加到solr/WEB-INF/lib目录下</li>
+<li>复制IKAnalyzer的配置文件和自定义词典和停用词词典到solr的classpath下</li>
+</ul>
+<p><img src="http://i.imgur.com/93ouEv8.png" alt=""></p>
+<ul>
+<li>在schema.xml中添加一个自定义的fieldType，使用中文分析器</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- IKAnalyzer 中文分词系统--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">fieldType</span> <span class="attr">name</span>=<span class="string">"text_ik"</span> <span class="attr">class</span>=<span class="string">"solr.TextField"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">analyzer</span> <span class="attr">class</span>=<span class="string">"org.wltea.analyzer.lucene.IKAnalyzer"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">fieldType</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>定义field，指定field的type属性为text_ik</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--IKAnalyzer Field配置两个索引,用中文分词器解析--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"title_ik"</span> <span class="attr">type</span>=<span class="string">"text_ik"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"content_ik"</span> <span class="attr">type</span>=<span class="string">"text_ik"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"true"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>重启tomcat<code>测试:</code></li>
+</ul>
+<p><img src="http://i.imgur.com/8EZnXEZ.png" alt=""></p>
+<h2 id="设置业务系统从数据库批量导入数据"><a href="#设置业务系统从数据库批量导入数据" class="headerlink" title="设置业务系统从数据库批量导入数据"></a>设置业务系统<code>从数据库批量导入数据</code></h2><ul>
+<li>如果不使用Solr提供的Field可以针对具体的业务需要自定义一套Field，如下是商品信息Field.</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--product--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"product_name"</span> <span class="attr">type</span>=<span class="string">"text_ik"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"product_price"</span>  <span class="attr">type</span>=<span class="string">"float"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"product_description"</span> <span class="attr">type</span>=<span class="string">"text_ik"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"product_picture"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"false"</span> <span class="attr">stored</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"product_catalog_name"</span> <span class="attr">type</span>=<span class="string">"string"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"product_keywords"</span> <span class="attr">type</span>=<span class="string">"text_ik"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"false"</span> <span class="attr">multiValued</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"product_name"</span> <span class="attr">dest</span>=<span class="string">"product_keywords"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">copyField</span> <span class="attr">source</span>=<span class="string">"product_description"</span> <span class="attr">dest</span>=<span class="string">"product_keywords"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>把dataimport插件依赖的jar包添加到solrcore（collection1\lib）中</li>
+</ul>
+<p><img src="http://i.imgur.com/zi5PmYI.png" alt=""></p>
+<ul>
+<li>mysql的数据库驱动<ul>
+<li>配置solrconfig.mxl文件，添加一个requestHandler</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">requestHandler</span> <span class="attr">name</span>=<span class="string">"/dataimport"</span> <span class="attr">class</span>=<span class="string">"org.apache.solr.handler.dataimport.DataImportHandler"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">lst</span> <span class="attr">name</span>=<span class="string">"defaults"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">str</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span>data-config.xml<span class="tag">&lt;/<span class="name">str</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">lst</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">requestHandler</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在collection1\conf\目录下创建一个data-config.xml文件  内容如下</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span>   </span></div><div class="line">		  <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span>   </div><div class="line">		  <span class="attr">url</span>=<span class="string">"jdbc:mysql://localhost:3306/lucene"</span>   </div><div class="line">		  <span class="attr">user</span>=<span class="string">"root"</span>   </div><div class="line">		  <span class="attr">password</span>=<span class="string">"123"</span>/&gt;   </div><div class="line"><span class="tag">&lt;<span class="name">document</span>&gt;</span>   </div><div class="line">	<span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"product"</span> <span class="attr">query</span>=<span class="string">"SELECT pid,name,catalog_name,price,description,picture FROM products "</span>&gt;</span></div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"pid"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"product_name"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"catalog_name"</span> <span class="attr">name</span>=<span class="string">"product_catalog_name"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"price"</span> <span class="attr">name</span>=<span class="string">"product_price"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"description"</span> <span class="attr">name</span>=<span class="string">"product_description"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"picture"</span> <span class="attr">name</span>=<span class="string">"product_picture"</span>/&gt;</span> </div><div class="line">	<span class="tag">&lt;/<span class="name">entity</span>&gt;</span>   </div><div class="line"><span class="tag">&lt;/<span class="name">document</span>&gt;</span>   </div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>重启tomcat</li>
+</ul>
+<p><img src="http://i.imgur.com/xcTLrjL.png" alt=""></p>
+<ul>
+<li>先向field添加一些字段</li>
+</ul>
+<p><img src="http://i.imgur.com/AqUsW8o.png" alt=""></p>
+<ul>
+<li>查询</li>
+</ul>
+<p><img src="http://i.imgur.com/e3N3Oni.png" alt=""></p>
 
       
     </div>
@@ -531,8 +679,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://i.imgur.com/q50MUsV.jpg"
@@ -594,6 +751,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#solr与Tomcat整合"><span class="nav-number">1.</span> <span class="nav-text">solr与Tomcat整合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体功能介绍"><span class="nav-number">2.</span> <span class="nav-text">具体功能介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装中文分词器"><span class="nav-number">3.</span> <span class="nav-text">安装中文分词器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置业务系统从数据库批量导入数据"><span class="nav-number">4.</span> <span class="nav-text">设置业务系统从数据库批量导入数据</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
