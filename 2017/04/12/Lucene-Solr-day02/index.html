@@ -106,10 +106,10 @@
 <meta property="og:image" content="http://i.imgur.com/93ouEv8.png">
 <meta property="og:image" content="http://i.imgur.com/8EZnXEZ.png">
 <meta property="og:image" content="http://i.imgur.com/6TcyHSX.png">
-<meta property="og:image" content="http://i.imgur.com/xcTLrjL.png">
-<meta property="og:image" content="http://i.imgur.com/AqUsW8o.png">
+<meta property="og:image" content="http://i.imgur.com/HlpwL5F.png">
+<meta property="og:image" content="http://i.imgur.com/whePBBD.png">
 <meta property="og:image" content="http://i.imgur.com/e3N3Oni.png">
-<meta property="og:updated_time" content="2017-04-14T11:24:34.702Z">
+<meta property="og:updated_time" content="2017-04-14T12:06:01.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lucene&Solr_day02">
 <meta name="twitter:image" content="http://i.imgur.com/HzjOxQA.png">
@@ -511,7 +511,7 @@
 <p><img src="http://i.imgur.com/r4e0RDM.png" alt=""></p>
 <h2 id="安装中文分词器"><a href="#安装中文分词器" class="headerlink" title="安装中文分词器"></a>安装中文分词器</h2><ul>
 <li>把IKAnalyzer2012FF_u1.jar添加到solr/WEB-INF/lib目录下</li>
-<li>复制IKAnalyzer的配置文件和自定义词典和停用词词典到solr的classpath下</li>
+<li>复制IKAnalyzer的配置文件和自定义词典和停用词词典到solr的classes下</li>
 </ul>
 <p><img src="http://i.imgur.com/93ouEv8.png" alt=""></p>
 <ul>
@@ -546,18 +546,21 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">dataConfig</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"JdbcDataSource"</span>   </span></div><div class="line">		  <span class="attr">driver</span>=<span class="string">"com.mysql.jdbc.Driver"</span>   </div><div class="line">		  <span class="attr">url</span>=<span class="string">"jdbc:mysql://localhost:3306/lucene"</span>   </div><div class="line">		  <span class="attr">user</span>=<span class="string">"root"</span>   </div><div class="line">		  <span class="attr">password</span>=<span class="string">"123"</span>/&gt;   </div><div class="line"><span class="tag">&lt;<span class="name">document</span>&gt;</span>   </div><div class="line">	<span class="tag">&lt;<span class="name">entity</span> <span class="attr">name</span>=<span class="string">"product"</span> <span class="attr">query</span>=<span class="string">"SELECT pid,name,catalog_name,price,description,picture FROM products "</span>&gt;</span></div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"pid"</span> <span class="attr">name</span>=<span class="string">"id"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"product_name"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"catalog_name"</span> <span class="attr">name</span>=<span class="string">"product_catalog_name"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"price"</span> <span class="attr">name</span>=<span class="string">"product_price"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"description"</span> <span class="attr">name</span>=<span class="string">"product_description"</span>/&gt;</span> </div><div class="line">		 <span class="tag">&lt;<span class="name">field</span> <span class="attr">column</span>=<span class="string">"picture"</span> <span class="attr">name</span>=<span class="string">"product_picture"</span>/&gt;</span> </div><div class="line">	<span class="tag">&lt;/<span class="name">entity</span>&gt;</span>   </div><div class="line"><span class="tag">&lt;/<span class="name">document</span>&gt;</span>   </div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">dataConfig</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
-<li>重启tomcat</li>
+<li>重启tomcat并把数据导入到索引库</li>
 </ul>
-<p><img src="http://i.imgur.com/xcTLrjL.png" alt=""></p>
+<p><img src="http://i.imgur.com/HlpwL5F.png" alt=""></p>
 <ul>
-<li>先向field添加一些字段</li>
+<li>删除指定ID的索引</li>
 </ul>
-<p><img src="http://i.imgur.com/AqUsW8o.png" alt=""></p>
+<p><img src="http://i.imgur.com/whePBBD.png" alt=""></p>
 <ul>
 <li>查询</li>
 </ul>
 <p><img src="http://i.imgur.com/e3N3Oni.png" alt=""></p>
-
+<ul>
+<li>删除查询到的索引数据</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">delete</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">query</span>&gt;</span>product_catalog_name:幽默杂货<span class="tag">&lt;/<span class="name">query</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">commit</span>/&gt;</span></div></pre></td></tr></table></figure>
       
     </div>
 
@@ -700,7 +703,7 @@
                alt="YYT" />
           <p class="site-author-name" itemprop="name">YYT</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">置我于死地者  必将赐我以后生</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -708,7 +711,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -730,7 +733,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
