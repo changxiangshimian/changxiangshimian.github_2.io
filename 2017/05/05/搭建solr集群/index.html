@@ -87,13 +87,12 @@
 
 
 
-<meta name="description" content="什么是SolrCloud SolrCloud(solr 云)是Solr提供的分布式搜索方案，当你需要大规模，容错，分布式索引和检索能力时使用 SolrCloud。当一个系统的索引数据量少的时候是不需要使用SolrCloud的，当索引量很大，搜索请求并发很高，这时需要使用SolrCloud来满足这些需求。 SolrCloud是基于Solr和Zookeeper的分布式搜索方案，它的主要思想是使用Zoo">
 <meta name="keywords" content="solr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建solr集群">
 <meta property="og:url" content="http://yoursite.com/2017/05/05/搭建solr集群/index.html">
 <meta property="og:site_name" content="YYT">
-<meta property="og:description" content="什么是SolrCloud SolrCloud(solr 云)是Solr提供的分布式搜索方案，当你需要大规模，容错，分布式索引和检索能力时使用 SolrCloud。当一个系统的索引数据量少的时候是不需要使用SolrCloud的，当索引量很大，搜索请求并发很高，这时需要使用SolrCloud来满足这些需求。 SolrCloud是基于Solr和Zookeeper的分布式搜索方案，它的主要思想是使用Zoo">
+<meta property="og:image" content="http://i.imgur.com/I8dSi5B.png">
 <meta property="og:image" content="http://i.imgur.com/L5VtSnJ.png">
 <meta property="og:image" content="http://i.imgur.com/YwgCfjH.png">
 <meta property="og:image" content="http://i.imgur.com/TT77Psp.png">
@@ -116,11 +115,10 @@
 <meta property="og:image" content="http://i.imgur.com/xZNW9rM.png">
 <meta property="og:image" content="http://i.imgur.com/eKuqCWG.png">
 <meta property="og:image" content="http://i.imgur.com/JeRBAQE.png">
-<meta property="og:updated_time" content="2017-05-05T13:39:34.233Z">
+<meta property="og:updated_time" content="2017-05-05T14:07:11.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建solr集群">
-<meta name="twitter:description" content="什么是SolrCloud SolrCloud(solr 云)是Solr提供的分布式搜索方案，当你需要大规模，容错，分布式索引和检索能力时使用 SolrCloud。当一个系统的索引数据量少的时候是不需要使用SolrCloud的，当索引量很大，搜索请求并发很高，这时需要使用SolrCloud来满足这些需求。 SolrCloud是基于Solr和Zookeeper的分布式搜索方案，它的主要思想是使用Zoo">
-<meta name="twitter:image" content="http://i.imgur.com/L5VtSnJ.png">
+<meta name="twitter:image" content="http://i.imgur.com/I8dSi5B.png">
 
 
 
@@ -441,7 +439,9 @@
       
 
       
-        <h3 id="什么是SolrCloud"><a href="#什么是SolrCloud" class="headerlink" title="什么是SolrCloud"></a>什么是SolrCloud</h3><ul>
+        <p><img src="http://i.imgur.com/I8dSi5B.png" alt=""></p>
+<a id="more"></a>
+<h3 id="什么是SolrCloud"><a href="#什么是SolrCloud" class="headerlink" title="什么是SolrCloud"></a>什么是SolrCloud</h3><ul>
 <li>SolrCloud(solr 云)是Solr提供的分布式搜索方案，当你需要大规模，容错，分布式索引和检索能力时使用 SolrCloud。当一个系统的索引数据量少的时候是不需要使用SolrCloud的，当索引量很大，搜索请求并发很高，这时需要使用SolrCloud来满足这些需求。</li>
 <li>SolrCloud是基于Solr和Zookeeper的分布式搜索方案，它的主要思想是使用Zookeeper作为集群的配置信息中心。</li>
 <li>特色功能<ul>
