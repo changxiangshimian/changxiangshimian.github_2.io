@@ -96,7 +96,7 @@
 <meta property="og:description" content="Struts2 Struts2框架的执行流程   Hibernate hibernate是一个持久层的orm框架 持久层: 与数据库打交道的 orm:Object Relational Mapping。对象关系映射。开发语言用的是Java，面向对象的（Object）。使用的数据库是关系型数据库（Relational）。就是将对象与数据库中的表建立一种映射关系，操作对象就可以操作这个表。   hib">
 <meta property="og:image" content="http://i.imgur.com/ykd44sW.png">
 <meta property="og:image" content="http://i.imgur.com/dXnGA74.png">
-<meta property="og:updated_time" content="2017-05-17T11:06:57.839Z">
+<meta property="og:updated_time" content="2017-05-17T16:11:10.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试">
 <meta name="twitter:description" content="Struts2 Struts2框架的执行流程   Hibernate hibernate是一个持久层的orm框架 持久层: 与数据库打交道的 orm:Object Relational Mapping。对象关系映射。开发语言用的是Java，面向对象的（Object）。使用的数据库是关系型数据库（Relational）。就是将对象与数据库中的表建立一种映射关系，操作对象就可以操作这个表。   hib">
@@ -608,8 +608,21 @@
 <li>在主方法里面调用该工厂,并输入参数,会返回一个动物类</li>
 </ul>
 </li>
-<li><p>oracle分页<code>比如查询第20到30条的数据</code></p>
+<li><p>装饰者模式</p>
+<ul>
+<li>组合与聚合</li>
+</ul>
 </li>
+<li><p>单一职责</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">单一职责原则(SRP:Single responsibility principle)又称单一功能原则，面向对象五个基本原则(SOLID)之一。它规定一个类应该只有一个发生变化的原因。</div><div class="line">单一职责原则是最简单的面对对象设计原则，它用于控制类的粒度大小。</div><div class="line">在软件系统中，一个类（大到模块，小到方法）承担的职责越多，它被复用的可能性就越小，而且一个类承担的职责过多，就相当于将这些职责耦合在一起，当其中一个职责变化时，</div><div class="line">可能会影响其他职责的运作，因此要将这些职责进行分离，将不同的职责封装在不同的类中，即将不同的变化原因封装在不同的类中，如果多个职责总是同时发生改变则可将它们封装在同一类中。</div><div class="line">我们写程序的目标就是 高内聚 低耦合!什么叫高内聚低耦合呢，举个例子：你房子里边有墙和窗 ，那墙和窗就有了关联，耦合度 是松还是紧 就看你的 关联 是强还是弱，也就是修改的代价，</div><div class="line">比如 你窗是扣死在墙里的 那么你修改窗子就必须修改墙 这就比较紧密了，但是如果你窗是按照某种规格的 可以自由拆装的 那么修改的代价就小，耦合度也就低了。</div></pre></td></tr></table></figure>
+<ul>
+<li>组合与聚合(一般能用组合与聚合的尽量别用继承,继承耦合度高)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在一个类里面,创建一个方法,里面创建另一个类的对象,并调用里面其他的方法,如果想扩展,就直接在下面写</div></pre></td></tr></table></figure>
+<ul>
+<li>oracle分页<code>比如查询第20到30条的数据</code></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">select *from (</div><div class="line">      select rownum r,empno,ename,hiredate  from ( </div><div class="line">         select * from emp  where rownum&lt;=30</div><div class="line">          order by hiredate </div><div class="line">     ) </div><div class="line">) where r&gt;=20 order by hiredate</div></pre></td></tr></table></figure>
 <ul>
@@ -648,6 +661,46 @@
 <li>Hibernate 的分页</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Query query = session.createQuery(<span class="string">"from Student"</span>);</div><div class="line">query.setFirstResult(firstResult);<span class="comment">//设置每页开始的记录号</span></div><div class="line">query.setMaxResults(resultNumber);<span class="comment">//设置每页显示的记录数</span></div><div class="line">Collection students = query.list();</div></pre></td></tr></table></figure>
+<h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><ul>
+<li>erp系统:为企业员工及决策层提供决策手段的管理平台</li>
+<li>b2c:商家对直接向消费者出售产品或者服务</li>
+<li>soa架构:面向服务的体系结构</li>
+<li>maven:分布式</li>
+<li>首页的并发量比较高,对数据库的压力比较大,采用了redis缓存</li>
+<li>首页运用了cms(内容管理系统),从后台更改前台页面的元素</li>
+<li>模块<ul>
+<li>前台</li>
+<li>后台</li>
+<li>会员</li>
+<li>订单</li>
+<li>搜索</li>
+<li>登录</li>
+</ul>
+</li>
+<li>使用solr建立索引来搜索商品</li>
+<li><p>添加商品:索引也要全部重新添加,速度慢;采用activemq消息队列解决</p>
+<ul>
+<li>每次添加新的商品,发一个消息,在另一个工程做一个activemq监听器,只要接收到消息就只向solr索引里面添加指定的内容</li>
+<li><p>登录信息保存在redis中</p>
+<ul>
+<li>模拟单点登录</li>
+<li>在添加购物车时,如果用户没有登录,就把购物车的信息放到cookie中<ul>
+<li>点击提交订单时,让用户登录,并把购物车里面的内容存放到数据库中,再根据数据库中的购物车里面的物品生成订单</li>
+</ul>
+</li>
+<li>如果用户登录了,就把购物车里面的商品直接添加到数据库中</li>
+</ul>
+</li>
+<li><p>搜索solr</p>
+<ul>
+<li>可以设置搜索的产品的权重,来竞价排名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>上架商品或修改商品时也可以利用页面静态化技术</li>
+</ul>
+
       
     </div>
 
@@ -853,7 +906,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Struts2"><span class="nav-number">1.</span> <span class="nav-text">Struts2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hibernate"><span class="nav-number">2.</span> <span class="nav-text">Hibernate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis"><span class="nav-number">3.</span> <span class="nav-text">mybatis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springMVC"><span class="nav-number">4.</span> <span class="nav-text">springMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他知识点"><span class="nav-number">5.</span> <span class="nav-text">其他知识点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Struts2"><span class="nav-number">1.</span> <span class="nav-text">Struts2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hibernate"><span class="nav-number">2.</span> <span class="nav-text">Hibernate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis"><span class="nav-number">3.</span> <span class="nav-text">mybatis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springMVC"><span class="nav-number">4.</span> <span class="nav-text">springMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他知识点"><span class="nav-number">5.</span> <span class="nav-text">其他知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目"><span class="nav-number">6.</span> <span class="nav-text">项目</span></a></li></ol></div>
             
 
           </div>
