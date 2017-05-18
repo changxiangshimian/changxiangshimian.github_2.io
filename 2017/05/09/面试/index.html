@@ -96,7 +96,7 @@
 <meta property="og:description" content="Struts2 Struts2框架的执行流程   Hibernate hibernate是一个持久层的orm框架 持久层: 与数据库打交道的 orm:Object Relational Mapping。对象关系映射。开发语言用的是Java，面向对象的（Object）。使用的数据库是关系型数据库（Relational）。就是将对象与数据库中的表建立一种映射关系，操作对象就可以操作这个表。   hib">
 <meta property="og:image" content="http://i.imgur.com/ykd44sW.png">
 <meta property="og:image" content="http://i.imgur.com/dXnGA74.png">
-<meta property="og:updated_time" content="2017-05-17T16:11:10.370Z">
+<meta property="og:updated_time" content="2017-05-18T01:23:22.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试">
 <meta name="twitter:description" content="Struts2 Struts2框架的执行流程   Hibernate hibernate是一个持久层的orm框架 持久层: 与数据库打交道的 orm:Object Relational Mapping。对象关系映射。开发语言用的是Java，面向对象的（Object）。使用的数据库是关系型数据库（Relational）。就是将对象与数据库中的表建立一种映射关系，操作对象就可以操作这个表。   hib">
@@ -510,29 +510,29 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$("button").click(function()&#123;</div><div class="line">  $.post("demo_test_post.asp",</div><div class="line">  &#123;</div><div class="line">    name:"Donald Duck",</div><div class="line">    city:"Duckburg"</div><div class="line">  &#125;,</div><div class="line">  function(data,status)&#123;</div><div class="line">    alert("Data: " + data + "\nStatus: " + status);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <ul>
 <li>jstl核心标签<code>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</code><ul>
-<li><c:set> 标签<ul>
+<li><code>&lt;c:set&gt;</code> 标签<ul>
 <li>value:要存储的值</li>
 <li>var:存储信息的变量</li>
 <li>scope:var属性的作用域</li>
 </ul>
-</c:set></li>
+</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=UTF-8"</span></span></div><div class="line">    <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</div><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">uri</span>=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> <span class="attr">prefix</span>=<span class="string">"c"</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>c:set 标签实例<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">c:set</span> <span class="attr">var</span>=<span class="string">"salary"</span> <span class="attr">scope</span>=<span class="string">"session"</span> <span class="attr">value</span>=<span class="string">"$&#123;2000*2&#125;"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>$&#123;salary&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
-<li><c:if> 标签<ul>
+<li><code>&lt;c:if&gt;</code> 标签<ul>
 <li>test:条件</li>
 </ul>
-</c:if></li>
+</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">c:set</span> <span class="attr">var</span>=<span class="string">"salary"</span> <span class="attr">scope</span>=<span class="string">"session"</span> <span class="attr">value</span>=<span class="string">"$&#123;2000*2&#125;"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">"$&#123;salary &gt; 2000&#125;"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>我的工资为: <span class="tag">&lt;<span class="name">c:out</span> <span class="attr">value</span>=<span class="string">"$&#123;salary&#125;"</span>/&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
-<li><c:foreach>标签<ul>
+<li><code>&lt;c:forEach&gt;</code> 标签<ul>
 <li>items:要被循环的额信息</li>
 <li>var:代表当前条目的变量名称</li>
 </ul>
-</c:foreach></li>
+</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">var</span>=<span class="string">"list"</span> <span class="attr">items</span>=<span class="string">"$&#123;List&#125;"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>list<span class="tag">&lt;/<span class="name">P</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
